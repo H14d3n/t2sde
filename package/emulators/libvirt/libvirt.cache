@@ -3,7 +3,7 @@
 [SIZE] 56.26 MB, 920 files
 
 [OPT] acl
-[DEP] audit
+[OPT] audit
 [DEP] bash
 [DEP] binutils
 [DEP] cmake
@@ -20,11 +20,10 @@
 [OPT] glusterfs
 [DEP] gnutls
 [DEP] grep
-[DEP] iat
 [DEP] json-c
 [DEP] libbsd
 [DEP] libcap-ng
-[DEP] libiscsi
+[OPT] libiscsi
 [DEP] libnl
 [DEP] libpcap
 [DEP] libpciaccess

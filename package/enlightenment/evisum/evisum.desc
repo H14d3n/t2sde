@@ -19,8 +19,8 @@
 [C] extra/tool
 
 [L] OpenSource
-[V] 2.0.5
+[V] 2.0.9
 
-[D] 005e986d569e688be31731770c38a3fa1f76cd2edd330289b79fd6ca evisum-2.0.5.tar.xz http://download.enlightenment.org/rel/apps/evisum/
+[D] e3a8d5a1c818b0757c367aa09e57c4bafe81e371e29dc184762b0d4b evisum-2.0.9.tar.xz http://download.enlightenment.org/rel/apps/evisum/
 
 . $base/package/*/*/e17-conf.in

@@ -19,9 +19,9 @@
 [F] CROSS
 
 [L] MIT
-[V] 2.6.28
+[V] 2.6.30
 
-[D] 5bc18c899912245ed72ac0b2a06d5303c2dd388030f03db7fb7be193 pyenv-2.6.28.tar.gz https://github.com/pyenv/pyenv/archive/v2.6.28/
+[D] 576421532a6112bab298a6f14f9abda0c95bc822d8d652534f6474ae pyenv-2.6.30.tar.gz https://github.com/pyenv/pyenv/archive/v2.6.30/
 
 runmake=0
 

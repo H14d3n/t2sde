@@ -466,14 +466,16 @@ EOT
 create_cmake_toolchain_file() {
 	cat <<-EOT
 	SET(CMAKE_SYSTEM_NAME Linux)
-	SET(CMAKE_SYSTEM_VERSION 1)
 	SET(CMAKE_C_COMPILER $CC)
 	SET(CMAKE_CXX_COMPILER $CXX)
+	SET(CMAKE_SYSROOT $root)
 	SET(CMAKE_FIND_ROOT_PATH $root)
+	list(APPEND CMAKE_MODULE_PATH "$root/TOOLCHAIN/cross/kde/lib/cmake")
 	SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
-	SET(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 	SET(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
-	SET(PACKAGE_VENDOR "T2 SDE")
+	SET(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+	SET(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+	SET(PACKAGE_VENDOR "T2")
 EOT
 }
 
@@ -545,9 +547,11 @@ pkgbuildtime() {
 		buildtime=$(sed -n "s/\[BUILDTIME\] \([^ ]*\).*/\1/p" $base/package/*/$pkg//$pkg.cache)
 	[ "$buildtime" = 0 ] && buildtime=1 # old quantizised to 0, or just fast: at least something
 
-	local parallel=${SDECFG_PARALLEL:-1}
-	# scale massive RISC server SMT
-	if [ -e /sys/devices/system/cpu/cpu0/topology/thread_siblings_list ]; then
+	local parallel=$SDECFG_PARALLEL
+	if hasflag NOPARALLEL; then
+		parallel=1
+	elif [ -e /sys/devices/system/cpu/cpu0/topology/thread_siblings_list ]; then
+	    # scale massive RISC server SMT
 	    if [ ! "$smt" ]; then
 		local smt=$(cat /sys/devices/system/cpu/cpu0/topology/thread_siblings_list)
 		if [[ "$smt" = *-* ]]; then # expand range
@@ -750,7 +754,7 @@ create_package_db() {
 			  cat $1/dependencies/$pkg
 			  echo -e "\027"
 
-			  cat $1/md5sums/$pkg
+			  #cat $1/md5sums/$pkg
 			  echo -e "\027"
 
 			  echo -e "\004"
@@ -1059,8 +1063,8 @@ build_this_package() {
 				eval echo "Running runhaskell Setup configure $setuphsopt"
 				eval runhaskell Setup configure $setuphsopt
 				hook_eval premake
-				eval echo "Running runhaskell Setup build -j${SDECFG_PARALLEL}"
-				eval runhaskell Setup build -j${SDECFG_PARALLEL}
+				eval echo "Running runhaskell Setup build -j$SDECFG_PARALLEL"
+				eval runhaskell Setup build -j$SDECFG_PARALLEL
 				hook_eval inmake
 				eval echo "Running runhaskell Setup copy"
 				runhaskell Setup copy
@@ -1352,7 +1356,7 @@ detect_confdir() {
 # initialize standard vars and hooks
 #
 init_vars_and_hooks() {
-	makeopt='CC="$CC" CPP="$CPP" CXX="$CXX"'
+	makeopt='CC="$CC" CPP="$CPP" CXX="$CXX" -j$SDECFG_PARALLEL'
 	sconsopt='CC=$CC PREFIX=/$prefix LIBDIR=$libdir'
 	cargoopt='build'
 	cargoinstopt='install --path . --root $root/$prefix --no-track --force' # -Z no-index-update
