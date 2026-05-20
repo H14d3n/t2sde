@@ -20,7 +20,7 @@
 [C] extra/base
 [F] CROSS
 
-[V] 0.23.5
+[V] 0.23.7
 [L] BSD
 
-[D] 11fb745a27d8e55d8f501c022ff145edbc5b3f4dfcdff7d572336462 xonsh-0.23.5.tar.gz https://github.com/xonsh/xonsh/archive/0.23.5/
+[D] 5be8b21583a3289639d5328f73b07645ef3a55ba77360b58d4d0e5cd xonsh-0.23.7.tar.gz https://github.com/xonsh/xonsh/archive/0.23.7/

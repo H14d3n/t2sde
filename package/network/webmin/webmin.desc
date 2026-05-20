@@ -24,9 +24,9 @@
 [C] extra/configuration
 
 [L] BSD
-[V] 2.630
+[V] 2.641
 
-[D] e7af28ffd45617bd7a6441a5a7a56ebb71a672e2cd96c10ddc8f9b23 webmin-2.630.tar.gz https://prdownloads.sourceforge.net/sourceforge/webadmin/
+[D] 8bfb9f8d0a680f856cf0ed64e9125cdc4a8e6c09aac1e49f1b6204ab webmin-2.641.tar.gz https://prdownloads.sourceforge.net/sourceforge/webadmin/
 
 runmake=0
 sysconfdir=$root/etc/webmin

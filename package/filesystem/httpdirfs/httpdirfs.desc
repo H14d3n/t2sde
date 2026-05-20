@@ -19,6 +19,6 @@
 [E] opt help2man perl perl-gettext
 
 [L] GPL
-[V] 1.2.8
+[V] 1.2.10
 
-[D] 21da873df15f592237f860433d5f2e86a6deb4dbb05ea5439b4f0057 httpdirfs-1.2.8.tar.gz https://github.com/fangfufu/httpdirfs/archive/1.2.8/
+[D] aaa1faae60dac3f763e821964ae57a851397adb9551662cbac23abfa httpdirfs-1.2.10.tar.gz https://github.com/fangfufu/httpdirfs/archive/1.2.10/

@@ -19,9 +19,9 @@
 [F] CROSS CUSTOM-LTO
 
 [L] GPL
-[V] 0.3.5
+[V] 0.3.7
 
-[D] 6a1f9a155a2c0963baef84d9cb699b7f5c5c01790d2790a58c2b8a95 fresh-0.3.5.tar.gz https://github.com/sinelaw/fresh/archive/v0.3.5/
+[D] b8797546be68ee5f576dac2ea630975057f191eae9b40f07189f5f46 fresh-0.3.7.tar.gz https://github.com/sinelaw/fresh/archive/v0.3.7/
 
 cargoinstopt=
 atstage cross && hook_add postmake 5 "install target/${arch_target}/*/fresh $root$bindir"

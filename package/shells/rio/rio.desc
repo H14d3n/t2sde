@@ -17,9 +17,9 @@
 [C] extra/shell
 
 [L] MIT
-[V] 0.4.3
+[V] 0.4.5
 
-[D] 16900a8f96e48e948ad8222e1b48559955de4a4562c9f1695f770c27 rio-0.4.3.tar.gz https://github.com/raphamorim/rio/archive/refs/tags/v0.4.3/
+[D] 1ec3a87e3998ee9a72e3826dd37608365c1f2543c39b6ebdc43ea4a1 rio-0.4.5.tar.gz https://github.com/raphamorim/rio/archive/refs/tags/v0.4.5/
 
 cargoinstopt=
 hook_add postmake 5 "cp -vf target/release/rio $root$bindir"
