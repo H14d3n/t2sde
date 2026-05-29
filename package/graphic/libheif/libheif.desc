@@ -24,9 +24,9 @@
 [E] opt x264
 
 [L] LGPL
-[V] 1.22.0
+[V] 1.22.2
 [P] X -----5---9 130.301
 
-[D] fef5a41cfeb9f44b212b9af74fc787a4fadefe0a60a149a078011bef libheif-1.22.0.tar.gz https://github.com/strukturag/libheif/releases/download/v1.22.0/
+[D] 3b452793b6b7656069203e3fa9b4e9413d56024a69bc48128cf5a42a libheif-1.22.2.tar.gz https://github.com/strukturag/libheif/releases/download/v1.22.2/
 
 var_append confopt ' ' --disable-go
