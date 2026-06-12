@@ -6,6 +6,7 @@
 
 https://github.com/raspberrypi/linux rpi-7.0.y
 
+diff --git a/Documentation/admin-guide/media/bcm2835-isp.rst b/Documentation/admin-guide/media/bcm2835-isp.rst
 new file mode 100644
 index 000000000000..e1c19f78435e
 --- /dev/null
@@ -345,6 +346,90 @@ index 868edb04989a..d9a69b3589c5 100644
          # Innolux AT070TN92 7.0" WQVGA TFT LCD panel
        - innolux,at070tn92
          # Innolux G070ACE-L01 7" WVGA (800x480) TFT LCD panel
+diff --git a/Documentation/devicetree/bindings/display/panel/waveshare,dsi-touch.yaml b/Documentation/devicetree/bindings/display/panel/waveshare,dsi-touch.yaml
+new file mode 100644
+index 000000000000..b5579ac35b42
+--- /dev/null
++++ b/Documentation/devicetree/bindings/display/panel/waveshare,dsi-touch.yaml
+@@ -0,0 +1,78 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/display/panel/waveshare,dsi-touch.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Waveshare DSI Touchscreen Panels
++
++maintainers:
++  - Waveshare_Team <support@waveshare.com>
++
++description: |
++  Waveshare DSI touchscreen panels with integrated touch controller.
++  These panels use MIPI DSI interface and come in various sizes from
++  3.4" to 12.3".
++
++properties:
++  compatible:
++    items:
++      - enum:
++          - waveshare,3.4-dsi-touch-c
++          - waveshare,4.0-dsi-touch-a
++          - waveshare,4.0-dsi-touch-c
++          - waveshare,4.3-dsi-touch-a
++          - waveshare,5.0-dsi-touch-a
++          - waveshare,5.5-dsi-touch-a
++          - waveshare,7.0-dsi-touch-a
++          - waveshare,7.0-dsi-touch-b
++          - waveshare,7.0-dsi-touch-c
++          - waveshare,8.0-dsi-touch-a
++          - waveshare,8.0-dsi-touch-a-4lane
++          - waveshare,8.8-dsi-touch-a
++          - waveshare,9.0-dsi-touch-b
++          - waveshare,9.0-dsi-touch-b,4lane
++          - waveshare,10.1-dsi-touch-a
++          - waveshare,10.1-dsi-touch-a-4lane
++          - waveshare,10.1-dsi-touch-b
++          - waveshare,10.1-dsi-touch-b,4lane
++          - waveshare,12.3-dsi-touch-a,4lane
++
++  reg:
++    description: DSI virtual channel
++    maxItems: 1
++
++  port: true
++  reset-gpios: true
++  rotation: true
++  backlight: true
++
++required:
++  - compatible
++  - reg
++  - port
++
++allOf:
++  - $ref: panel-common.yaml#
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    dsi {
++        #address-cells = <1>;
++        #size-cells = <0>;
++
++        panel@0 {
++            compatible = "waveshare,4.0-dsi-touch-a";
++            reg = <0>;
++            reset-gpios = <&gpio 4 1 GPIO_ACTIVE_HIGH>;
++            backlight = <&backlight>;
++
++            port {
++                panel_in: endpoint {
++                    remote-endpoint = <&dsi_out>;
++                };
++            };
++        };
++    };
 diff --git a/Documentation/devicetree/bindings/gpu/brcm,bcm-v3d.yaml b/Documentation/devicetree/bindings/gpu/brcm,bcm-v3d.yaml
 index 43c6d2d72456..8740649e215e 100644
 --- a/Documentation/devicetree/bindings/gpu/brcm,bcm-v3d.yaml
@@ -1724,7 +1809,7 @@ index 000000000000..b76dc694f1ac
 +};
 +
 diff --git a/Documentation/devicetree/bindings/mmc/snps,dwcmshc-sdhci.yaml b/Documentation/devicetree/bindings/mmc/snps,dwcmshc-sdhci.yaml
-index 7e7c55dc2440..9e550a6db774 100644
+index 5cebe5eb1efb..67c065633157 100644
 --- a/Documentation/devicetree/bindings/mmc/snps,dwcmshc-sdhci.yaml
 +++ b/Documentation/devicetree/bindings/mmc/snps,dwcmshc-sdhci.yaml
 @@ -23,6 +23,7 @@ properties:
@@ -1735,7 +1820,7 @@ index 7e7c55dc2440..9e550a6db774 100644
            - rockchip,rk3568-dwcmshc
            - rockchip,rk3588-dwcmshc
            - snps,dwcmshc-sdhci
-@@ -115,6 +116,8 @@ allOf:
+@@ -117,6 +118,8 @@ allOf:
              - description: axi clock for rockchip specified
              - description: block clock for rockchip specified
              - description: timer clock for rockchip specified
@@ -1744,7 +1829,7 @@ index 7e7c55dc2440..9e550a6db774 100644
          clock-names:
            minItems: 1
            items:
-@@ -123,6 +126,8 @@ allOf:
+@@ -125,6 +128,8 @@ allOf:
              - const: axi
              - const: block
              - const: timer
@@ -5966,10 +6051,10 @@ index 000000000000..ce48eb6073f0
 +};
 diff --git a/arch/arm/boot/dts/broadcom/bcm2710-rpi-3-b-plus.dts b/arch/arm/boot/dts/broadcom/bcm2710-rpi-3-b-plus.dts
 new file mode 100644
-index 000000000000..8973985e9902
+index 000000000000..bcea7301c6c5
 --- /dev/null
 +++ b/arch/arm/boot/dts/broadcom/bcm2710-rpi-3-b-plus.dts
-@@ -0,0 +1,295 @@
+@@ -0,0 +1,293 @@
 +/dts-v1/;
 +
 +#include "bcm2710.dtsi"
@@ -6230,8 +6315,6 @@ index 000000000000..8973985e9902
 +};
 +
 +&eth_phy {
-+	microchip,eee-enabled;
-+	microchip,tx-lpi-timer = <600>; /* non-aggressive*/
 +	microchip,downshift-after = <2>;
 +};
 +
@@ -6257,8 +6340,8 @@ index 000000000000..8973985e9902
 +		pwr_led_activelow = <&led_pwr>,"gpios:8";
 +		pwr_led_trigger = <&led_pwr>,"linux,default-trigger";
 +
-+		eee = <&eth_phy>,"microchip,eee-enabled?";
-+		tx_lpi_timer = <&eth_phy>,"microchip,tx-lpi-timer:0";
++		eee = <&eth_phy>,"eee-broken-1000t!",
++		      <&eth_phy>,"eee-broken-100tx!";
 +		eth_led0 = <&eth_phy>,"microchip,led-modes:0";
 +		eth_led1 = <&eth_phy>,"microchip,led-modes:4";
 +		eth_downshift_after = <&eth_phy>,"microchip,downshift-after:0";
@@ -9372,10 +9455,10 @@ index 69b0919f1324..562c4e9d08cc 100644
  			compatible = "fixed-clock";
 diff --git a/arch/arm/boot/dts/overlays/Makefile b/arch/arm/boot/dts/overlays/Makefile
 new file mode 100644
-index 000000000000..398c8d65de19
+index 000000000000..c5a4e5211c7c
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/Makefile
-@@ -0,0 +1,378 @@
+@@ -0,0 +1,380 @@
 +# Overlays for the Raspberry Pi platform
 +
 +dtb-$(CONFIG_ARCH_BCM2835) += overlay_map.dtb hat_map.dtb
@@ -9715,6 +9798,8 @@ index 000000000000..398c8d65de19
 +	vc4-kms-dpi-hyperpixel4sq.dtbo \
 +	vc4-kms-dpi-panel.dtbo \
 +	vc4-kms-dsi-7inch.dtbo \
++	vc4-kms-dsi-edatec-panel-070c.dtbo \
++	vc4-kms-dsi-edatec-panel-101c.dtbo \
 +	vc4-kms-dsi-generic.dtbo \
 +	vc4-kms-dsi-ili79600-10-1inch.dtbo \
 +	vc4-kms-dsi-ili9881-5inch.dtbo \
@@ -9756,10 +9841,10 @@ index 000000000000..398c8d65de19
 +clean-files	:= *.dtbo
 diff --git a/arch/arm/boot/dts/overlays/README b/arch/arm/boot/dts/overlays/README
 new file mode 100644
-index 000000000000..9842ca1f8fb2
+index 000000000000..1e0744de649a
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/README
-@@ -0,0 +1,6286 @@
+@@ -0,0 +1,6311 @@
 +Introduction
 +============
 +
@@ -9995,8 +10080,8 @@ index 000000000000..9842ca1f8fb2
 +        drm_fb2_vc4             Assign /dev/fb2 to the vc4 outputs
 +
 +        eee                     Enable Energy Efficient Ethernet support for
-+                                compatible devices (default "on"). See also
-+                                "tx_lpi_timer". Pi3B+, Pi4, CM4, Pi5 and CM5.
++                                compatible devices (default "on").
++                                Pi3B+, Pi4, CM4, Pi5 and CM5.
 +
 +        enable_eeprom           Set to "on" to enable the onboard bootloader
 +                                EEPROM by driving GPIO 57 low
@@ -10216,10 +10301,6 @@ index 000000000000..9842ca1f8fb2
 +
 +        suspend                 Make the power button trigger a suspend rather
 +                                than a power-off (2712 only, default "off")
-+
-+        tx_lpi_timer            Set the delay in microseconds between going idle
-+                                and entering the low power state (default 600).
-+                                Requires EEE to be enabled - see "eee".
 +
 +        uart0                   Set to "off" to disable uart0 (default "on")
 +
@@ -10711,6 +10792,7 @@ index 000000000000..9842ca1f8fb2
 +        cam1-sync-sink          Set camera on port 1 as vsync sink
 +
 +        cam0                    Connect the mux to CAM0 port (default is CAM1)
++        gpio-sel                Set the GPIO used to control the mux
 +
 +
 +Name:   camera-mux-4port
@@ -10780,6 +10862,9 @@ index 000000000000..9842ca1f8fb2
 +        cam3-sync-sink          Set camera on port 3 as vsync sink
 +
 +        cam0                    Connect the mux to CAM0 port (default is CAM1)
++        gpio-sel                Set the GPIO used to control the mux select line
++        gpio-en1                Set the GPIO used to control the mux en1 line
++        gpio-en2                Set the GPIO used to control the mux en2 line
 +
 +
 +Name:   cap1106
@@ -15553,6 +15638,29 @@ index 000000000000..9842ca1f8fb2
 +                                the default DSI1 and i2c_csi_dsi).
 +
 +
++Name:   vc4-kms-dsi-edatec-panel-070c
++Info:   Enable the edatec DSI 7" screen.
++        support ed-dispr-070c.
++        support ed-dispr5-070c.
++        support ed-dispr4-070c.
++Load:   dtoverlay=vc4-kms-dsi-edatec-panel-070c,<param>=<val>
++Params: interrupt               GPIO pin for interrupt signal(default 16)
++        i2c1                    Use i2c-1
++        i2c4                    Use i2c-4 (specialized for CM5)
++
++
++Name:   vc4-kms-dsi-edatec-panel-101c
++Info:   Enable the edatec DSI 10" screen.
++        support ed-dispr-101c.
++        support ed-dispr5-101c.
++        support ed-dispr4-101c.
++Load:   dtoverlay=vc4-kms-dsi-edatec-panel-101c,<param>=<val>
++Params: rotation                Display rotation {0,90,180,270} (default 270)
++        interrupt               GPIO pin for interrupt signal(default 16)
++        i2c1                    Use i2c-1
++        i2c4                    Use i2c-4 (specialized for CM5)
++
++
 +Name:   vc4-kms-dsi-generic
 +Info:   Enable a generic DSI display under KMS.
 +        Default timings are for a 840x480 RGB888 panel.
@@ -15710,7 +15818,9 @@ index 000000000000..9842ca1f8fb2
 +        Requires vc4-kms-v3d to be loaded.
 +Load:   dtoverlay=vc4-kms-dsi-waveshare-panel-v2,<param>
 +Params: 3_4_inch_c              3.4" 800x800 2lane
++        4_0_inch_a              4.0" 480x800 2lane
 +        4_0_inch_c              4.0" 720x720 2lane
++        4_3_inch_a              4.3" 480x800 2lane
 +        5_0_inch_a              5.0" 720x1280 2lane
 +        5_5_inch_a              5.5" 720x1280 2lane
 +        7_0_inch_a              7.0" A 720x1280 2lane
@@ -18532,10 +18642,10 @@ index 000000000000..1ee74234e805
 +};
 diff --git a/arch/arm/boot/dts/overlays/camera-mux-2port-overlay.dts b/arch/arm/boot/dts/overlays/camera-mux-2port-overlay.dts
 new file mode 100644
-index 000000000000..97d1988dd984
+index 000000000000..296477c11a4e
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/camera-mux-2port-overlay.dts
-@@ -0,0 +1,545 @@
+@@ -0,0 +1,554 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +// Overlay to configure a 2 port camera multiplexer
 +//
@@ -18877,15 +18987,17 @@ index 000000000000..97d1988dd984
 +	fragment@203 {
 +		target-path="/";
 +		__overlay__ {
-+			mux: mux-controller {
++			mux: mux-controller@1 {
 +				compatible = "gpio-mux";
++				reg = <1>;
 +				#mux-control-cells = <0>;
 +
 +				mux-gpios = <&gpio 4 GPIO_ACTIVE_HIGH>;
 +			};
 +
-+			video-mux {
++			videomux: video-mux@1 {
 +				compatible = "video-mux";
++				reg = <1>;
 +				mux-controls = <&mux>;
 +				#address-cells = <1>;
 +				#size-cells = <0>;
@@ -18916,7 +19028,7 @@ index 000000000000..97d1988dd984
 +				};
 +			};
 +
-+			clk_24mhz: clk_24mhz {
++			clk_24mhz: clk_24mhz_1 {
 +				compatible = "fixed-clock";
 +				#clock-cells = <0>;
 +
@@ -18924,7 +19036,7 @@ index 000000000000..97d1988dd984
 +				status = "okay";
 +			};
 +
-+			clk_25mhz: clk_25mhz {
++			clk_25mhz: clk_25mhz_1 {
 +				compatible = "fixed-clock";
 +				#clock-cells = <0>;
 +
@@ -18932,7 +19044,7 @@ index 000000000000..97d1988dd984
 +				status = "okay";
 +			};
 +
-+			clk_imx290: clk_imx290 {
++			clk_imx290: clk_imx290_1 {
 +				compatible = "fixed-clock";
 +				#clock-cells = <0>;
 +
@@ -19073,20 +19185,27 @@ index 000000000000..97d1988dd984
 +				       <&imx290_1>,"clock-frequency:0";
 +
 +		cam0 = <&i2c_frag>, "target:0=",<&i2c_csi_dsi0>,
-+		       <&csi_frag>, "target:0=",<&csi0>;
++		       <&csi_frag>, "target:0=",<&csi0>,
++		       <&mux>, "reg:0=0",
++		       <&videomux>, "reg:0=0",
++		       <&clk_24mhz>, "name=clk_24mhz_0",
++		       <&clk_25mhz>, "name=clk_25mhz_0",
++		       <&clk_imx290>, "name=clk_imx290_0";
 +
 +		cam0-sync-source = <&imx477_0>, "trigger-mode:0=1";
 +		cam0-sync-sink = <&imx477_0>, "trigger-mode:0=2";
 +		cam1-sync-source = <&imx477_1>, "trigger-mode:0=1";
 +		cam1-sync-sink = <&imx477_1>, "trigger-mode:0=2";
++
++		gpio-sel = <&mux>, "mux-gpios:4";
 +	};
 +};
 diff --git a/arch/arm/boot/dts/overlays/camera-mux-4port-overlay.dts b/arch/arm/boot/dts/overlays/camera-mux-4port-overlay.dts
 new file mode 100644
-index 000000000000..dbbb476f51e7
+index 000000000000..75330970f174
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/camera-mux-4port-overlay.dts
-@@ -0,0 +1,954 @@
+@@ -0,0 +1,965 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +
 +// Overlay to configure a 4 port camera multiplexer
@@ -19706,8 +19825,9 @@ index 000000000000..dbbb476f51e7
 +	fragment@203 {
 +		target-path="/";
 +		__overlay__ {
-+			mux: mux-controller {
++			mux: mux-controller@1 {
 +				compatible = "gpio-mux";
++				reg = <1>;
 +				#mux-control-cells = <0>;
 +
 +				/* SEL, En2, En1 */
@@ -19716,8 +19836,9 @@ index 000000000000..dbbb476f51e7
 +					    <&gpio 17 GPIO_ACTIVE_HIGH>;
 +			};
 +
-+			video-mux {
++			videomux: video-mux@1 {
 +				compatible = "video-mux";
++				reg = <1>;
 +				mux-controls = <&mux>;
 +				#address-cells = <1>;
 +				#size-cells = <0>;
@@ -19773,7 +19894,7 @@ index 000000000000..dbbb476f51e7
 +				};
 +			};
 +
-+			clk_24mhz: clk_24mhz {
++			clk_24mhz: clk_24mhz_1 {
 +				compatible = "fixed-clock";
 +				#clock-cells = <0>;
 +
@@ -19781,7 +19902,7 @@ index 000000000000..dbbb476f51e7
 +				status = "okay";
 +			};
 +
-+			clk_25mhz: clk_25mhz {
++			clk_25mhz: clk_25mhz_1 {
 +				compatible = "fixed-clock";
 +				#clock-cells = <0>;
 +
@@ -19789,7 +19910,7 @@ index 000000000000..dbbb476f51e7
 +				status = "okay";
 +			};
 +
-+			clk_imx290: clk_imx290 {
++			clk_imx290: clk_imx290_1 {
 +				compatible = "fixed-clock";
 +				#clock-cells = <0>;
 +
@@ -20029,7 +20150,12 @@ index 000000000000..dbbb476f51e7
 +				       <&imx290_3>,"clock-frequency:0";
 +
 +		cam0 = <&i2c_frag>, "target:0=",<&i2c_csi_dsi0>,
-+		       <&csi_frag>, "target:0=",<&csi0>;
++		       <&csi_frag>, "target:0=",<&csi0>,
++		       <&mux>, "reg:0=0",
++		       <&videomux>, "reg:0=0",
++		       <&clk_24mhz>, "name=clk_24mhz_0",
++		       <&clk_25mhz>, "name=clk_25mhz_0",
++		       <&clk_imx290>, "name=clk_imx290_0";
 +
 +		cam0-sync-source = <&imx477_0>, "trigger-mode:0=1";
 +		cam0-sync-sink = <&imx477_0>, "trigger-mode:0=2";
@@ -20039,6 +20165,10 @@ index 000000000000..dbbb476f51e7
 +		cam2-sync-sink = <&imx477_2>, "trigger-mode:0=2";
 +		cam3-sync-source = <&imx477_3>, "trigger-mode:0=1";
 +		cam3-sync-sink = <&imx477_3>, "trigger-mode:0=2";
++
++		gpio-sel = <&mux>, "mux-gpios:4";
++		gpio-en2 = <&mux>, "mux-gpios:16";
++		gpio-en1 = <&mux>, "mux-gpios:28";
 +	};
 +};
 diff --git a/arch/arm/boot/dts/overlays/cap1106-overlay.dts b/arch/arm/boot/dts/overlays/cap1106-overlay.dts
@@ -47226,6 +47356,253 @@ index 000000000000..8d58d5e6067f
 +		disable_touch = <&ft5406>, "status=disabled";
 +	};
 +};
+diff --git a/arch/arm/boot/dts/overlays/vc4-kms-dsi-edatec-panel-070c-overlay.dts b/arch/arm/boot/dts/overlays/vc4-kms-dsi-edatec-panel-070c-overlay.dts
+new file mode 100644
+index 000000000000..4a075a885dbe
+--- /dev/null
++++ b/arch/arm/boot/dts/overlays/vc4-kms-dsi-edatec-panel-070c-overlay.dts
+@@ -0,0 +1,119 @@
++/dts-v1/;
++/plugin/;
++
++/ {
++	compatible = "brcm,bcm2835";
++
++	i2c_frag: fragment@0 {
++		target = <&i2c_csi_dsi>;
++		__overlay__ {
++			#gpio-cells = <2>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "okay";
++
++			reg_display: reg_display@27 {
++				reg = <0x27>;
++				compatible = "edatec,disp-regulator";
++
++				gpio-controller;
++				#gpio-cells = <2>;
++			};
++
++			gt911: gt911@14 {
++				compatible = "goodix,gt911";
++				reg = <0x14>;
++				pinctrl-names = "default";
++				pinctrl-0 = <&gt911_pins>;
++
++				reset-gpios = <&reg_display 3 0>;
++				interrupt-parent = <&gpio>;
++				interrupts = <16 2>;
++				irq-gpios = <&gpio 16 0>;
++			};
++		};
++	};
++
++	fragment@1 {
++		target = <&dsi1>;
++		__overlay__ {
++			status = "okay";
++			port {
++				dsi_out: endpoint {
++					remote-endpoint = <&panel_in>;
++				};
++			};
++
++			panel: panel@0 {
++				reg = <0>;
++				compatible = "panel-dsi";
++				backlight = <&reg_display>;
++
++				width-mm = <154>;
++				height-mm = <86>;
++				dsi-color-format = "RGB888";
++				mode = "MODE_VIDEO","MODE_VIDEO_SYNC_PULSE";
++
++				timing: panel-timing {
++					clock-frequency = <41000000>;
++					hactive = <1024>;
++					hfront-porch = <40>;
++					hsync-len = <10>;
++					hback-porch = <40>;
++					vactive = <600>;
++					vfront-porch = <4>;
++					vsync-len = <2>;
++					vback-porch = <4>;
++				};
++
++				port {
++					panel_in: endpoint {
++						data-lanes = <1 2>;
++						remote-endpoint = <&dsi_out>;
++					};
++				};
++			};
++		};
++	};
++
++	fragment@2 {
++		target = <&i2c0if>;
++		__overlay__ {
++			status = "okay";
++		};
++	};
++
++	fragment@3 {
++		target = <&i2c0mux>;
++		__overlay__ {
++			status = "okay";
++		};
++	};
++
++	fragment@4 {
++		target = <&i2c1>;
++		__dormant__ {
++			status = "okay";
++		};
++	};
++
++	fragment@5 {
++		target = <&gpio>;
++		__overlay__ {
++			gt911_pins: gt911_pins {
++				brcm,pins = <16>;
++				brcm,function = <0>;
++				brcm,pull = <2>;
++			};
++		};
++	};
++
++	__overrides__ {
++		i2c1 = <&i2c_frag>, "target:0=",<&i2c1>,
++			   <0>,"-2-3+4";
++		i2c4 = <&i2c_frag>, "target:0=",<&i2c_csi_dsi0>;
++		interrupt = <&gt911_pins>,"brcm,pins:0",
++				    <&gt911>,"interrupts:0",
++				    <&gt911>,"irq-gpios:4";
++	};
++};
+diff --git a/arch/arm/boot/dts/overlays/vc4-kms-dsi-edatec-panel-101c-overlay.dts b/arch/arm/boot/dts/overlays/vc4-kms-dsi-edatec-panel-101c-overlay.dts
+new file mode 100644
+index 000000000000..35c97c18cc64
+--- /dev/null
++++ b/arch/arm/boot/dts/overlays/vc4-kms-dsi-edatec-panel-101c-overlay.dts
+@@ -0,0 +1,116 @@
++/dts-v1/;
++/plugin/;
++
++#include <dt-bindings/gpio/gpio.h>
++
++/ {
++	compatible = "brcm,bcm2835";
++
++	fragment@0 {
++		target-path = "/";
++		__overlay__ {
++			vdd_lcd: fixedregulator_lcd {
++				compatible = "regulator-fixed";
++				regulator-name = "vdd_lcd";
++
++				gpios = <&reg_display 4 GPIO_ACTIVE_HIGH>;
++				startup-delay-us = <5000>;
++				enable-active-high;
++			};
++		};
++	};
++
++	fragment@1 {
++		target = <&dsi1>;
++		__overlay__{
++			status = "okay";
++			#address-cells = <1>;
++			#size-cells = <0>;
++			port {
++				dsi_out_port:endpoint {
++					remote-endpoint = <&panel_dsi_port>;
++				};
++			};
++
++			ili9881c:ili9881c@0 {
++				compatible    = "rzw,t101p136cq";
++				status        = "okay";
++				reg           = <0>;
++
++				reset-gpios = <&reg_display 2 GPIO_ACTIVE_LOW>;
++				backlight = <&reg_display>;
++				power-supply = <&vdd_lcd>;
++				rotation = <270>;
++
++				port {
++					panel_dsi_port: endpoint {
++						remote-endpoint = <&dsi_out_port>;
++					};
++				};
++			};
++		};
++	};
++
++	fragment@2 {
++		target = <&i2c0if>;
++		__overlay__ {
++			status = "okay";
++		};
++	};
++
++	fragment@3 {
++		target = <&i2c0mux>;
++		__overlay__ {
++			status = "okay";
++		};
++	};
++
++	fragment@4 {
++		target = <&gpio>;
++		__overlay__ {
++			gt928_pins: gt928_pins {
++				brcm,pins = <16>;
++				brcm,function = <0>;
++				brcm,pull = <2>;
++			};
++		};
++	};
++
++	i2c_frag: fragment@5 {
++		target = <&i2c_csi_dsi>;
++		__overlay__ {
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "okay";
++
++			reg_display: reg_display@27 {
++				compatible = "edatec,disp-regulator";
++				reg = <0x27>;
++				gpio-controller;
++				#gpio-cells = <2>;
++			};
++
++			gt928:gt928@14 {
++				compatible = "goodix,gt928";
++				reg = <0x14>;
++				pinctrl-names = "default";
++				pinctrl-0 = <&gt928_pins>;
++
++				reset-gpios = <&reg_display 3 GPIO_ACTIVE_HIGH>;
++				interrupt-parent = <&gpio>;
++				interrupts = <16 2>;
++				irq-gpios = <&gpio 16 GPIO_ACTIVE_HIGH>;
++			};
++		};
++	};
++
++	__overrides__ {
++		i2c1 = <&i2c_frag>, "target:0=",<&i2c1>,
++			   <0>, "-3-4+5";
++		i2c4 = <&i2c_frag>, "target:0=",<&i2c_csi_dsi0>;
++		interrupt = <&gt928_pins>, "brcm,pins:0",
++				    <&gt928>, "interrupts:0",
++				    <&gt928>, "irq-gpios:4";
++		rotation = <&ili9881c>, "rotation:0";
++	};
++};
 diff --git a/arch/arm/boot/dts/overlays/vc4-kms-dsi-generic-overlay.dts b/arch/arm/boot/dts/overlays/vc4-kms-dsi-generic-overlay.dts
 new file mode 100644
 index 000000000000..cf4ca5b6c75f
@@ -48065,10 +48442,10 @@ index 000000000000..7af0f3763fc4
 +};
 diff --git a/arch/arm/boot/dts/overlays/vc4-kms-dsi-waveshare-panel-v2-overlay.dts b/arch/arm/boot/dts/overlays/vc4-kms-dsi-waveshare-panel-v2-overlay.dts
 new file mode 100644
-index 000000000000..ddb085d03cfa
+index 000000000000..51b773e4afff
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/vc4-kms-dsi-waveshare-panel-v2-overlay.dts
-@@ -0,0 +1,111 @@
+@@ -0,0 +1,114 @@
 +/*
 + * vc4-kms-dsi-waveshare-panel-v2-overlay.dts
 + */
@@ -48150,7 +48527,9 @@ index 000000000000..ddb085d03cfa
 +
 +	__overrides__ {
 +		3_4_inch_c = <&dsi_panel>, "compatible=waveshare,3.4-dsi-touch-c";
++		4_0_inch_a = <&dsi_panel>, "compatible=waveshare,4.0-dsi-touch-a";
 +		4_0_inch_c = <&dsi_panel>, "compatible=waveshare,4.0-dsi-touch-c";
++		4_3_inch_a = <&dsi_panel>, "compatible=waveshare,4.3-dsi-touch-a";
 +		5_0_inch_a = <&dsi_panel>, "compatible=waveshare,5.0-dsi-touch-a";
 +		5_5_inch_a = <&dsi_panel>, "compatible=waveshare,5.5-dsi-touch-a";
 +		7_0_inch_a = <&dsi_panel>, "compatible=waveshare,7.0-dsi-touch-a";
@@ -48158,7 +48537,8 @@ index 000000000000..ddb085d03cfa
 +		7_0_inch_c = <&dsi_panel>, "compatible=waveshare,7.0-dsi-touch-c";
 +		8_0_inch_a = <&dsi_panel>, "compatible=waveshare,8.0-dsi-touch-a";
 +		8_0_inch_a_4lane = <&dsi_panel>, "compatible=waveshare,8.0-dsi-touch-a-4lane";
-+		8_8_inch_a = <&dsi_panel>, "compatible=waveshare,8.8-dsi-touch-a";
++		8_8_inch_a = <&dsi_panel>, "compatible=waveshare,8.8-dsi-touch-a",
++			     <&display_mcu>, "pre-power-on?";
 +		9_0_inch_b = <&dsi_panel>, "compatible=waveshare,9.0-dsi-touch-b",
 +			     <&touch>, "touchscreen-inverted-x";
 +		9_0_inch_b_4lane = <&dsi_panel>, "compatible=waveshare,9.0-dsi-touch-b,4lane",
@@ -52287,10 +52667,10 @@ index 127be0fc27c2..4c8d28a1a0dc 100644
  };
 diff --git a/arch/arm64/boot/dts/broadcom/bcm2712-ds.dtsi b/arch/arm64/boot/dts/broadcom/bcm2712-ds.dtsi
 new file mode 100644
-index 000000000000..32a40daba68a
+index 000000000000..874902bc750f
 --- /dev/null
 +++ b/arch/arm64/boot/dts/broadcom/bcm2712-ds.dtsi
-@@ -0,0 +1,482 @@
+@@ -0,0 +1,493 @@
 +// SPDX-License-Identifier: GPL-2.0
 +#include <dt-bindings/soc/bcm2835-pm.h>
 +
@@ -52351,6 +52731,17 @@ index 000000000000..32a40daba68a
 +		compatible = "usb-nop-xceiv";
 +		#phy-cells = <0>;
 +	};
++};
++
++/*
++ * With a #size-cells of 2, the 'size' property should be 2 cells long.
++ * Unfortunately the old firmware will only write the CMA value correctly
++ * if the property is 1 cell long. Fortunately the new firmware silently
++ * makes 'size' 2 cells long, so create what is actually an invalid DTS file
++ * on the understanding that it will be patched up as needed.
++ */
++&cma {
++	size = <0x4000000>; /* 64MB */
 +};
 +
 +&soc {
@@ -56922,10 +57313,10 @@ index 000000000000..ded08646b6f6
 \ No newline at end of file
 diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
 new file mode 100644
-index 000000000000..f735a00eb2be
+index 000000000000..72d4b17c6f4a
 --- /dev/null
 +++ b/arch/arm64/configs/bcm2711_defconfig
-@@ -0,0 +1,1761 @@
+@@ -0,0 +1,1765 @@
 +CONFIG_LOCALVERSION="-v8"
 +# CONFIG_LOCALVERSION_AUTO is not set
 +CONFIG_SYSVIPC=y
@@ -57454,6 +57845,8 @@ index 000000000000..f735a00eb2be
 +CONFIG_NETKIT=y
 +CONFIG_NET_VRF=m
 +CONFIG_VSOCKMON=m
++CONFIG_NET_DSA_MICROCHIP_KSZ_COMMON=m
++CONFIG_NET_DSA_MICROCHIP_KSZ_SPI=m
 +CONFIG_BCMGENET=y
 +CONFIG_MACB=y
 +CONFIG_IGB=m
@@ -57561,6 +57954,7 @@ index 000000000000..f735a00eb2be
 +CONFIG_MT7601U=m
 +CONFIG_MT76x0U=m
 +CONFIG_MT76x2U=m
++CONFIG_MT7921E=m
 +CONFIG_MT7921U=m
 +CONFIG_MT7925E=m
 +CONFIG_MT7925U=m
@@ -57787,6 +58181,7 @@ index 000000000000..f735a00eb2be
 +CONFIG_REGULATOR_RASPBERRYPI_TOUCHSCREEN_ATTINY=m
 +CONFIG_REGULATOR_RASPBERRYPI_TOUCHSCREEN_V2=m
 +CONFIG_REGULATOR_WAVESHARE_TOUCHSCREEN=m
++CONFIG_REGULATOR_EDATEC_PANEL=m
 +CONFIG_RC_CORE=y
 +CONFIG_BPF_LIRC_MODE2=y
 +CONFIG_LIRC=y
@@ -58689,10 +59084,10 @@ index 000000000000..f735a00eb2be
 +# CONFIG_STRICT_DEVMEM is not set
 diff --git a/arch/arm64/configs/bcm2711_rt_defconfig b/arch/arm64/configs/bcm2711_rt_defconfig
 new file mode 100644
-index 000000000000..33734826bf21
+index 000000000000..84eacd93eaea
 --- /dev/null
 +++ b/arch/arm64/configs/bcm2711_rt_defconfig
-@@ -0,0 +1,1758 @@
+@@ -0,0 +1,1762 @@
 +CONFIG_LOCALVERSION="-v8-rt"
 +# CONFIG_LOCALVERSION_AUTO is not set
 +CONFIG_SYSVIPC=y
@@ -59221,6 +59616,8 @@ index 000000000000..33734826bf21
 +CONFIG_NETKIT=y
 +CONFIG_NET_VRF=m
 +CONFIG_VSOCKMON=m
++CONFIG_NET_DSA_MICROCHIP_KSZ_COMMON=m
++CONFIG_NET_DSA_MICROCHIP_KSZ_SPI=m
 +CONFIG_BCMGENET=y
 +CONFIG_MACB=y
 +CONFIG_IGB=m
@@ -59328,6 +59725,7 @@ index 000000000000..33734826bf21
 +CONFIG_MT7601U=m
 +CONFIG_MT76x0U=m
 +CONFIG_MT76x2U=m
++CONFIG_MT7921E=m
 +CONFIG_MT7921U=m
 +CONFIG_MT7925E=m
 +CONFIG_MT7925U=m
@@ -59553,6 +59951,7 @@ index 000000000000..33734826bf21
 +CONFIG_REGULATOR_RASPBERRYPI_TOUCHSCREEN_ATTINY=m
 +CONFIG_REGULATOR_RASPBERRYPI_TOUCHSCREEN_V2=m
 +CONFIG_REGULATOR_WAVESHARE_TOUCHSCREEN=m
++CONFIG_REGULATOR_EDATEC_PANEL=m
 +CONFIG_RC_CORE=y
 +CONFIG_BPF_LIRC_MODE2=y
 +CONFIG_LIRC=y
@@ -60453,10 +60852,10 @@ index 000000000000..33734826bf21
 +# CONFIG_STRICT_DEVMEM is not set
 diff --git a/arch/arm64/configs/bcm2712_defconfig b/arch/arm64/configs/bcm2712_defconfig
 new file mode 100644
-index 000000000000..862e775ebb0e
+index 000000000000..aba23f60ab88
 --- /dev/null
 +++ b/arch/arm64/configs/bcm2712_defconfig
-@@ -0,0 +1,1763 @@
+@@ -0,0 +1,1767 @@
 +CONFIG_LOCALVERSION="-v8-16k"
 +# CONFIG_LOCALVERSION_AUTO is not set
 +CONFIG_SYSVIPC=y
@@ -60988,6 +61387,8 @@ index 000000000000..862e775ebb0e
 +CONFIG_NETKIT=y
 +CONFIG_NET_VRF=m
 +CONFIG_VSOCKMON=m
++CONFIG_NET_DSA_MICROCHIP_KSZ_COMMON=m
++CONFIG_NET_DSA_MICROCHIP_KSZ_SPI=m
 +CONFIG_BCMGENET=y
 +CONFIG_MACB=y
 +CONFIG_IGB=m
@@ -61095,6 +61496,7 @@ index 000000000000..862e775ebb0e
 +CONFIG_MT7601U=m
 +CONFIG_MT76x0U=m
 +CONFIG_MT76x2U=m
++CONFIG_MT7921E=m
 +CONFIG_MT7921U=m
 +CONFIG_MT7925E=m
 +CONFIG_MT7925U=m
@@ -61320,6 +61722,7 @@ index 000000000000..862e775ebb0e
 +CONFIG_REGULATOR_RASPBERRYPI_TOUCHSCREEN_ATTINY=m
 +CONFIG_REGULATOR_RASPBERRYPI_TOUCHSCREEN_V2=m
 +CONFIG_REGULATOR_WAVESHARE_TOUCHSCREEN=m
++CONFIG_REGULATOR_EDATEC_PANEL=m
 +CONFIG_RC_CORE=y
 +CONFIG_BPF_LIRC_MODE2=y
 +CONFIG_LIRC=y
@@ -62383,6 +62786,19 @@ index b2b5792b2caa..51c43c1f5630 100644
  }
  
  void arch_sync_dma_for_cpu(phys_addr_t paddr, size_t size,
+diff --git a/drivers/ata/ahci.c b/drivers/ata/ahci.c
+index 1d73a53370cf..eb2d896daa66 100644
+--- a/drivers/ata/ahci.c
++++ b/drivers/ata/ahci.c
+@@ -216,7 +216,7 @@ static const struct ata_port_info ahci_port_info[] = {
+ 	/* JMicron JMB582/585: 64-bit DMA is broken, force 32-bit */
+ 	[board_ahci_jmb585] = {
+ 		AHCI_HFLAGS	(AHCI_HFLAG_IGN_IRQ_IF_ERR |
+-				 AHCI_HFLAG_32BIT_ONLY),
++				 0*AHCI_HFLAG_32BIT_ONLY),
+ 		.flags		= AHCI_FLAG_COMMON,
+ 		.pio_mask	= ATA_PIO4,
+ 		.udma_mask	= ATA_UDMA6,
 diff --git a/drivers/bluetooth/btbcm.c b/drivers/bluetooth/btbcm.c
 index d33cc70eec66..a3d898fa95e9 100644
 --- a/drivers/bluetooth/btbcm.c
@@ -68043,7 +68459,7 @@ index 06d830d36882..4f6e660ede0b 100644
  MODULE_DESCRIPTION("BCM2835 DMA engine driver");
  MODULE_AUTHOR("Florian Meier <florian.meier@koalo.de>");
 diff --git a/drivers/dma/dw-axi-dmac/dw-axi-dmac-platform.c b/drivers/dma/dw-axi-dmac/dw-axi-dmac-platform.c
-index 5d74bc29cf89..c71706b31425 100644
+index 95e460422b2a..5eea21a559c5 100644
 --- a/drivers/dma/dw-axi-dmac/dw-axi-dmac-platform.c
 +++ b/drivers/dma/dw-axi-dmac/dw-axi-dmac-platform.c
 @@ -12,6 +12,7 @@
@@ -68166,7 +68582,7 @@ index 5d74bc29cf89..c71706b31425 100644
 +
  static enum dma_status
  dma_chan_tx_status(struct dma_chan *dchan, dma_cookie_t cookie,
- 		  struct dma_tx_state *txstate)
+ 		   struct dma_tx_state *txstate)
 @@ -360,10 +435,7 @@ dma_chan_tx_status(struct dma_chan *dchan, dma_cookie_t cookie,
  	enum dma_status status;
  	u32 completed_length;
@@ -68248,7 +68664,7 @@ index 5d74bc29cf89..c71706b31425 100644
  		return;
  	}
  
-@@ -657,34 +744,48 @@ static int dw_axi_dma_set_hw_desc(struct axi_dma_chan *chan,
+@@ -655,34 +742,48 @@ static int dw_axi_dma_set_hw_desc(struct axi_dma_chan *chan,
  	size_t axi_block_ts;
  	size_t block_ts;
  	u32 ctllo, ctlhi;
@@ -68306,7 +68722,7 @@ index 5d74bc29cf89..c71706b31425 100644
  			DWAXIDMAC_CH_CTL_L_INC << CH_CTL_L_DST_INC_POS |
  			DWAXIDMAC_CH_CTL_L_NOINC << CH_CTL_L_SRC_INC_POS;
  		block_ts = len >> reg_width;
-@@ -693,6 +794,11 @@ static int dw_axi_dma_set_hw_desc(struct axi_dma_chan *chan,
+@@ -691,6 +792,11 @@ static int dw_axi_dma_set_hw_desc(struct axi_dma_chan *chan,
  		return -EINVAL;
  	}
  
@@ -68318,7 +68734,7 @@ index 5d74bc29cf89..c71706b31425 100644
  	if (block_ts > axi_block_ts)
  		return -EINVAL;
  
-@@ -703,7 +809,7 @@ static int dw_axi_dma_set_hw_desc(struct axi_dma_chan *chan,
+@@ -701,7 +807,7 @@ static int dw_axi_dma_set_hw_desc(struct axi_dma_chan *chan,
  	ctlhi = CH_CTL_H_LLI_VALID;
  
  	if (chan->chip->dw->hdata->restrict_axi_burst_len) {
@@ -68327,7 +68743,7 @@ index 5d74bc29cf89..c71706b31425 100644
  		ctlhi |= CH_CTL_H_ARLEN_EN | CH_CTL_H_AWLEN_EN |
  			 burst_len << CH_CTL_H_ARLEN_POS |
  			 burst_len << CH_CTL_H_AWLEN_POS;
-@@ -720,14 +826,17 @@ static int dw_axi_dma_set_hw_desc(struct axi_dma_chan *chan,
+@@ -718,14 +824,17 @@ static int dw_axi_dma_set_hw_desc(struct axi_dma_chan *chan,
  	}
  
  	hw_desc->lli->block_ts_lo = cpu_to_le32(block_ts - 1);
@@ -68348,7 +68764,7 @@ index 5d74bc29cf89..c71706b31425 100644
  	return 0;
  }
  
-@@ -744,9 +853,6 @@ static size_t calculate_block_len(struct axi_dma_chan *chan,
+@@ -742,9 +851,6 @@ static size_t calculate_block_len(struct axi_dma_chan *chan,
  	case DMA_MEM_TO_DEV:
  		data_width = BIT(chan->chip->dw->hdata->m_data_width);
  		mem_width = __ffs(data_width | dma_addr | buf_len);
@@ -68358,7 +68774,7 @@ index 5d74bc29cf89..c71706b31425 100644
  		block_len = axi_block_ts << mem_width;
  		break;
  	case DMA_DEV_TO_MEM:
-@@ -817,6 +923,8 @@ dw_axi_dma_chan_prep_cyclic(struct dma_chan *dchan, dma_addr_t dma_addr,
+@@ -815,6 +921,8 @@ dw_axi_dma_chan_prep_cyclic(struct dma_chan *dchan, dma_addr_t dma_addr,
  		src_addr += segment_len;
  	}
  
@@ -68367,7 +68783,7 @@ index 5d74bc29cf89..c71706b31425 100644
  	llp = desc->hw_desc[0].llp;
  
  	/* Managed transfer list */
-@@ -880,6 +988,9 @@ dw_axi_dma_chan_prep_slave_sg(struct dma_chan *dchan, struct scatterlist *sgl,
+@@ -878,6 +986,9 @@ dw_axi_dma_chan_prep_slave_sg(struct dma_chan *dchan, struct scatterlist *sgl,
  		mem = sg_dma_address(sg);
  		len = sg_dma_len(sg);
  		num_segments = DIV_ROUND_UP(sg_dma_len(sg), axi_block_len);
@@ -68377,7 +68793,7 @@ index 5d74bc29cf89..c71706b31425 100644
  		segment_len = DIV_ROUND_UP(sg_dma_len(sg), num_segments);
  
  		do {
-@@ -894,6 +1005,8 @@ dw_axi_dma_chan_prep_slave_sg(struct dma_chan *dchan, struct scatterlist *sgl,
+@@ -892,6 +1003,8 @@ dw_axi_dma_chan_prep_slave_sg(struct dma_chan *dchan, struct scatterlist *sgl,
  		} while (len >= segment_len);
  	}
  
@@ -68386,7 +68802,7 @@ index 5d74bc29cf89..c71706b31425 100644
  	/* Set end-of-link to the last link descriptor of list */
  	set_desc_last(&desc->hw_desc[num_sgs - 1]);
  
-@@ -972,7 +1085,7 @@ dma_chan_prep_dma_memcpy(struct dma_chan *dchan, dma_addr_t dst_adr,
+@@ -970,7 +1083,7 @@ dma_chan_prep_dma_memcpy(struct dma_chan *dchan, dma_addr_t dst_adr,
  
  		reg = CH_CTL_H_LLI_VALID;
  		if (chan->chip->dw->hdata->restrict_axi_burst_len) {
@@ -68395,7 +68811,7 @@ index 5d74bc29cf89..c71706b31425 100644
  
  			reg |= (CH_CTL_H_ARLEN_EN |
  				burst_len << CH_CTL_H_ARLEN_POS |
-@@ -1001,6 +1114,8 @@ dma_chan_prep_dma_memcpy(struct dma_chan *dchan, dma_addr_t dst_adr,
+@@ -999,6 +1112,8 @@ dma_chan_prep_dma_memcpy(struct dma_chan *dchan, dma_addr_t dst_adr,
  		num++;
  	}
  
@@ -68404,7 +68820,7 @@ index 5d74bc29cf89..c71706b31425 100644
  	/* Set end-of-link to the last link descriptor of list */
  	set_desc_last(&desc->hw_desc[num - 1]);
  	/* Managed transfer list */
-@@ -1049,7 +1164,7 @@ static void axi_chan_dump_lli(struct axi_dma_chan *chan,
+@@ -1047,7 +1162,7 @@ static void axi_chan_dump_lli(struct axi_dma_chan *chan,
  static void axi_chan_list_dump_lli(struct axi_dma_chan *chan,
  				   struct axi_dma_desc *desc_head)
  {
@@ -68413,7 +68829,7 @@ index 5d74bc29cf89..c71706b31425 100644
  	int i;
  
  	for (i = 0; i < count; i++)
-@@ -1092,11 +1207,11 @@ static noinline void axi_chan_handle_err(struct axi_dma_chan *chan, u32 status)
+@@ -1090,11 +1205,11 @@ static noinline void axi_chan_handle_err(struct axi_dma_chan *chan, u32 status)
  
  static void axi_chan_block_xfer_complete(struct axi_dma_chan *chan)
  {
@@ -68426,7 +68842,7 @@ index 5d74bc29cf89..c71706b31425 100644
  	u64 llp;
  	int i;
  
-@@ -1118,6 +1233,7 @@ static void axi_chan_block_xfer_complete(struct axi_dma_chan *chan)
+@@ -1116,6 +1231,7 @@ static void axi_chan_block_xfer_complete(struct axi_dma_chan *chan)
  	if (chan->cyclic) {
  		desc = vd_to_axi_desc(vd);
  		if (desc) {
@@ -68434,7 +68850,7 @@ index 5d74bc29cf89..c71706b31425 100644
  			llp = lo_hi_readq(chan->chan_regs + CH_LLP);
  			for (i = 0; i < count; i++) {
  				hw_desc = &desc->hw_desc[i];
-@@ -1138,6 +1254,9 @@ static void axi_chan_block_xfer_complete(struct axi_dma_chan *chan)
+@@ -1136,6 +1252,9 @@ static void axi_chan_block_xfer_complete(struct axi_dma_chan *chan)
  		/* Remove the completed descriptor from issued list before completing */
  		list_del(&vd->node);
  		vchan_cookie_complete(vd);
@@ -68444,7 +68860,7 @@ index 5d74bc29cf89..c71706b31425 100644
  	}
  
  out:
-@@ -1355,19 +1474,85 @@ static int __maybe_unused axi_dma_runtime_resume(struct device *dev)
+@@ -1353,19 +1472,85 @@ static int __maybe_unused axi_dma_runtime_resume(struct device *dev)
  	return axi_dma_resume(chip);
  }
  
@@ -68534,7 +68950,7 @@ index 5d74bc29cf89..c71706b31425 100644
  	return dchan;
  }
  
-@@ -1375,6 +1560,7 @@ static int parse_device_properties(struct axi_dma_chip *chip)
+@@ -1373,6 +1558,7 @@ static int parse_device_properties(struct axi_dma_chip *chip)
  {
  	struct device *dev = chip->dev;
  	u32 tmp, carr[DMAC_MAX_CHANNELS];
@@ -68542,7 +68958,7 @@ index 5d74bc29cf89..c71706b31425 100644
  	int ret;
  
  	ret = device_property_read_u32(dev, "dma-channels", &tmp);
-@@ -1395,6 +1581,10 @@ static int parse_device_properties(struct axi_dma_chip *chip)
+@@ -1393,6 +1579,10 @@ static int parse_device_properties(struct axi_dma_chip *chip)
  
  	chip->dw->hdata->nr_masters = tmp;
  
@@ -68553,7 +68969,7 @@ index 5d74bc29cf89..c71706b31425 100644
  	ret = device_property_read_u32(dev, "snps,data-width", &tmp);
  	if (ret)
  		return ret;
-@@ -1427,17 +1617,32 @@ static int parse_device_properties(struct axi_dma_chip *chip)
+@@ -1425,17 +1615,32 @@ static int parse_device_properties(struct axi_dma_chip *chip)
  	}
  
  	/* axi-max-burst-len is optional property */
@@ -68594,7 +69010,7 @@ index 5d74bc29cf89..c71706b31425 100644
  	return 0;
  }
  
-@@ -1465,6 +1670,7 @@ static int dw_probe(struct platform_device *pdev)
+@@ -1463,6 +1668,7 @@ static int dw_probe(struct platform_device *pdev)
  	struct dw_axi_dma *dw;
  	struct dw_axi_dma_hcfg *hdata;
  	struct reset_control *resets;
@@ -68602,7 +69018,7 @@ index 5d74bc29cf89..c71706b31425 100644
  	unsigned int flags;
  	u32 i;
  	int ret;
-@@ -1548,7 +1754,7 @@ static int dw_probe(struct platform_device *pdev)
+@@ -1546,7 +1752,7 @@ static int dw_probe(struct platform_device *pdev)
  	dma_cap_set(DMA_CYCLIC, dw->dma.cap_mask);
  
  	/* DMA capabilities */
@@ -68611,7 +69027,7 @@ index 5d74bc29cf89..c71706b31425 100644
  	dw->dma.src_addr_widths = AXI_DMA_BUSWIDTHS;
  	dw->dma.dst_addr_widths = AXI_DMA_BUSWIDTHS;
  	dw->dma.directions = BIT(DMA_MEM_TO_MEM);
-@@ -1575,9 +1781,21 @@ static int dw_probe(struct platform_device *pdev)
+@@ -1573,9 +1779,21 @@ static int dw_probe(struct platform_device *pdev)
  	 * Synopsis DesignWare AxiDMA datasheet mentioned Maximum
  	 * supported blocks is 1024. Device register width is 4 bytes.
  	 * Therefore, set constraint to 1024 * 4.
@@ -69207,7 +69623,7 @@ index 000000000000..be33ac6ed218
 +MODULE_DESCRIPTION("RP1 firmware driver");
 +MODULE_LICENSE("GPL v2");
 diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-index b45fb799e36c..01613ef1b243 100644
+index e63096002e92..6e7ff65e4290 100644
 --- a/drivers/gpio/Kconfig
 +++ b/drivers/gpio/Kconfig
 @@ -237,6 +237,12 @@ config GPIO_BLZP1600
@@ -71547,7 +71963,7 @@ index 3b1f5f72885e..854b83034777 100644
 +}
 +EXPORT_SYMBOL(drm_crtc_attach_background_color_property);
 diff --git a/drivers/gpu/drm/drm_color_mgmt.c b/drivers/gpu/drm/drm_color_mgmt.c
-index c598b99673fc..c93dc3b61423 100644
+index e7db4e4ea700..c337527339b8 100644
 --- a/drivers/gpu/drm/drm_color_mgmt.c
 +++ b/drivers/gpu/drm/drm_color_mgmt.c
 @@ -332,7 +332,9 @@ static int drm_crtc_legacy_gamma_set(struct drm_crtc *crtc,
@@ -71766,7 +72182,7 @@ index ff432ac6b569..e9f044162a19 100644
  	info->max_tmds_clock = 0;
  	info->dvi_dual = false;
 diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
-index 05803169bed5..dc0ad065fbf1 100644
+index 16bfbfb0af16..6972b80f45ea 100644
 --- a/drivers/gpu/drm/drm_fb_helper.c
 +++ b/drivers/gpu/drm/drm_fb_helper.c
 @@ -1633,7 +1633,7 @@ __drm_fb_helper_initial_config_and_unlock(struct drm_fb_helper *fb_helper)
@@ -71778,7 +72194,7 @@ index 05803169bed5..dc0ad065fbf1 100644
  
  	width = dev->mode_config.max_width;
  	height = dev->mode_config.max_height;
-@@ -1665,6 +1665,15 @@ __drm_fb_helper_initial_config_and_unlock(struct drm_fb_helper *fb_helper)
+@@ -1667,6 +1667,15 @@ __drm_fb_helper_initial_config_and_unlock(struct drm_fb_helper *fb_helper)
  	 * register the fbdev emulation instance in kernel_fb_helper_list. */
  	mutex_unlock(&fb_helper->lock);
  
@@ -71945,7 +72361,7 @@ index 87a91148a731..26841fd080b1 100644
  		 * Start timer if we don't already have an update pending
  		 * on this crtc:
 diff --git a/drivers/gpu/drm/panel/Kconfig b/drivers/gpu/drm/panel/Kconfig
-index 307152ad7759..f4c47975df9d 100644
+index 79264f7bbd0e..809d3ed00e9e 100644
 --- a/drivers/gpu/drm/panel/Kconfig
 +++ b/drivers/gpu/drm/panel/Kconfig
 @@ -228,6 +228,15 @@ config DRM_PANEL_HYDIS_HV101HD1
@@ -71982,7 +72398,7 @@ index 307152ad7759..f4c47975df9d 100644
  config DRM_PANEL_ILITEK_ILI9881C
  	tristate "Ilitek ILI9881C-based panels"
  	depends on OF
-@@ -1122,6 +1142,17 @@ config DRM_PANEL_TDO_TL070WSH30
+@@ -1123,6 +1143,17 @@ config DRM_PANEL_TDO_TL070WSH30
  	  24 bit RGB per pixel. It provides a MIPI DSI interface to
  	  the host, a built-in LED backlight and touch controller.
  
@@ -72000,7 +72416,7 @@ index 307152ad7759..f4c47975df9d 100644
  config DRM_PANEL_TPO_TD028TTEC1
  	tristate "Toppoly (TPO) TD028TTEC1 panel driver"
  	depends on OF && SPI
-@@ -1204,6 +1235,26 @@ config DRM_PANEL_VISIONOX_VTDR6130
+@@ -1205,6 +1236,26 @@ config DRM_PANEL_VISIONOX_VTDR6130
  	  Say Y here if you want to enable support for Visionox
  	  VTDR6130 1080x2400 AMOLED DSI panel.
  
@@ -73019,7 +73435,7 @@ index 000000000000..dd5fbd23ba26
 +MODULE_DESCRIPTION("ili9806 LCD panel driver");
 +MODULE_LICENSE("GPL v2");
 diff --git a/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c b/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c
-index 947b47841b01..e8025ed7e9df 100644
+index 947b47841b01..dea77f44af94 100644
 --- a/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c
 +++ b/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c
 @@ -1,6 +1,9 @@
@@ -73467,7 +73883,219 @@ index 947b47841b01..e8025ed7e9df 100644
  static const struct ili9881c_instr rpi_5inch_init[] = {
  	ILI9881C_SWITCH_PAGE_INSTR(3),
  	ILI9881C_COMMAND_INSTR(0x01, 0x00),
-@@ -2209,6 +2640,41 @@ static const struct drm_display_mode am8001280g_default_mode = {
+@@ -1997,6 +2428,211 @@ static const struct ili9881c_instr bsd1218_a101kl68_init[] = {
+ 	ILI9881C_COMMAND_INSTR(0xd3, 0x3f),
+ };
+ 
++static const struct ili9881c_instr t101p136cq_init[] = {
++	ILI9881C_SWITCH_PAGE_INSTR(3),
++	ILI9881C_COMMAND_INSTR(0x01, 0x00),
++	ILI9881C_COMMAND_INSTR(0x02, 0x00),
++	ILI9881C_COMMAND_INSTR(0x03, 0x53),
++	ILI9881C_COMMAND_INSTR(0x04, 0x53),
++	ILI9881C_COMMAND_INSTR(0x05, 0x13),
++	ILI9881C_COMMAND_INSTR(0x06, 0x04),
++	ILI9881C_COMMAND_INSTR(0x07, 0x02),
++	ILI9881C_COMMAND_INSTR(0x08, 0x02),
++	ILI9881C_COMMAND_INSTR(0x09, 0x00),
++	ILI9881C_COMMAND_INSTR(0x0A, 0x00),
++	ILI9881C_COMMAND_INSTR(0x0B, 0x00),
++	ILI9881C_COMMAND_INSTR(0x0C, 0x00),
++	ILI9881C_COMMAND_INSTR(0x0D, 0x00),
++	ILI9881C_COMMAND_INSTR(0x0E, 0x00),
++	ILI9881C_COMMAND_INSTR(0x0F, 0x00),
++	ILI9881C_COMMAND_INSTR(0x10, 0x00),
++	ILI9881C_COMMAND_INSTR(0x11, 0x00),
++	ILI9881C_COMMAND_INSTR(0x12, 0x00),
++	ILI9881C_COMMAND_INSTR(0x13, 0x00),
++	ILI9881C_COMMAND_INSTR(0x14, 0x00),
++	ILI9881C_COMMAND_INSTR(0x15, 0x05),
++	ILI9881C_COMMAND_INSTR(0x16, 0x05),
++	ILI9881C_COMMAND_INSTR(0x17, 0x03),
++	ILI9881C_COMMAND_INSTR(0x18, 0x03),
++	ILI9881C_COMMAND_INSTR(0x19, 0x00),
++	ILI9881C_COMMAND_INSTR(0x1A, 0x00),
++	ILI9881C_COMMAND_INSTR(0x1B, 0x00),
++	ILI9881C_COMMAND_INSTR(0x1C, 0x00),
++	ILI9881C_COMMAND_INSTR(0x1D, 0x00),
++	ILI9881C_COMMAND_INSTR(0x1E, 0xC0),
++	ILI9881C_COMMAND_INSTR(0x1F, 0x80),
++	ILI9881C_COMMAND_INSTR(0x20, 0x02),
++	ILI9881C_COMMAND_INSTR(0x21, 0x09),
++	ILI9881C_COMMAND_INSTR(0x22, 0x00),
++	ILI9881C_COMMAND_INSTR(0x23, 0x00),
++	ILI9881C_COMMAND_INSTR(0x24, 0x00),
++	ILI9881C_COMMAND_INSTR(0x25, 0x00),
++	ILI9881C_COMMAND_INSTR(0x26, 0x00),
++	ILI9881C_COMMAND_INSTR(0x27, 0x00),
++	ILI9881C_COMMAND_INSTR(0x28, 0x55),
++	ILI9881C_COMMAND_INSTR(0x29, 0x03),
++	ILI9881C_COMMAND_INSTR(0x2A, 0x00),
++	ILI9881C_COMMAND_INSTR(0x2B, 0x00),
++	ILI9881C_COMMAND_INSTR(0x2C, 0x00),
++	ILI9881C_COMMAND_INSTR(0x2D, 0x00),
++	ILI9881C_COMMAND_INSTR(0x2E, 0x00),
++	ILI9881C_COMMAND_INSTR(0x2F, 0x00),
++	ILI9881C_COMMAND_INSTR(0x30, 0x00),
++	ILI9881C_COMMAND_INSTR(0x31, 0x00),
++	ILI9881C_COMMAND_INSTR(0x32, 0x00),
++	ILI9881C_COMMAND_INSTR(0x33, 0x00),
++	ILI9881C_COMMAND_INSTR(0x34, 0x00),
++	ILI9881C_COMMAND_INSTR(0x35, 0x00),
++	ILI9881C_COMMAND_INSTR(0x36, 0x00),
++	ILI9881C_COMMAND_INSTR(0x37, 0x00),
++	ILI9881C_COMMAND_INSTR(0x38, 0x3C),
++	ILI9881C_COMMAND_INSTR(0x39, 0x00),
++	ILI9881C_COMMAND_INSTR(0x3A, 0x00),
++	ILI9881C_COMMAND_INSTR(0x3B, 0x00),
++	ILI9881C_COMMAND_INSTR(0x3C, 0x00),
++	ILI9881C_COMMAND_INSTR(0x3D, 0x00),
++	ILI9881C_COMMAND_INSTR(0x3E, 0x00),
++	ILI9881C_COMMAND_INSTR(0x3F, 0x00),
++	ILI9881C_COMMAND_INSTR(0x40, 0x00),
++	ILI9881C_COMMAND_INSTR(0x41, 0x00),
++	ILI9881C_COMMAND_INSTR(0x42, 0x00),
++	ILI9881C_COMMAND_INSTR(0x43, 0x00),
++	ILI9881C_COMMAND_INSTR(0x44, 0x00),
++	ILI9881C_COMMAND_INSTR(0x50, 0x01),
++	ILI9881C_COMMAND_INSTR(0x51, 0x23),
++	ILI9881C_COMMAND_INSTR(0x52, 0x45),
++	ILI9881C_COMMAND_INSTR(0x53, 0x67),
++	ILI9881C_COMMAND_INSTR(0x54, 0x89),
++	ILI9881C_COMMAND_INSTR(0x55, 0xAB),
++	ILI9881C_COMMAND_INSTR(0x56, 0x01),
++	ILI9881C_COMMAND_INSTR(0x57, 0x23),
++	ILI9881C_COMMAND_INSTR(0x58, 0x45),
++	ILI9881C_COMMAND_INSTR(0x59, 0x67),
++	ILI9881C_COMMAND_INSTR(0x5A, 0x89),
++	ILI9881C_COMMAND_INSTR(0x5B, 0xAB),
++	ILI9881C_COMMAND_INSTR(0x5C, 0xCD),
++	ILI9881C_COMMAND_INSTR(0x5D, 0xEF),
++	ILI9881C_COMMAND_INSTR(0x5E, 0x01),
++	ILI9881C_COMMAND_INSTR(0x5F, 0x0A),
++	ILI9881C_COMMAND_INSTR(0x60, 0x02),
++	ILI9881C_COMMAND_INSTR(0x61, 0x02),
++	ILI9881C_COMMAND_INSTR(0x62, 0x08),
++	ILI9881C_COMMAND_INSTR(0x63, 0x15),
++	ILI9881C_COMMAND_INSTR(0x64, 0x14),
++	ILI9881C_COMMAND_INSTR(0x65, 0x02),
++	ILI9881C_COMMAND_INSTR(0x66, 0x11),
++	ILI9881C_COMMAND_INSTR(0x67, 0x10),
++	ILI9881C_COMMAND_INSTR(0x68, 0x02),
++	ILI9881C_COMMAND_INSTR(0x69, 0x0F),
++	ILI9881C_COMMAND_INSTR(0x6A, 0x0E),
++	ILI9881C_COMMAND_INSTR(0x6B, 0x02),
++	ILI9881C_COMMAND_INSTR(0x6C, 0x0D),
++	ILI9881C_COMMAND_INSTR(0x6D, 0x0C),
++	ILI9881C_COMMAND_INSTR(0x6E, 0x06),
++	ILI9881C_COMMAND_INSTR(0x6F, 0x02),
++	ILI9881C_COMMAND_INSTR(0x70, 0x02),
++	ILI9881C_COMMAND_INSTR(0x71, 0x02),
++	ILI9881C_COMMAND_INSTR(0x72, 0x02),
++	ILI9881C_COMMAND_INSTR(0x73, 0x02),
++	ILI9881C_COMMAND_INSTR(0x74, 0x02),
++	ILI9881C_COMMAND_INSTR(0x75, 0x0A),
++	ILI9881C_COMMAND_INSTR(0x76, 0x02),
++	ILI9881C_COMMAND_INSTR(0x77, 0x02),
++	ILI9881C_COMMAND_INSTR(0x78, 0x06),
++	ILI9881C_COMMAND_INSTR(0x79, 0x15),
++	ILI9881C_COMMAND_INSTR(0x7A, 0x14),
++	ILI9881C_COMMAND_INSTR(0x7B, 0x02),
++	ILI9881C_COMMAND_INSTR(0x7C, 0x10),
++	ILI9881C_COMMAND_INSTR(0x7D, 0x11),
++	ILI9881C_COMMAND_INSTR(0x7E, 0x02),
++	ILI9881C_COMMAND_INSTR(0x7F, 0x0C),
++	ILI9881C_COMMAND_INSTR(0x80, 0x0D),
++	ILI9881C_COMMAND_INSTR(0x81, 0x02),
++	ILI9881C_COMMAND_INSTR(0x82, 0x0E),
++	ILI9881C_COMMAND_INSTR(0x83, 0x0F),
++	ILI9881C_COMMAND_INSTR(0x84, 0x08),
++	ILI9881C_COMMAND_INSTR(0x85, 0x02),
++	ILI9881C_COMMAND_INSTR(0x86, 0x02),
++	ILI9881C_COMMAND_INSTR(0x87, 0x02),
++	ILI9881C_COMMAND_INSTR(0x88, 0x02),
++	ILI9881C_COMMAND_INSTR(0x89, 0x02),
++	ILI9881C_COMMAND_INSTR(0x8A, 0x02),
++
++	ILI9881C_SWITCH_PAGE_INSTR(4),
++	ILI9881C_COMMAND_INSTR(0x3B, 0x98),
++	ILI9881C_COMMAND_INSTR(0x6C, 0x15),
++	ILI9881C_COMMAND_INSTR(0x6E, 0x30),
++	ILI9881C_COMMAND_INSTR(0x6F, 0x45),
++	ILI9881C_COMMAND_INSTR(0x8D, 0x1F),
++	ILI9881C_COMMAND_INSTR(0x87, 0xBA),
++	ILI9881C_COMMAND_INSTR(0x26, 0x76),
++	ILI9881C_COMMAND_INSTR(0xB2, 0xD1),
++	ILI9881C_COMMAND_INSTR(0x88, 0x0B),
++	ILI9881C_COMMAND_INSTR(0x21, 0xB0),
++	ILI9881C_COMMAND_INSTR(0x35, 0x17),
++	ILI9881C_COMMAND_INSTR(0x30, 0x01),
++	ILI9881C_COMMAND_INSTR(0x31, 0x75),
++	ILI9881C_COMMAND_INSTR(0xB5, 0x07),
++	ILI9881C_COMMAND_INSTR(0x8A, 0xD8),
++	ILI9881C_COMMAND_INSTR(0x3A, 0x8A),
++
++	ILI9881C_SWITCH_PAGE_INSTR(1),
++	ILI9881C_COMMAND_INSTR(0x22, 0x0A),
++	ILI9881C_COMMAND_INSTR(0x31, 0x09),
++	ILI9881C_COMMAND_INSTR(0x40, 0x33),
++	ILI9881C_COMMAND_INSTR(0x42, 0x44),
++	ILI9881C_COMMAND_INSTR(0x53, 0x3E),
++	ILI9881C_COMMAND_INSTR(0x55, 0x45),
++	ILI9881C_COMMAND_INSTR(0x56, 0x00),
++	ILI9881C_COMMAND_INSTR(0x50, 0x95),
++	ILI9881C_COMMAND_INSTR(0x51, 0x95),
++	ILI9881C_COMMAND_INSTR(0x60, 0x09),
++	ILI9881C_COMMAND_INSTR(0x2E, 0xC8),
++	ILI9881C_COMMAND_INSTR(0x35, 0x07),
++	ILI9881C_COMMAND_INSTR(0x63, 0x00),
++	ILI9881C_COMMAND_INSTR(0xA0, 0x00),
++	ILI9881C_COMMAND_INSTR(0xA1, 0x14),
++	ILI9881C_COMMAND_INSTR(0xA2, 0x24),
++	ILI9881C_COMMAND_INSTR(0xA3, 0x17),
++	ILI9881C_COMMAND_INSTR(0xA4, 0x1A),
++	ILI9881C_COMMAND_INSTR(0xA5, 0x2C),
++	ILI9881C_COMMAND_INSTR(0xA6, 0x20),
++	ILI9881C_COMMAND_INSTR(0xA7, 0x1F),
++	ILI9881C_COMMAND_INSTR(0xA8, 0x81),
++	ILI9881C_COMMAND_INSTR(0xA9, 0x1E),
++	ILI9881C_COMMAND_INSTR(0xAA, 0x2A),
++	ILI9881C_COMMAND_INSTR(0xAB, 0x71),
++	ILI9881C_COMMAND_INSTR(0xAC, 0x19),
++	ILI9881C_COMMAND_INSTR(0xAD, 0x17),
++	ILI9881C_COMMAND_INSTR(0xAE, 0x4C),
++	ILI9881C_COMMAND_INSTR(0xAF, 0x1F),
++	ILI9881C_COMMAND_INSTR(0xB0, 0x26),
++	ILI9881C_COMMAND_INSTR(0xB1, 0x4D),
++	ILI9881C_COMMAND_INSTR(0xB2, 0x5D),
++	ILI9881C_COMMAND_INSTR(0xB3, 0x3F),
++	ILI9881C_COMMAND_INSTR(0xB7, 0x03),
++	ILI9881C_COMMAND_INSTR(0xC0, 0x00),
++	ILI9881C_COMMAND_INSTR(0xC1, 0x18),
++	ILI9881C_COMMAND_INSTR(0xC2, 0x24),
++	ILI9881C_COMMAND_INSTR(0xC3, 0x0E),
++	ILI9881C_COMMAND_INSTR(0xC4, 0x11),
++	ILI9881C_COMMAND_INSTR(0xC5, 0x24),
++	ILI9881C_COMMAND_INSTR(0xC6, 0x1A),
++	ILI9881C_COMMAND_INSTR(0xC7, 0x1E),
++	ILI9881C_COMMAND_INSTR(0xC8, 0x76),
++	ILI9881C_COMMAND_INSTR(0xC9, 0x1B),
++	ILI9881C_COMMAND_INSTR(0xCA, 0x27),
++	ILI9881C_COMMAND_INSTR(0xCB, 0x64),
++	ILI9881C_COMMAND_INSTR(0xCC, 0x19),
++	ILI9881C_COMMAND_INSTR(0xCD, 0x18),
++	ILI9881C_COMMAND_INSTR(0xCE, 0x4A),
++	ILI9881C_COMMAND_INSTR(0xCF, 0x20),
++	ILI9881C_COMMAND_INSTR(0xD0, 0x28),
++	ILI9881C_COMMAND_INSTR(0xD1, 0x4A),
++	ILI9881C_COMMAND_INSTR(0xD2, 0x5C),
++	ILI9881C_COMMAND_INSTR(0xD3, 0x3F),
++};
++
+ static inline struct ili9881c *panel_to_ili9881c(struct drm_panel *panel)
+ {
+ 	return container_of(panel, struct ili9881c, panel);
+@@ -2209,6 +2845,41 @@ static const struct drm_display_mode am8001280g_default_mode = {
  	.height_mm	= 151,
  };
  
@@ -73509,7 +74137,31 @@ index 947b47841b01..e8025ed7e9df 100644
  static const struct drm_display_mode rpi_5inch_default_mode = {
  	.clock		= 83333,
  
-@@ -2359,7 +2825,11 @@ static int ili9881c_dsi_probe(struct mipi_dsi_device *dsi)
+@@ -2260,6 +2931,23 @@ static const struct drm_display_mode bsd1218_a101kl68_default_mode = {
+ 	.height_mm	= 170,
+ };
+ 
++static const struct drm_display_mode t101p136cq_mode = {
++	.clock		= 78086,
++
++	.hdisplay	= 800,
++	.hsync_start	= 800 + 120,
++	.hsync_end	= 800 + 120 + 20,
++	.htotal		= 800 + 120 + 20 + 40,
++
++	.vdisplay	= 1280,
++	.vsync_start	= 1280 + 16,
++	.vsync_end	= 1280 + 16 + 8,
++	.vtotal		= 1280 + 16 + 8 + 24,
++
++	.width_mm	= 135,
++	.height_mm	= 216,
++};
++
+ static int ili9881c_get_modes(struct drm_panel *panel,
+ 			      struct drm_connector *connector)
+ {
+@@ -2359,7 +3047,11 @@ static int ili9881c_dsi_probe(struct mipi_dsi_device *dsi)
  	dsi->format = MIPI_DSI_FMT_RGB888;
  	dsi->lanes = ctx->desc->lanes;
  
@@ -73522,7 +74174,7 @@ index 947b47841b01..e8025ed7e9df 100644
  }
  
  static void ili9881c_dsi_remove(struct mipi_dsi_device *dsi)
-@@ -2368,6 +2838,9 @@ static void ili9881c_dsi_remove(struct mipi_dsi_device *dsi)
+@@ -2368,6 +3060,9 @@ static void ili9881c_dsi_remove(struct mipi_dsi_device *dsi)
  
  	mipi_dsi_detach(dsi);
  	drm_panel_remove(&ctx->panel);
@@ -73532,7 +74184,7 @@ index 947b47841b01..e8025ed7e9df 100644
  }
  
  static const struct ili9881c_desc lhr050h41_desc = {
-@@ -2429,6 +2902,22 @@ static const struct ili9881c_desc am8001280g_desc = {
+@@ -2429,6 +3124,22 @@ static const struct ili9881c_desc am8001280g_desc = {
  		      MIPI_DSI_CLOCK_NON_CONTINUOUS | MIPI_DSI_MODE_LPM,
  };
  
@@ -73555,7 +74207,22 @@ index 947b47841b01..e8025ed7e9df 100644
  static const struct ili9881c_desc rpi_5inch_desc = {
  	.init = rpi_5inch_init,
  	.init_length = ARRAY_SIZE(rpi_5inch_init),
-@@ -2463,6 +2952,8 @@ static const struct of_device_id ili9881c_of_match[] = {
+@@ -2454,6 +3165,14 @@ static const struct ili9881c_desc bsd1218_a101kl68_desc = {
+ 	.lanes = 4,
+ };
+ 
++static const struct ili9881c_desc t101p136cq_desc = {
++	.init = t101p136cq_init,
++	.init_length = ARRAY_SIZE(t101p136cq_init),
++	.mode = &t101p136cq_mode,
++	.mode_flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_BURST | MIPI_DSI_MODE_LPM,
++	.lanes = 2,
++};
++
+ static const struct of_device_id ili9881c_of_match[] = {
+ 	{ .compatible = "bananapi,lhr050h41", .data = &lhr050h41_desc },
+ 	{ .compatible = "bestar,bsd1218-a101kl68", .data = &bsd1218_a101kl68_desc },
+@@ -2463,8 +3182,11 @@ static const struct of_device_id ili9881c_of_match[] = {
  	{ .compatible = "wanchanglong,w552946aaa", .data = &w552946aaa_desc },
  	{ .compatible = "wanchanglong,w552946aba", .data = &w552946aba_desc },
  	{ .compatible = "ampire,am8001280g", .data = &am8001280g_desc },
@@ -73563,7 +74230,10 @@ index 947b47841b01..e8025ed7e9df 100644
 +	{ .compatible = "nwe,nwe080", .data = &nwe080_desc },
  	{ .compatible = "raspberrypi,dsi-5inch", &rpi_5inch_desc },
  	{ .compatible = "raspberrypi,dsi-7inch", &rpi_7inch_desc },
++	{ .compatible = "rzw,t101p136cq", .data = &t101p136cq_desc },
  	{ }
+ };
+ MODULE_DEVICE_TABLE(of, ili9881c_of_match);
 diff --git a/drivers/gpu/drm/panel/panel-jdi-lt070me05000.c b/drivers/gpu/drm/panel/panel-jdi-lt070me05000.c
 index 3513e5c4dd8c..42b9815fb887 100644
 --- a/drivers/gpu/drm/panel/panel-jdi-lt070me05000.c
@@ -73698,7 +74368,7 @@ index dc4bb8ad9131..043877de257d 100644
  	/* Look up the DSI host.  It needs to probe before we do. */
  	endpoint = of_graph_get_endpoint_by_regs(dev->of_node, 0, -1);
 diff --git a/drivers/gpu/drm/panel/panel-simple.c b/drivers/gpu/drm/panel/panel-simple.c
-index 91ab280869ba..cae66a7b3bb5 100644
+index a242ae284db5..04e16e932a81 100644
 --- a/drivers/gpu/drm/panel/panel-simple.c
 +++ b/drivers/gpu/drm/panel/panel-simple.c
 @@ -160,8 +160,6 @@ struct panel_simple {
@@ -74669,10 +75339,10 @@ index 000000000000..ca6818dc465d
 +MODULE_LICENSE("GPL v2");
 diff --git a/drivers/gpu/drm/panel/panel-waveshare-dsi-v2.c b/drivers/gpu/drm/panel/panel-waveshare-dsi-v2.c
 new file mode 100644
-index 000000000000..e15dae58a19d
+index 000000000000..6809b6e2ef3f
 --- /dev/null
 +++ b/drivers/gpu/drm/panel/panel-waveshare-dsi-v2.c
-@@ -0,0 +1,2327 @@
+@@ -0,0 +1,2472 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * Copyright (C) 2024 Waveshare International Limited
@@ -76165,6 +76835,103 @@ index 000000000000..e15dae58a19d
 +	{},
 +};
 +
++static const struct panel_init_cmd ws_panel_4_3_a_init[] = {
++	_INIT_DCS_CMD(0xFF, 0x77, 0x01, 0x00, 0x00, 0x13),
++	_INIT_DCS_CMD(0xEF, 0x08),
++	_INIT_DCS_CMD(0xFF, 0x77, 0x01, 0x00, 0x00, 0x10),
++	_INIT_DCS_CMD(0xC0, 0x63, 0x00),
++	_INIT_DCS_CMD(0xC1, 0x0D, 0x02),
++	_INIT_DCS_CMD(0xC2, 0x17, 0x08),
++	_INIT_DCS_CMD(0xCC, 0x10),
++	_INIT_DCS_CMD(0xB0, 0x40, 0xC9, 0x94, 0x0E, 0x10, 0x05, 0x0B, 0x09,
++		      0x08, 0x26, 0x04, 0x52, 0x10, 0x69, 0x6B, 0x69),
++	_INIT_DCS_CMD(0xB1, 0x40, 0xD2, 0x98, 0x0C, 0x92, 0x07, 0x09, 0x08,
++		      0x07, 0x25, 0x02, 0x0E, 0x0C, 0x6E, 0x78, 0x55),
++	_INIT_DCS_CMD(0xFF, 0x77, 0x01, 0x00, 0x00, 0x11),
++	_INIT_DCS_CMD(0xB0, 0x5D),
++	_INIT_DCS_CMD(0xB1, 0x4E),
++	_INIT_DCS_CMD(0xB2, 0x87),
++	_INIT_DCS_CMD(0xB3, 0x80),
++	_INIT_DCS_CMD(0xB5, 0x4E),
++	_INIT_DCS_CMD(0xB7, 0x85),
++	_INIT_DCS_CMD(0xB8, 0x21),
++	_INIT_DCS_CMD(0xB9, 0x10, 0x1F),
++	_INIT_DCS_CMD(0xBB, 0x03),
++	_INIT_DCS_CMD(0xBC, 0x00),
++	_INIT_DCS_CMD(0xC1, 0x78),
++	_INIT_DCS_CMD(0xC2, 0x78),
++	_INIT_DCS_CMD(0xD0, 0x88),
++	_INIT_DCS_CMD(0xE0, 0x00, 0x3A, 0x02),
++	_INIT_DCS_CMD(0xE1, 0x04, 0xA0, 0x00, 0xA0, 0x05, 0xA0, 0x00, 0xA0,
++		      0x00, 0x40, 0x40),
++	_INIT_DCS_CMD(0xE2, 0x30, 0x00, 0x40, 0x40, 0x32, 0xA0, 0x00, 0xA0,
++		      0x00, 0xA0, 0x00, 0xA0, 0x00),
++	_INIT_DCS_CMD(0xE3, 0x00, 0x00, 0x33, 0x33),
++	_INIT_DCS_CMD(0xE4, 0x44, 0x44),
++	_INIT_DCS_CMD(0xE5, 0x09, 0x2E, 0xA0, 0xA0, 0x0B, 0x30, 0xA0, 0xA0,
++		      0x05, 0x2A, 0xA0, 0xA0, 0x07, 0x2C, 0xA0, 0xA0),
++	_INIT_DCS_CMD(0xE6, 0x00, 0x00, 0x33, 0x33),
++	_INIT_DCS_CMD(0xE7, 0x44, 0x44),
++	_INIT_DCS_CMD(0xE8, 0x08, 0x2D, 0xA0, 0xA0, 0x0A, 0x2F, 0xA0, 0xA0,
++		      0x04, 0x29, 0xA0, 0xA0, 0x06, 0x2B, 0xA0, 0xA0),
++	_INIT_DCS_CMD(0xEB, 0x00, 0x00, 0x4E, 0x4E, 0x00, 0x00, 0x00),
++	_INIT_DCS_CMD(0xEC, 0x08, 0x01),
++	_INIT_DCS_CMD(0xED, 0xB0, 0x2B, 0x98, 0xA4, 0x56, 0x7F, 0xFF, 0xFF,
++		      0xFF, 0xFF, 0xF7, 0x65, 0x4A, 0x89, 0xB2, 0x0B),
++	_INIT_DCS_CMD(0xEF, 0x08, 0x08, 0x08, 0x45, 0x3F, 0x54),
++	_INIT_DCS_CMD(0xFF, 0x77, 0x01, 0x00, 0x00, 0x00),
++	_INIT_DCS_CMD(0x11),
++	_INIT_DELAY_CMD(120),
++	_INIT_DCS_CMD(0x29),
++	_INIT_DELAY_CMD(20),
++	{},
++};
++
++static const struct panel_init_cmd ws_panel_4_a_init[] = {
++	_INIT_DCS_CMD(0x11),
++	_INIT_DELAY_CMD(200),
++	_INIT_DCS_CMD(0xFF, 0x77, 0x01, 0x00, 0x00, 0x10),
++	_INIT_DCS_CMD(0xC0, 0x63, 0x00),
++	_INIT_DCS_CMD(0xC1, 0x0A, 0x02),
++	_INIT_DCS_CMD(0xC2, 0x31, 0x08),
++	_INIT_DCS_CMD(0xB0, 0x00, 0x11, 0x19, 0x0C, 0x10, 0x06, 0x07, 0x0A,
++		      0x09, 0x22, 0x04, 0x10, 0x0E, 0x28, 0x30, 0x1C),
++	_INIT_DCS_CMD(0xB1, 0x00, 0x12, 0x19, 0x0D, 0x10, 0x04, 0x06, 0x07,
++		      0x08, 0x23, 0x04, 0x12, 0x11, 0x28, 0x30, 0x1C),
++	_INIT_DCS_CMD(0xFF, 0x77, 0x01, 0x00, 0x00, 0x11),
++	_INIT_DCS_CMD(0xB0, 0x4D),
++	_INIT_DCS_CMD(0xB1, 0x3E),
++	_INIT_DCS_CMD(0xB2, 0x07),
++	_INIT_DCS_CMD(0xB3, 0x80),
++	_INIT_DCS_CMD(0xB5, 0x47),
++	_INIT_DCS_CMD(0xB7, 0x8A),
++	_INIT_DCS_CMD(0xB8, 0x21),
++	_INIT_DCS_CMD(0xC1, 0x78),
++	_INIT_DCS_CMD(0xC2, 0x78),
++	_INIT_DCS_CMD(0xD0, 0x88),
++	_INIT_DELAY_CMD(100),
++	_INIT_DCS_CMD(0xE0, 0x00, 0x00, 0x02),
++	_INIT_DCS_CMD(0xE1, 0x04, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00,
++		      0x00, 0x20, 0x20),
++	_INIT_DCS_CMD(0xE2, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
++		      0x00, 0x00, 0x00, 0x00, 0x00),
++	_INIT_DCS_CMD(0xE3, 0x00, 0x00, 0x33, 0x00),
++	_INIT_DCS_CMD(0xE4, 0x22, 0x00),
++	_INIT_DCS_CMD(0xE5, 0x04, 0x34, 0xAA, 0xAA, 0x06, 0x34, 0xAA, 0xAA,
++		      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00),
++	_INIT_DCS_CMD(0xE6, 0x00, 0x00, 0x33, 0x00),
++	_INIT_DCS_CMD(0xE7, 0x22, 0x00),
++	_INIT_DCS_CMD(0xE8, 0x05, 0x34, 0xAA, 0xAA, 0x07, 0x34, 0xAA, 0xAA,
++		      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00),
++	_INIT_DCS_CMD(0xEB, 0x02, 0x00, 0x40, 0x40, 0x00, 0x00, 0x00),
++	_INIT_DCS_CMD(0xED, 0xFA, 0x45, 0x0B, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
++		      0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xB0, 0x54, 0xAF),
++	_INIT_DCS_CMD(0xFF, 0x77, 0x01, 0x00, 0x00, 0x00),
++	_INIT_DELAY_CMD(10),
++	_INIT_DCS_CMD(0x29),
++	{},
++};
++
 +static const struct panel_init_cmd ws_panel_4_c_init[] = {
 +	_INIT_DCS_CMD(0xE0, 0x00), _INIT_DCS_CMD(0xE1, 0x93),
 +	_INIT_DCS_CMD(0xE2, 0x65), _INIT_DCS_CMD(0xE3, 0xF8),
@@ -76638,6 +77405,34 @@ index 000000000000..e15dae58a19d
 +	.height_mm = 110,
 +};
 +
++static const struct drm_display_mode ws_panel_4_3_a_mode = {
++	.clock = 30000,
++	.hdisplay = 480,
++	.hsync_start = 480 + 42,
++	.hsync_end = 480 + 42 + 12,
++	.htotal = 480 + 42 + 12 + 42,
++	.vdisplay = 800,
++	.vsync_start = 800 + 60,
++	.vsync_end = 800 + 60 + 8,
++	.vtotal = 800 + 60 + 8 + 2,
++	.width_mm = 56,
++	.height_mm = 93,
++};
++
++static const struct drm_display_mode ws_panel_4_a_mode = {
++	.clock = 27200,
++	.hdisplay = 480,
++	.hsync_start = 480 + 30,
++	.hsync_end = 480 + 30 + 30,
++	.htotal = 480 + 30 + 30 + 8,
++	.vdisplay = 800,
++	.vsync_start = 800 + 12,
++	.vsync_end = 800 + 12 + 12,
++	.vtotal = 800 + 12 + 12 + 2,
++	.width_mm = 51,
++	.height_mm = 86,
++};
++
 +static const struct drm_display_mode ws_panel_4_c_mode = {
 +	.clock = 36500,
 +	.hdisplay = 720,
@@ -76727,17 +77522,17 @@ index 000000000000..e15dae58a19d
 +	drm_panel_init(&ctx->panel, &dsi->dev, &ws_panel_funcs,
 +		       DRM_MODE_CONNECTOR_DSI);
 +
-+	ctx->reset = devm_gpiod_get_optional(&dsi->dev, "reset", GPIOD_OUT_LOW);
++	ctx->reset = devm_gpiod_get_optional(&dsi->dev, "reset", GPIOD_ASIS);
 +	if (IS_ERR(ctx->reset))
 +		return dev_err_probe(&dsi->dev, PTR_ERR(ctx->reset),
 +				     "Couldn't get our reset GPIO\n");
 +
-+	ctx->iovcc = devm_gpiod_get_optional(&dsi->dev, "iovcc", GPIOD_OUT_LOW);
++	ctx->iovcc = devm_gpiod_get_optional(&dsi->dev, "iovcc", GPIOD_ASIS);
 +	if (IS_ERR(ctx->iovcc))
 +		return dev_err_probe(&dsi->dev, PTR_ERR(ctx->iovcc),
 +				     "Couldn't get our iovcc GPIO\n");
 +
-+	ctx->avdd = devm_gpiod_get_optional(&dsi->dev, "avdd", GPIOD_OUT_LOW);
++	ctx->avdd = devm_gpiod_get_optional(&dsi->dev, "avdd", GPIOD_ASIS);
 +	if (IS_ERR(ctx->avdd))
 +		return dev_err_probe(&dsi->dev, PTR_ERR(ctx->avdd),
 +				     "Couldn't get our avdd GPIO\n");
@@ -76936,6 +77731,24 @@ index 000000000000..e15dae58a19d
 +	.format = MIPI_DSI_FMT_RGB888,
 +};
 +
++static const struct ws_panel_desc ws_panel_4_3_inch_a_desc = {
++	.init = ws_panel_4_3_a_init,
++	.mode = &ws_panel_4_3_a_mode,
++	.mode_flags = MIPI_DSI_MODE_VIDEO_HSE | MIPI_DSI_MODE_VIDEO |
++		      MIPI_DSI_MODE_LPM | MIPI_DSI_CLOCK_NON_CONTINUOUS,
++	.lanes = 2,
++	.format = MIPI_DSI_FMT_RGB888,
++};
++
++static const struct ws_panel_desc ws_panel_4_inch_a_desc = {
++	.init = ws_panel_4_a_init,
++	.mode = &ws_panel_4_a_mode,
++	.mode_flags = MIPI_DSI_MODE_VIDEO_HSE | MIPI_DSI_MODE_VIDEO |
++		      MIPI_DSI_MODE_LPM | MIPI_DSI_CLOCK_NON_CONTINUOUS,
++	.lanes = 2,
++	.format = MIPI_DSI_FMT_RGB888,
++};
++
 +static const struct ws_panel_desc ws_panel_4_inch_c_desc = {
 +	.init = ws_panel_4_c_init,
 +	.mode = &ws_panel_4_c_mode,
@@ -76979,6 +77792,8 @@ index 000000000000..e15dae58a19d
 +	{ .compatible = "waveshare,5.5-dsi-touch-a",
 +	  &ws_panel_5_5_inch_a_desc },
 +	{ .compatible = "waveshare,5.0-dsi-touch-a", &ws_panel_5_inch_a_desc },
++	{ .compatible = "waveshare,4.3-dsi-touch-a", &ws_panel_4_3_inch_a_desc },
++	{ .compatible = "waveshare,4.0-dsi-touch-a", &ws_panel_4_inch_a_desc },
 +	{ .compatible = "waveshare,4.0-dsi-touch-c", &ws_panel_4_inch_c_desc },
 +	{ .compatible = "waveshare,3.4-dsi-touch-c",
 +	  &ws_panel_3_4_inch_c_desc },
@@ -84765,7 +85580,7 @@ index 89f24eec62a7..634cc796ba23 100644
  		   cycles,
  		   cycles / (measure_ms * 1000),
 diff --git a/drivers/gpu/drm/v3d/v3d_drv.c b/drivers/gpu/drm/v3d/v3d_drv.c
-index dd60acdf52c2..15759ce6d95a 100644
+index 86e05fcf6cf6..6675dc3e3796 100644
 --- a/drivers/gpu/drm/v3d/v3d_drv.c
 +++ b/drivers/gpu/drm/v3d/v3d_drv.c
 @@ -26,6 +26,7 @@
@@ -84804,7 +85619,7 @@ index dd60acdf52c2..15759ce6d95a 100644
  		return 0;
  	}
  
-@@ -287,36 +296,6 @@ static const struct of_device_id v3d_of_match[] = {
+@@ -295,36 +304,6 @@ static const struct of_device_id v3d_of_match[] = {
  };
  MODULE_DEVICE_TABLE(of, v3d_of_match);
  
@@ -84841,7 +85656,7 @@ index dd60acdf52c2..15759ce6d95a 100644
  static int
  map_regs(struct v3d_dev *v3d, void __iomem **regs, const char *name)
  {
-@@ -360,23 +339,66 @@ static int v3d_platform_drm_probe(struct platform_device *pdev)
+@@ -368,23 +347,66 @@ static int v3d_platform_drm_probe(struct platform_device *pdev)
  			return ret;
  	}
  
@@ -84913,7 +85728,7 @@ index dd60acdf52c2..15759ce6d95a 100644
  
  	dma_set_max_seg_size(&pdev->dev, UINT_MAX);
  
-@@ -396,66 +418,32 @@ static int v3d_platform_drm_probe(struct platform_device *pdev)
+@@ -404,66 +426,32 @@ static int v3d_platform_drm_probe(struct platform_device *pdev)
  	ident3 = V3D_READ(V3D_HUB_IDENT3);
  	v3d->rev = V3D_GET_FIELD(ident3, V3D_HUB_IDENT3_IPREV);
  
@@ -84957,7 +85772,7 @@ index dd60acdf52c2..15759ce6d95a 100644
 -	ret = v3d_irq_init(v3d);
 -	if (ret)
 -		goto gem_destroy;
-+	pm_runtime_set_autosuspend_delay(dev, 100);
++	pm_runtime_set_autosuspend_delay(dev, 50);
 +	pm_runtime_use_autosuspend(dev);
  
  	ret = drm_dev_register(drm, 0);
@@ -84989,7 +85804,7 @@ index dd60acdf52c2..15759ce6d95a 100644
  	return ret;
  }
  
-@@ -469,22 +457,27 @@ static void v3d_platform_drm_remove(struct platform_device *pdev)
+@@ -477,22 +465,27 @@ static void v3d_platform_drm_remove(struct platform_device *pdev)
  
  	drm_dev_unregister(drm);
  
@@ -85073,7 +85888,7 @@ index 99a39329bb85..5083e211584a 100644
  void v3d_timestamp_query_info_free(struct v3d_timestamp_query_info *query_info,
  				   unsigned int count);
 diff --git a/drivers/gpu/drm/v3d/v3d_gem.c b/drivers/gpu/drm/v3d/v3d_gem.c
-index 57965c0d6f6e..cdc8b98f413d 100644
+index 57965c0d6f6e..b9d477f40366 100644
 --- a/drivers/gpu/drm/v3d/v3d_gem.c
 +++ b/drivers/gpu/drm/v3d/v3d_gem.c
 @@ -36,13 +36,6 @@ v3d_init_core(struct v3d_dev *v3d, int core)
@@ -85090,7 +85905,22 @@ index 57965c0d6f6e..cdc8b98f413d 100644
  static void
  v3d_idle_axi(struct v3d_dev *v3d, int core)
  {
-@@ -277,6 +270,13 @@ v3d_huge_mnt_init(struct v3d_dev *v3d)
+@@ -213,6 +206,14 @@ v3d_clean_caches(struct v3d_dev *v3d)
+ 
+ 	trace_v3d_cache_clean_begin(dev);
+ 
++	/* GFXH-1897: Ensure pending flushes complete before writing L2TCACTL */
++	if (v3d->ver < V3D_GEN_71) {
++		if (wait_for(!(V3D_CORE_READ(core, V3D_CTL_L2TCACTL) &
++			       V3D_L2TCACTL_L2TFLS), 100)) {
++			DRM_ERROR("Timeout waiting for L2T clean\n");
++		}
++	}
++
+ 	V3D_CORE_WRITE(core, V3D_CTL_L2TCACTL, V3D_L2TCACTL_TMUWCF);
+ 	if (wait_for(!(V3D_CORE_READ(core, V3D_CTL_L2TCACTL) &
+ 		       V3D_L2TCACTL_TMUWCF), 100)) {
+@@ -277,6 +278,13 @@ v3d_huge_mnt_init(struct v3d_dev *v3d)
  			   "Transparent Hugepage support is recommended for optimal performance on this platform!\n");
  }
  
@@ -85104,7 +85934,7 @@ index 57965c0d6f6e..cdc8b98f413d 100644
  int
  v3d_gem_init(struct drm_device *dev)
  {
-@@ -325,9 +325,6 @@ v3d_gem_init(struct drm_device *dev)
+@@ -325,9 +333,6 @@ v3d_gem_init(struct drm_device *dev)
  		return -ENOMEM;
  	}
  
@@ -85158,40 +85988,53 @@ index 1249f6e64b97..e33cdede7c74 100644
  	for (core = 0; core < v3d->cores; core++) {
  		V3D_CORE_WRITE(core, V3D_CTL_INT_MSK_SET, ~V3D_CORE_IRQS(v3d->ver));
 diff --git a/drivers/gpu/drm/v3d/v3d_mmu.c b/drivers/gpu/drm/v3d/v3d_mmu.c
-index c513a393c031..630c64e51d2f 100644
+index c513a393c031..94f6676d5633 100644
 --- a/drivers/gpu/drm/v3d/v3d_mmu.c
 +++ b/drivers/gpu/drm/v3d/v3d_mmu.c
-@@ -39,7 +39,11 @@ static bool v3d_mmu_is_aligned(u32 page, u32 page_address, size_t alignment)
+@@ -37,7 +37,12 @@ static bool v3d_mmu_is_aligned(u32 page, u32 page_address, size_t alignment)
+ 		IS_ALIGNED(page_address, alignment >> V3D_MMU_PAGE_SHIFT);
+ }
  
- int v3d_mmu_flush_all(struct v3d_dev *v3d)
+-int v3d_mmu_flush_all(struct v3d_dev *v3d)
++/*
++ * Issue the MMUC flush and TLB clear unconditionally. The caller must
++ * already know that V3D is reachable. In particular, this is used from
++ * the runtime resume callback.
++ */
++static int v3d_mmu_flush_all_locked(struct v3d_dev *v3d)
  {
--	int ret;
-+	int ret = 0;
+ 	int ret;
+ 
+@@ -62,6 +67,20 @@ int v3d_mmu_flush_all(struct v3d_dev *v3d)
+ 	return ret;
+ }
+ 
++int v3d_mmu_flush_all(struct v3d_dev *v3d)
++{
++	int ret;
 +
 +	/* Flush the PTs only if we're already awake */
 +	if (!pm_runtime_get_if_active(v3d->drm.dev))
 +		return 0;
- 
- 	V3D_WRITE(V3D_MMUC_CONTROL, V3D_MMUC_CONTROL_FLUSH |
- 		  V3D_MMUC_CONTROL_ENABLE);
-@@ -48,7 +52,7 @@ int v3d_mmu_flush_all(struct v3d_dev *v3d)
- 			 V3D_MMUC_CONTROL_FLUSHING), 100);
- 	if (ret) {
- 		dev_err(v3d->drm.dev, "MMUC flush wait idle failed\n");
--		return ret;
-+		goto pm_put;
- 	}
- 
- 	V3D_WRITE(V3D_MMU_CTL, V3D_READ(V3D_MMU_CTL) |
-@@ -59,6 +63,8 @@ int v3d_mmu_flush_all(struct v3d_dev *v3d)
- 	if (ret)
- 		dev_err(v3d->drm.dev, "MMU TLB clear wait idle failed\n");
- 
-+pm_put:
++
++	ret = v3d_mmu_flush_all_locked(v3d);
++
 +	v3d_pm_runtime_put(v3d);
- 	return ret;
++	return ret;
++}
++
+ int v3d_mmu_set_page_table(struct v3d_dev *v3d)
+ {
+ 	V3D_WRITE(V3D_MMU_PT_PA_BASE, v3d->pt_paddr >> V3D_MMU_PAGE_SHIFT);
+@@ -79,7 +98,7 @@ int v3d_mmu_set_page_table(struct v3d_dev *v3d)
+ 		  V3D_MMU_ILLEGAL_ADDR_ENABLE);
+ 	V3D_WRITE(V3D_MMUC_CONTROL, V3D_MMUC_CONTROL_ENABLE);
+ 
+-	return v3d_mmu_flush_all(v3d);
++	return v3d_mmu_flush_all_locked(v3d);
  }
  
+ void v3d_mmu_insert_ptes(struct v3d_bo *bo)
 diff --git a/drivers/gpu/drm/v3d/v3d_perfmon.c b/drivers/gpu/drm/v3d/v3d_perfmon.c
 index e3d7474854eb..6cc175de70c4 100644
 --- a/drivers/gpu/drm/v3d/v3d_perfmon.c
@@ -85245,61 +86088,72 @@ index e3d7474854eb..6cc175de70c4 100644
  
 diff --git a/drivers/gpu/drm/v3d/v3d_power.c b/drivers/gpu/drm/v3d/v3d_power.c
 new file mode 100644
-index 000000000000..f3d30ef5de4e
+index 000000000000..865fb9b7b365
 --- /dev/null
 +++ b/drivers/gpu/drm/v3d/v3d_power.c
-@@ -0,0 +1,83 @@
+@@ -0,0 +1,90 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/* Copyright (C) 2026 Raspberry Pi */
 +
 +#include <linux/clk.h>
-+#include <linux/reset.h>
 +
 +#include <drm/drm_print.h>
 +
 +#include "v3d_drv.h"
 +#include "v3d_regs.h"
 +
-+static void
++static int
 +v3d_resume_sms(struct v3d_dev *v3d)
 +{
 +	if (v3d->ver < V3D_GEN_71)
-+		return;
++		return 0;
 +
 +	V3D_SMS_WRITE(V3D_SMS_TEE_CS, V3D_SMS_CLEAR_POWER_OFF);
 +
 +	if (wait_for((V3D_GET_FIELD(V3D_SMS_READ(V3D_SMS_TEE_CS),
 +				    V3D_SMS_STATE) == V3D_SMS_IDLE), 100)) {
 +		drm_err(&v3d->drm, "Failed to power up SMS\n");
++		return -ETIMEDOUT;
 +	}
 +
 +	v3d_reset_sms(v3d);
++
++	return 0;
 +}
 +
-+static void
++static int
 +v3d_suspend_sms(struct v3d_dev *v3d)
 +{
 +	if (v3d->ver < V3D_GEN_71)
-+		return;
++		return 0;
 +
 +	V3D_SMS_WRITE(V3D_SMS_TEE_CS, V3D_SMS_POWER_OFF);
 +
 +	if (wait_for((V3D_GET_FIELD(V3D_SMS_READ(V3D_SMS_TEE_CS),
 +				    V3D_SMS_STATE) == V3D_SMS_POWER_OFF_STATE), 100)) {
 +		drm_err(&v3d->drm, "Failed to power off SMS\n");
++		return -ETIMEDOUT;
 +	}
++
++	return 0;
 +}
 +
 +int v3d_power_suspend(struct device *dev)
 +{
 +	struct drm_device *drm = dev_get_drvdata(dev);
 +	struct v3d_dev *v3d = to_v3d_dev(drm);
++	int ret;
 +
 +	v3d_irq_disable(v3d);
-+	v3d_suspend_sms(v3d);
 +
-+	if (v3d->reset)
-+		reset_control_assert(v3d->reset);
++	/* Always clean V3D caches on shutdown. */
++	v3d_clean_caches(v3d);
++
++	ret = v3d_suspend_sms(v3d);
++	if (ret) {
++		v3d_irq_enable(v3d);
++		return ret;
++	}
 +
 +	clk_disable_unprepare(v3d->clk);
 +
@@ -85316,24 +86170,20 @@ index 000000000000..f3d30ef5de4e
 +	if (ret)
 +		return ret;
 +
-+	if (v3d->reset) {
-+		ret = reset_control_deassert(v3d->reset);
-+		if (ret)
-+			goto clk_disable;
++	ret = v3d_resume_sms(v3d);
++	if (ret) {
++		clk_disable_unprepare(v3d->clk);
++		return ret;
 +	}
 +
-+	v3d_resume_sms(v3d);
++	v3d_init_hw_state(v3d);
 +	v3d_mmu_set_page_table(v3d);
 +	v3d_irq_enable(v3d);
 +
 +	return 0;
-+
-+clk_disable:
-+	clk_disable_unprepare(v3d->clk);
-+	return ret;
 +}
 diff --git a/drivers/gpu/drm/v3d/v3d_submit.c b/drivers/gpu/drm/v3d/v3d_submit.c
-index fc74351efad5..51654d49280e 100644
+index 24de81bc3c1e..55ce7e80349f 100644
 --- a/drivers/gpu/drm/v3d/v3d_submit.c
 +++ b/drivers/gpu/drm/v3d/v3d_submit.c
 @@ -103,6 +103,9 @@ v3d_job_free(struct kref *ref)
@@ -85346,7 +86196,7 @@ index fc74351efad5..51654d49280e 100644
  	kfree(job);
  }
  
-@@ -184,13 +187,13 @@ v3d_job_init(struct v3d_dev *v3d, struct drm_file *file_priv,
+@@ -202,13 +205,13 @@ v3d_job_init(struct v3d_dev *v3d, struct drm_file *file_priv,
  				if (copy_from_user(&in, handle++, sizeof(in))) {
  					ret = -EFAULT;
  					drm_dbg(&v3d->drm, "Failed to copy wait dep handle.\n");
@@ -85362,7 +86212,7 @@ index fc74351efad5..51654d49280e 100644
  			}
  		}
  	} else {
-@@ -198,14 +201,22 @@ v3d_job_init(struct v3d_dev *v3d, struct drm_file *file_priv,
+@@ -216,14 +219,22 @@ v3d_job_init(struct v3d_dev *v3d, struct drm_file *file_priv,
  
  		// TODO: Investigate why this was filtered out for the IOCTL.
  		if (ret && ret != -ENOENT)
@@ -92348,7 +93198,7 @@ index c1e4a6ce9631..483671d66e03 100644
  #define USB_DEVICE_ID_XIN_MO_DUAL_ARCADE	0x05e1
  #define USB_DEVICE_ID_THT_2P_ARCADE		0x75e1
 diff --git a/drivers/hid/hid-quirks.c b/drivers/hid/hid-quirks.c
-index 02f7db5c1056..366be35cdea9 100644
+index 5e754b0a5032..5f802b0c8916 100644
 --- a/drivers/hid/hid-quirks.c
 +++ b/drivers/hid/hid-quirks.c
 @@ -45,6 +45,7 @@ static const struct hid_device_id hid_quirks[] = {
@@ -92368,7 +93218,7 @@ index 02f7db5c1056..366be35cdea9 100644
  	{ 0 }
  };
 diff --git a/drivers/hid/usbhid/hid-core.c b/drivers/hid/usbhid/hid-core.c
-index ddd5d77fb5a5..441edb3c02a5 100644
+index 047d390d5aae..a1086151d014 100644
 --- a/drivers/hid/usbhid/hid-core.c
 +++ b/drivers/hid/usbhid/hid-core.c
 @@ -47,7 +47,7 @@
@@ -92380,7 +93230,7 @@ index ddd5d77fb5a5..441edb3c02a5 100644
  module_param_named(mousepoll, hid_mousepoll_interval, uint, 0644);
  MODULE_PARM_DESC(mousepoll, "Polling interval of mice");
  
-@@ -1132,7 +1132,9 @@ static int usbhid_start(struct hid_device *hid)
+@@ -1133,7 +1133,9 @@ static int usbhid_start(struct hid_device *hid)
  		 */
  		switch (hid->collection->usage) {
  		case HID_GD_MOUSE:
@@ -92391,7 +93241,7 @@ index ddd5d77fb5a5..441edb3c02a5 100644
  				interval = hid_mousepoll_interval;
  			break;
  		case HID_GD_JOYSTICK:
-@@ -1144,6 +1146,7 @@ static int usbhid_start(struct hid_device *hid)
+@@ -1145,6 +1147,7 @@ static int usbhid_start(struct hid_device *hid)
  				interval = hid_kbpoll_interval;
  			break;
  		}
@@ -144368,28 +145218,10 @@ index b6a571d866fa..847b72ba7aec 100644
  
  #ifdef CONFIG_MMC_SDHCI_IO_ACCESSORS
 diff --git a/drivers/net/ethernet/broadcom/genet/bcmgenet.c b/drivers/net/ethernet/broadcom/genet/bcmgenet.c
-index 482a31e7b72b..3e40097fea8f 100644
+index 7c11cf916762..f008aeac0bd4 100644
 --- a/drivers/net/ethernet/broadcom/genet/bcmgenet.c
 +++ b/drivers/net/ethernet/broadcom/genet/bcmgenet.c
-@@ -1368,13 +1368,12 @@ void bcmgenet_eee_enable_set(struct net_device *dev, bool enable)
- 		reg &= ~(TBUF_EEE_EN | TBUF_PM_EN);
- 	bcmgenet_writel(reg, priv->base + off);
- 
--	/* Do the same for thing for RBUF */
-+	/* RBUF EEE/PM can break the RX path on GENET. Keep it disabled. */
- 	reg = bcmgenet_rbuf_readl(priv, RBUF_ENERGY_CTRL);
--	if (enable)
--		reg |= RBUF_EEE_EN | RBUF_PM_EN;
--	else
-+	if (reg & (RBUF_EEE_EN | RBUF_PM_EN)) {
- 		reg &= ~(RBUF_EEE_EN | RBUF_PM_EN);
--	bcmgenet_rbuf_writel(priv, reg, RBUF_ENERGY_CTRL);
-+		bcmgenet_rbuf_writel(priv, reg, RBUF_ENERGY_CTRL);
-+	}
- 
- 	if (!enable && priv->clk_eee_enabled) {
- 		clk_disable_unprepare(priv->clk_eee);
-@@ -2725,7 +2724,7 @@ static void bcmgenet_init_tx_ring(struct bcmgenet_priv *priv,
+@@ -2726,7 +2726,7 @@ static void bcmgenet_init_tx_ring(struct bcmgenet_priv *priv,
  
  	bcmgenet_tdma_ring_writel(priv, index, 0, TDMA_PROD_INDEX);
  	bcmgenet_tdma_ring_writel(priv, index, 0, TDMA_CONS_INDEX);
@@ -144398,7 +145230,7 @@ index 482a31e7b72b..3e40097fea8f 100644
  	/* Disable rate control for now */
  	bcmgenet_tdma_ring_writel(priv, index, flow_period_val,
  				  TDMA_FLOW_PERIOD);
-@@ -4077,8 +4076,10 @@ static int bcmgenet_probe(struct platform_device *pdev)
+@@ -4074,8 +4074,10 @@ static int bcmgenet_probe(struct platform_device *pdev)
  	netif_set_real_num_rx_queues(priv->dev, priv->hw_params->rx_queues + 1);
  
  	/* Set default coalescing parameters */
@@ -144410,19 +145242,6 @@ index 482a31e7b72b..3e40097fea8f 100644
  
  	/* Initialize u64 stats seq counter for 32bit machines */
  	for (i = 0; i <= priv->hw_params->rx_queues; i++)
-diff --git a/drivers/net/ethernet/broadcom/genet/bcmgenet.h b/drivers/net/ethernet/broadcom/genet/bcmgenet.h
-index 9e4110c7fdf6..bf6a7eda0f86 100644
---- a/drivers/net/ethernet/broadcom/genet/bcmgenet.h
-+++ b/drivers/net/ethernet/broadcom/genet/bcmgenet.h
-@@ -34,7 +34,7 @@
- #define ENET_PAD		8
- #define ENET_MAX_MTU_SIZE	(ETH_DATA_LEN + ETH_HLEN + VLAN_HLEN + \
- 				 ENET_BRCM_TAG_LEN + ETH_FCS_LEN + ENET_PAD)
--#define DMA_MAX_BURST_LENGTH    0x10
-+#define DMA_MAX_BURST_LENGTH    0x08
- 
- /* misc. configuration */
- #define MAX_NUM_OF_FS_RULES		16
 diff --git a/drivers/net/ethernet/broadcom/genet/bcmmii.c b/drivers/net/ethernet/broadcom/genet/bcmmii.c
 index a4e0d5a68268..ec5f95b8daae 100644
 --- a/drivers/net/ethernet/broadcom/genet/bcmmii.c
@@ -145413,22 +146232,8 @@ index dc8634e7bcbe..53f6f7c89237 100644
  	/* these values can be used to identify internal PHY */
  	priv->chip_id = phy_read_mmd(phydev, 3, LAN88XX_MMD3_CHIP_ID);
  	priv->chip_rev = phy_read_mmd(phydev, 3, LAN88XX_MMD3_CHIP_REV);
-diff --git a/drivers/net/phy/phy_device.c b/drivers/net/phy/phy_device.c
-index 3bd415710bf3..788bb3d4f62f 100644
---- a/drivers/net/phy/phy_device.c
-+++ b/drivers/net/phy/phy_device.c
-@@ -2933,7 +2933,8 @@ EXPORT_SYMBOL_GPL(phy_advertise_eee_all);
-  */
- void phy_support_eee(struct phy_device *phydev)
- {
--	linkmode_copy(phydev->advertising_eee, phydev->supported_eee);
-+	linkmode_andnot(phydev->advertising_eee, phydev->supported_eee,
-+			phydev->eee_disabled_modes);
- 	phydev->eee_cfg.tx_lpi_enabled = true;
- 	phydev->eee_cfg.eee_enabled = true;
- }
 diff --git a/drivers/net/usb/lan78xx.c b/drivers/net/usb/lan78xx.c
-index 19cdf69fa589..41a51deca9a2 100644
+index 19cdf69fa589..dd2109fd2ed3 100644
 --- a/drivers/net/usb/lan78xx.c
 +++ b/drivers/net/usb/lan78xx.c
 @@ -596,6 +596,20 @@ static int lan78xx_alloc_tx_resources(struct lan78xx_net *dev)
@@ -145470,82 +146275,7 @@ index 19cdf69fa589..41a51deca9a2 100644
  }
  
  /* some work can't be done in tasklets, so we use keventd
-@@ -1795,15 +1818,34 @@ static int lan78xx_set_wol(struct net_device *netdev,
- static int lan78xx_get_eee(struct net_device *net, struct ethtool_keee *edata)
- {
- 	struct lan78xx_net *dev = netdev_priv(net);
-+	u32 buf;
-+	int ret;
-+
-+	ret = phylink_ethtool_get_eee(dev->phylink, edata);
-+	if (ret < 0)
-+		return ret;
- 
--	return phylink_ethtool_get_eee(dev->phylink, edata);
-+	ret = lan78xx_read_reg(dev, EEE_TX_LPI_REQ_DLY, &buf);
-+	if (ret >= 0)
-+		edata->tx_lpi_timer = buf;
-+	else
-+		edata->tx_lpi_timer = 0;
-+
-+	return 0;
- }
- 
- static int lan78xx_set_eee(struct net_device *net, struct ethtool_keee *edata)
- {
- 	struct lan78xx_net *dev = netdev_priv(net);
-+	u32 buf;
-+	int ret;
- 
--	return phylink_ethtool_set_eee(dev->phylink, edata);
-+	ret = phylink_ethtool_set_eee(dev->phylink, edata);
-+	if (ret < 0)
-+		return ret;
-+
-+	buf = (u32)edata->tx_lpi_timer;
-+	return lan78xx_write_reg(dev, EEE_TX_LPI_REQ_DLY, buf);
- }
- 
- static void lan78xx_get_drvinfo(struct net_device *net,
-@@ -1918,6 +1960,7 @@ static const struct ethtool_ops lan78xx_ethtool_ops = {
- 	.set_link_ksettings = lan78xx_set_link_ksettings,
- 	.get_regs_len	= lan78xx_get_regs_len,
- 	.get_regs	= lan78xx_get_regs,
-+	.get_ts_info    = ethtool_op_get_ts_info,
- };
- 
- static int lan78xx_init_mac_address(struct lan78xx_net *dev)
-@@ -2874,6 +2917,29 @@ static int lan78xx_phy_init(struct lan78xx_net *dev)
- 		goto phylink_uninit;
- 	}
- 
-+	if (of_property_read_bool(phydev->mdio.dev.of_node,
-+				  "microchip,eee-enabled")) {
-+		struct ethtool_keee edata;
-+		memset(&edata, 0, sizeof(edata));
-+
-+		linkmode_set_bit(ETHTOOL_LINK_MODE_1000baseT_Full_BIT,
-+			edata.advertised);
-+		linkmode_set_bit(ETHTOOL_LINK_MODE_100baseT_Full_BIT,
-+			edata.advertised);
-+
-+		edata.eee_enabled = true;
-+		edata.tx_lpi_enabled = true;
-+		if (of_property_read_u32(phydev->mdio.dev.of_node,
-+					 "microchip,tx-lpi-timer",
-+					 &edata.tx_lpi_timer))
-+			edata.tx_lpi_timer = 600; /* non-aggressive */
-+		rtnl_lock();
-+		(void)lan78xx_set_eee(dev->net, &edata);
-+		rtnl_unlock();
-+
-+		phy_support_eee(phydev);
-+	}
-+
- 	ret = lan78xx_configure_leds_from_dt(dev, phydev);
- 	if (ret < 0)
- 		goto phylink_uninit;
-@@ -3226,6 +3292,11 @@ static int lan78xx_reset(struct lan78xx_net *dev)
+@@ -3226,6 +3249,11 @@ static int lan78xx_reset(struct lan78xx_net *dev)
  	unsigned long timeout;
  	int ret;
  	u32 buf;
@@ -145557,7 +146287,7 @@ index 19cdf69fa589..41a51deca9a2 100644
  
  	ret = lan78xx_read_reg(dev, HW_CFG, &buf);
  	if (ret < 0)
-@@ -3296,6 +3367,10 @@ static int lan78xx_reset(struct lan78xx_net *dev)
+@@ -3296,6 +3324,10 @@ static int lan78xx_reset(struct lan78xx_net *dev)
  	buf |= HW_CFG_CLK125_EN_;
  	buf |= HW_CFG_REFCLK25_EN_;
  
@@ -145568,7 +146298,7 @@ index 19cdf69fa589..41a51deca9a2 100644
  	ret = lan78xx_write_reg(dev, HW_CFG, buf);
  	if (ret < 0)
  		return ret;
-@@ -3388,6 +3463,10 @@ static int lan78xx_reset(struct lan78xx_net *dev)
+@@ -3388,6 +3420,10 @@ static int lan78xx_reset(struct lan78xx_net *dev)
  	if (dev->chipid == ID_REV_CHIP_ID_7801_)
  		buf &= ~MAC_CR_GMII_EN_;
  
@@ -145579,7 +146309,7 @@ index 19cdf69fa589..41a51deca9a2 100644
  	ret = lan78xx_write_reg(dev, MAC_CR, buf);
  	if (ret < 0)
  		return ret;
-@@ -3758,8 +3837,14 @@ static int lan78xx_bind(struct lan78xx_net *dev, struct usb_interface *intf)
+@@ -3758,8 +3794,14 @@ static int lan78xx_bind(struct lan78xx_net *dev, struct usb_interface *intf)
  	if (DEFAULT_RX_CSUM_ENABLE)
  		dev->net->features |= NETIF_F_RXCSUM;
  
@@ -145596,7 +146326,7 @@ index 19cdf69fa589..41a51deca9a2 100644
  
  	if (DEFAULT_VLAN_RX_OFFLOAD)
  		dev->net->features |= NETIF_F_HW_VLAN_CTAG_RX;
-@@ -4722,7 +4807,13 @@ static int lan78xx_probe(struct usb_interface *intf,
+@@ -4722,7 +4764,13 @@ static int lan78xx_probe(struct usb_interface *intf,
  	if (ret < 0)
  		goto out4;
  
@@ -146735,7 +147465,7 @@ index 0340bba96868..090a75bcd728 100644
 +
  #endif				/* _SBCHIPC_H */
 diff --git a/drivers/nvme/host/pci.c b/drivers/nvme/host/pci.c
-index db5fc9bf6627..0fbc4298d6a6 100644
+index a0e9767bc21e..ab6392cb0dfb 100644
 --- a/drivers/nvme/host/pci.c
 +++ b/drivers/nvme/host/pci.c
 @@ -327,9 +327,11 @@ struct nvme_dev {
@@ -146750,7 +147480,7 @@ index db5fc9bf6627..0fbc4298d6a6 100644
  	void **host_mem_desc_bufs;
  	unsigned int nr_allocated_queues;
  	unsigned int nr_write_queues;
-@@ -2513,6 +2515,13 @@ static int nvme_set_host_mem(struct nvme_dev *dev, u32 bits)
+@@ -2540,6 +2542,13 @@ static int nvme_set_host_mem(struct nvme_dev *dev, u32 bits)
  	return ret;
  }
  
@@ -146764,7 +147494,7 @@ index db5fc9bf6627..0fbc4298d6a6 100644
  static void nvme_free_host_mem_multi(struct nvme_dev *dev)
  {
  	int i;
-@@ -2529,6 +2538,7 @@ static void nvme_free_host_mem_multi(struct nvme_dev *dev)
+@@ -2556,6 +2565,7 @@ static void nvme_free_host_mem_multi(struct nvme_dev *dev)
  	kfree(dev->host_mem_desc_bufs);
  	dev->host_mem_desc_bufs = NULL;
  }
@@ -146772,7 +147502,7 @@ index db5fc9bf6627..0fbc4298d6a6 100644
  
  static void nvme_free_host_mem(struct nvme_dev *dev)
  {
-@@ -2571,6 +2581,93 @@ static int nvme_alloc_host_mem_single(struct nvme_dev *dev, u64 size)
+@@ -2600,6 +2610,93 @@ static int nvme_alloc_host_mem_single(struct nvme_dev *dev, u64 size)
  	return 0;
  }
  
@@ -146838,9 +147568,9 @@ index db5fc9bf6627..0fbc4298d6a6 100644
 +	i = dev->nr_host_mem_descs = mapped_nents;
 +
 +	while (--i >= 0) {
-+		descs[i].addr = sg_dma_address(&slist[i]);
++		descs[i].addr = cpu_to_le64(sg_dma_address(&slist[i]));
 +		WARN_ON_ONCE(sg_dma_len(&slist[i]) & (NVME_CTRL_PAGE_SIZE - 1));
-+		descs[i].size = sg_dma_len(&slist[i]) / NVME_CTRL_PAGE_SIZE;
++		descs[i].size = cpu_to_le32(sg_dma_len(&slist[i]) / NVME_CTRL_PAGE_SIZE);
 +	}
 +
 +	dev->host_mem_size = size;
@@ -146866,7 +147596,7 @@ index db5fc9bf6627..0fbc4298d6a6 100644
  static int nvme_alloc_host_mem_multi(struct nvme_dev *dev, u64 preferred,
  		u32 chunk_size)
  {
-@@ -2631,6 +2728,7 @@ static int nvme_alloc_host_mem_multi(struct nvme_dev *dev, u64 preferred,
+@@ -2660,6 +2757,7 @@ static int nvme_alloc_host_mem_multi(struct nvme_dev *dev, u64 preferred,
  	dev->host_mem_descs = NULL;
  	return -ENOMEM;
  }
@@ -147366,6 +148096,119 @@ index 000000000000..0e6bccb8ff2e
 +	return ret;
 +}
 +late_initcall(of_cfs_init);
+diff --git a/drivers/of/fdt.c b/drivers/of/fdt.c
+index 331646d667b9..4b1f4048d95b 100644
+--- a/drivers/of/fdt.c
++++ b/drivers/of/fdt.c
+@@ -625,17 +625,56 @@ const void *__init of_get_flat_dt_prop(unsigned long node, const char *name,
+ 	return fdt_getprop(initial_boot_params, node, name, size);
+ }
+ 
++static bool possible_size_cells_1(const __be32 *prop, int len)
++{
++	const int size_cells = 1;
++	const __be32 *endp = prop + (len / sizeof(__be32));
++	const __be32 *r = prop;
++
++	if (dt_root_addr_cells != 2 || dt_root_size_cells != 2 ||
++	    len % ((dt_root_addr_cells + size_cells) * sizeof(__be32)))
++		return false;
++
++	/* Scan reg to see if the content makes sense with size-cells == 1 */
++	while ((endp - r) >= (dt_root_addr_cells + size_cells)) {
++		const u64 megabyte = 1024 * 1024ull;
++		const u64 max_memory = 64 * 1024 * 1024 * 1024ull;
++		u64 base, size;
++
++		base = dt_mem_next_cell(dt_root_addr_cells, &r);
++		size = dt_mem_next_cell(size_cells, &r);
++		if (base >= max_memory ||
++			size == 0 || size >= max_memory ||
++			(size >= megabyte && (base % megabyte != 0)))
++			return false;
++	}
++
++	return true;
++}
++
++static const __be32 *size_cells_1_prop;
++
+ const __be32 *__init of_flat_dt_get_addr_size_prop(unsigned long node,
+ 						   const char *name,
+ 						   int *entries)
+ {
+ 	const __be32 *prop;
+ 	int len, elen = (dt_root_addr_cells + dt_root_size_cells) * sizeof(__be32);
++	const void *fdt = initial_boot_params;
++
++	size_cells_1_prop = NULL;
+ 
+ 	prop = of_get_flat_dt_prop(node, name, &len);
+ 	if (!prop || len % elen) {
+-		*entries = 0;
+-		return NULL;
++		if (!prop || strcmp(name, "reg") ||
++		     !possible_size_cells_1(prop, len)) {
++			*entries = 0;
++			return NULL;
++		}
++		size_cells_1_prop = prop;
++		elen = (2 + 1) * sizeof(__be32);
++		pr_warn("invalid size for '%s/reg' - firmware out-of-date?\n",
++				 fdt_get_name(fdt, node, NULL));
+ 	}
+ 
+ 	*entries = len / elen;
+@@ -659,11 +698,16 @@ bool __init of_flat_dt_get_addr_size(unsigned long node, const char *name,
+ void __init of_flat_dt_read_addr_size(const __be32 *prop, int entry_index,
+ 				      u64 *addr, u64 *size)
+ {
+-	int entry_cells = dt_root_addr_cells + dt_root_size_cells;
++	int actual_size_cells = dt_root_size_cells;
++	int entry_cells;
++
++	if (prop == size_cells_1_prop)
++		actual_size_cells = 1;
++	entry_cells = dt_root_addr_cells + actual_size_cells;
+ 	prop += entry_cells * entry_index;
+ 
+ 	*addr = dt_mem_next_cell(dt_root_addr_cells, &prop);
+-	*size = dt_mem_next_cell(dt_root_size_cells, &prop);
++	*size = dt_mem_next_cell(actual_size_cells, &prop);
+ }
+ 
+ /**
+diff --git a/drivers/of/of_reserved_mem.c b/drivers/of/of_reserved_mem.c
+index 1fd28f805610..9d0676a7b8b8 100644
+--- a/drivers/of/of_reserved_mem.c
++++ b/drivers/of/of_reserved_mem.c
+@@ -399,16 +399,24 @@ static int __init __reserved_mem_alloc_size(unsigned long node, const char *unam
+ 	const __be32 *prop;
+ 	bool nomap, default_cma;
+ 	int ret;
++	int actual_size_cells;
+ 
+ 	prop = of_get_flat_dt_prop(node, "size", &len);
+ 	if (!prop)
+ 		return -EINVAL;
++	if (dt_root_size_cells == 2 && len == sizeof(__be32)) {
++		pr_warn("invalid size for '%s/size' - firmware out-of-date?\n",
++			uname);
++		actual_size_cells = 1;
++	} else {
++		actual_size_cells = dt_root_size_cells;
++	}
+ 
+-	if (len != dt_root_size_cells * sizeof(__be32)) {
++	if (len != actual_size_cells * sizeof(__be32)) {
+ 		pr_err("invalid size property in '%s' node.\n", uname);
+ 		return -EINVAL;
+ 	}
+-	size = dt_mem_next_cell(dt_root_size_cells, &prop);
++	size = dt_mem_next_cell(actual_size_cells, &prop);
+ 
+ 	prop = of_get_flat_dt_prop(node, "alignment", &len);
+ 	if (prop) {
 diff --git a/drivers/of/overlay.c b/drivers/of/overlay.c
 index c1c5686fc7b1..00b34340a4a8 100644
 --- a/drivers/of/overlay.c
@@ -147380,7 +148223,7 @@ index c1c5686fc7b1..00b34340a4a8 100644
  	new_prop = kzalloc_obj(*new_prop);
  	if (!new_prop)
 diff --git a/drivers/pci/controller/pcie-brcmstb.c b/drivers/pci/controller/pcie-brcmstb.c
-index 062f55690012..d207bff8a705 100644
+index 062f55690012..0643165041bf 100644
 --- a/drivers/pci/controller/pcie-brcmstb.c
 +++ b/drivers/pci/controller/pcie-brcmstb.c
 @@ -5,6 +5,7 @@
@@ -147757,27 +148600,7 @@ index 062f55690012..d207bff8a705 100644
  	return 0;
  }
  
-@@ -1338,7 +1635,7 @@ static void brcm_config_clkreq(struct brcm_pcie *pcie)
- {
- 	static const char err_msg[] = "invalid 'brcm,clkreq-mode' DT string\n";
- 	const char *mode = "default";
--	u32 clkreq_cntl;
-+	u32 clkreq_cntl = 0;
- 	int ret, tmp;
- 
- 	ret = of_property_read_string(pcie->np, "brcm,clkreq-mode", &mode);
-@@ -1347,10 +1644,6 @@ static void brcm_config_clkreq(struct brcm_pcie *pcie)
- 		mode = "safe";
- 	}
- 
--	/* Start out assuming safe mode (both mode bits cleared) */
--	clkreq_cntl = readl(pcie->base + HARD_DEBUG(pcie));
--	clkreq_cntl &= ~PCIE_CLKREQ_MASK;
--
- 	if (strcmp(mode, "no-l1ss") == 0) {
- 		/*
- 		 * "no-l1ss" -- Provides Clock Power Management, L0s, and
-@@ -1384,35 +1677,203 @@ static void brcm_config_clkreq(struct brcm_pcie *pcie)
+@@ -1384,35 +1681,203 @@ static void brcm_config_clkreq(struct brcm_pcie *pcie)
  
  	} else {
  		/*
@@ -147984,7 +148807,7 @@ index 062f55690012..d207bff8a705 100644
  	msleep(PCIE_RESET_CONFIG_WAIT_MS);
  
  	/*
-@@ -1445,6 +1906,20 @@ static int brcm_pcie_start_link(struct brcm_pcie *pcie)
+@@ -1445,6 +1910,20 @@ static int brcm_pcie_start_link(struct brcm_pcie *pcie)
  		 pci_speed_string(pcie_link_speed[cls]), nlw,
  		 ssc_good ? "(SSC)" : "(!SSC)");
  
@@ -148005,7 +148828,7 @@ index 062f55690012..d207bff8a705 100644
  	return 0;
  }
  
-@@ -1880,6 +2355,7 @@ static void brcm_unregister_die_notifiers(struct brcm_pcie *pcie)
+@@ -1880,6 +2359,7 @@ static void brcm_unregister_die_notifiers(struct brcm_pcie *pcie)
  
  static void __brcm_pcie_remove(struct brcm_pcie *pcie)
  {
@@ -148013,7 +148836,7 @@ index 062f55690012..d207bff8a705 100644
  	brcm_msi_remove(pcie);
  	brcm_pcie_turn_off(pcie);
  	if (brcm_phy_stop(pcie))
-@@ -1956,7 +2432,7 @@ static const struct pcie_cfg_data bcm2712_cfg = {
+@@ -1956,7 +2436,7 @@ static const struct pcie_cfg_data bcm2712_cfg = {
  	.perst_set	= brcm_pcie_perst_set_7278,
  	.bridge_sw_init_set = brcm_pcie_bridge_sw_init_set_generic,
  	.post_setup	= brcm_pcie_post_setup_bcm2712,
@@ -148022,7 +148845,7 @@ index 062f55690012..d207bff8a705 100644
  	.num_inbound_wins = 10,
  };
  
-@@ -2040,6 +2516,98 @@ static struct pci_ops brcm7425_pcie_ops = {
+@@ -2040,6 +2520,98 @@ static struct pci_ops brcm7425_pcie_ops = {
  	.remove_bus = brcm_pcie_remove_bus,
  };
  
@@ -148121,7 +148944,7 @@ index 062f55690012..d207bff8a705 100644
  static int brcm_pcie_probe(struct platform_device *pdev)
  {
  	struct device_node *np = pdev->dev.of_node;
-@@ -2062,6 +2630,19 @@ static int brcm_pcie_probe(struct platform_device *pdev)
+@@ -2062,6 +2634,19 @@ static int brcm_pcie_probe(struct platform_device *pdev)
  	pcie->dev = &pdev->dev;
  	pcie->np = np;
  	pcie->cfg = data;
@@ -148141,7 +148964,7 @@ index 062f55690012..d207bff8a705 100644
  
  	pcie->base = devm_platform_ioremap_resource(pdev, 0);
  	if (IS_ERR(pcie->base))
-@@ -2074,7 +2655,10 @@ static int brcm_pcie_probe(struct platform_device *pdev)
+@@ -2074,7 +2659,10 @@ static int brcm_pcie_probe(struct platform_device *pdev)
  	ret = of_pci_get_max_link_speed(np);
  	pcie->gen = (ret < 0) ? 0 : ret;
  
@@ -148154,7 +148977,7 @@ index 062f55690012..d207bff8a705 100644
  	pcie->rescal = devm_reset_control_get_optional_shared(&pdev->dev, "rescal");
  	if (IS_ERR(pcie->rescal))
 diff --git a/drivers/pci/probe.c b/drivers/pci/probe.c
-index bccc7a4bdd79..cb5753ae4a36 100644
+index b4707640e102..eaba9bda8617 100644
 --- a/drivers/pci/probe.c
 +++ b/drivers/pci/probe.c
 @@ -1076,9 +1076,6 @@ static int pci_register_host_bridge(struct pci_host_bridge *bridge)
@@ -155659,6 +156482,19 @@ index 8c3959f6f97f..ae9e26a3b05b 100644
  };
  
  struct vchiq_mmal_component {
+diff --git a/drivers/pmdomain/bcm/bcm2835-power.c b/drivers/pmdomain/bcm/bcm2835-power.c
+index eee87a300532..111fffafa9a6 100644
+--- a/drivers/pmdomain/bcm/bcm2835-power.c
++++ b/drivers/pmdomain/bcm/bcm2835-power.c
+@@ -175,7 +175,7 @@ static int bcm2835_asb_control(struct bcm2835_power *power, u32 reg, bool enable
+ 	writel(PM_PASSWORD | val, base + reg);
+ 
+ 	if (readl_poll_timeout_atomic(base + reg, val,
+-				      !!(val & ASB_ACK) != enable, 0, 5))
++				      !!(val & ASB_ACK) != enable, 0, 100))
+ 		return -ETIMEDOUT;
+ 
+ 	return 0;
 diff --git a/drivers/power/reset/gpio-poweroff.c b/drivers/power/reset/gpio-poweroff.c
 index 3eaae352ffb9..a4c0c5c06fc5 100644
 --- a/drivers/power/reset/gpio-poweroff.c
@@ -156697,7 +157533,7 @@ index 000000000000..fcf20ded80cf
 +MODULE_DESCRIPTION("RP1 PWM driver");
 +MODULE_LICENSE("GPL");
 diff --git a/drivers/regulator/Kconfig b/drivers/regulator/Kconfig
-index d10b6f9243d5..cb5f751fab5f 100644
+index d10b6f9243d5..f7899666eb7f 100644
 --- a/drivers/regulator/Kconfig
 +++ b/drivers/regulator/Kconfig
 @@ -1251,6 +1251,16 @@ config REGULATOR_RASPBERRYPI_TOUCHSCREEN_V2
@@ -156717,8 +157553,32 @@ index d10b6f9243d5..cb5f751fab5f 100644
  config REGULATOR_RC5T583
  	tristate "RICOH RC5T583 Power regulators"
  	depends on MFD_RC5T583
+@@ -1888,4 +1898,23 @@ config REGULATOR_QCOM_LABIBB
+ 	  boost regulator and IBB can be used as a negative boost regulator
+ 	  for LCD display panel.
+ 
++config REGULATOR_EDATEC_PANEL
++	tristate "EDATEC panel regulator support"
++	depends on BACKLIGHT_CLASS_DEVICE
++	depends on I2C
++	select REGMAP_I2C
++	select GPIO_REGMAP
++	help
++	  This driver provides support for controlling the panel's power supply,
++	  including the necessary voltage and current regulation for proper
++	  backlight and LCD operation.
++
++	  The driver communicates with the regulator hardware via the I2C bus.
++	  Configuration is done through the Device Tree. You will need to enable
++	  the appropriate Device Tree overlay or add the necessary node to your
++	  Device Tree source file to make use of this driver.
++
++	  Say Y or M here if your system uses an EDATEC 101c/070c display panel.
++	  Otherwise, say N.
++
+ endif
 diff --git a/drivers/regulator/Makefile b/drivers/regulator/Makefile
-index 35639f3115fd..af10bf0b6e64 100644
+index 35639f3115fd..8ccb17cb8da8 100644
 --- a/drivers/regulator/Makefile
 +++ b/drivers/regulator/Makefile
 @@ -146,6 +146,7 @@ obj-$(CONFIG_REGULATOR_PCAP) += pcap-regulator.o
@@ -156729,6 +157589,230 @@ index 35639f3115fd..af10bf0b6e64 100644
  obj-$(CONFIG_REGULATOR_RC5T583)  += rc5t583-regulator.o
  obj-$(CONFIG_REGULATOR_RK808)   += rk808-regulator.o
  obj-$(CONFIG_REGULATOR_RN5T618) += rn5t618-regulator.o
+@@ -217,5 +218,6 @@ obj-$(CONFIG_REGULATOR_WM831X) += wm831x-ldo.o
+ obj-$(CONFIG_REGULATOR_WM8350) += wm8350-regulator.o
+ obj-$(CONFIG_REGULATOR_WM8400) += wm8400-regulator.o
+ obj-$(CONFIG_REGULATOR_WM8994) += wm8994-regulator.o
++obj-$(CONFIG_REGULATOR_EDATEC_PANEL) += edatec-panel-regulator.o
+ 
+ ccflags-$(CONFIG_REGULATOR_DEBUG) += -DDEBUG
+diff --git a/drivers/regulator/edatec-panel-regulator.c b/drivers/regulator/edatec-panel-regulator.c
+new file mode 100644
+index 000000000000..4227837466cb
+--- /dev/null
++++ b/drivers/regulator/edatec-panel-regulator.c
+@@ -0,0 +1,211 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2026 EDATEC
++ *
++ */
++
++#include <linux/backlight.h>
++#include <linux/err.h>
++#include <linux/gpio.h>
++#include <linux/gpio/driver.h>
++#include <linux/gpio/regmap.h>
++#include <linux/i2c.h>
++#include <linux/init.h>
++#include <linux/interrupt.h>
++#include <linux/module.h>
++#include <linux/regmap.h>
++#include <linux/regulator/driver.h>
++#include <linux/regulator/machine.h>
++#include <linux/regulator/of_regulator.h>
++#include <linux/slab.h>
++
++#define REG_PWM				0x01
++#define REG_PWR				0x03
++#define REG_OUTPUT			0x0A
++#define REG_BRIDGE_INIT		0x11
++#define REG_BACKLIGHT_EN	0x12
++
++#define CMD_FW_VERSION		0xE1
++
++enum gpio_signals {
++	PIN_LCD_BL_EN,
++	PIN_LCD_BL_PWM,
++	PIN_LCD_RST,
++	PIN_TP_RST,
++	PIN_LCD_VDD_EN,
++	NUM_GPIO
++};
++
++struct ed_regulator {
++	struct regmap	*regmap;
++};
++
++static bool ed_readable_reg(struct device *dev, unsigned int reg)
++{
++	/* No registers are readable via the regmap. Use cached values */
++	return false;
++}
++
++static const struct regmap_config ed_regmap_config = {
++	.reg_bits = 8,
++	.val_bits = 8,
++	.max_register = REG_BACKLIGHT_EN,
++	.can_sleep = true,
++	.cache_type = REGCACHE_RBTREE,
++	.readable_reg = ed_readable_reg,
++};
++
++static int ed_update_status(struct backlight_device *bl)
++{
++	struct backlight_properties *props = &(bl->props);
++	struct ed_regulator *regulator = bl_get_data(bl);
++	struct regmap *regmap = regulator->regmap;
++	int brightness = backlight_get_brightness(bl);
++	int bl_power = props->power;
++	int ret;
++
++	if (bl_power == 1 || bl_power == 4)
++		ret = regmap_write(regmap, REG_PWR, bl_power);
++	else
++		ret = regmap_write(regmap, REG_PWM, brightness);
++
++	return ret;
++}
++
++static const struct backlight_ops ed_bl = {
++	.update_status = ed_update_status,
++};
++
++static int ed_firmware_version(struct i2c_client *i2c)
++{
++	struct i2c_msg msgs[1];
++	u8 addr_buf[1] = { CMD_FW_VERSION };
++	u8 data_buf[16] = { 0 };
++	int ret;
++
++	msgs[0].addr = i2c->addr;
++	msgs[0].flags = 0;
++	msgs[0].len = 1;
++	msgs[0].buf = addr_buf;
++
++	ret = i2c_transfer(i2c->adapter, msgs, ARRAY_SIZE(msgs));
++	if (ret != ARRAY_SIZE(msgs))
++		return -EIO;
++
++	usleep_range(200, 300);
++
++	/* Read data from register */
++	msgs[0].addr = i2c->addr;
++	msgs[0].flags = I2C_M_RD;
++	msgs[0].len = 16;
++	msgs[0].buf = data_buf;
++
++	ret = i2c_transfer(i2c->adapter, msgs, ARRAY_SIZE(msgs));
++	if (ret != ARRAY_SIZE(msgs))
++		return -EIO;
++
++	dev_info(&i2c->dev, "Firmware version: %s\n", data_buf);
++
++	return 0;
++}
++
++/*
++ * I2C driver interface functions
++ */
++static int ed_i2c_probe(struct i2c_client *i2c)
++{
++	struct gpio_regmap_config gconfig = {
++		.ngpio		= NUM_GPIO,
++		.ngpio_per_reg	= NUM_GPIO,
++		.parent		= &i2c->dev,
++		.reg_set_base	= REG_OUTPUT,
++	};
++	struct backlight_properties props = { };
++	struct backlight_device *bl;
++	struct ed_regulator *regulator;
++	struct regmap *regmap;
++	int ret;
++
++	regulator = devm_kzalloc(&i2c->dev, sizeof(*regulator), GFP_KERNEL);
++	if (!regulator)
++		return -ENOMEM;
++
++	ed_firmware_version(i2c);
++
++	i2c_set_clientdata(i2c, regulator);
++
++	regmap = devm_regmap_init_i2c(i2c, &ed_regmap_config);
++	if (IS_ERR(regmap)) {
++		ret = PTR_ERR(regmap);
++		dev_err(&i2c->dev, "Failed to allocate register map: %d\n",
++			ret);
++		return ret;
++	}
++
++	props.type = BACKLIGHT_RAW;
++	props.max_brightness = 0xff;
++	props.brightness = 0xff;
++
++	regulator->regmap = regmap;
++	bl = devm_backlight_device_register(&i2c->dev, dev_name(&i2c->dev),
++					    &i2c->dev, regulator, &ed_bl, &props);
++	if (IS_ERR(bl))
++		return PTR_ERR(bl);
++
++	bl->props.brightness = 0xff;
++
++	ret = regmap_write(regmap, REG_OUTPUT, 0x00);
++	if (ret) {
++		dev_err(&i2c->dev, "Failed to initialise regmap values: %d\n", ret);
++		return ret;
++	}
++
++	ret = regmap_write(regmap, REG_BRIDGE_INIT, 0x02);
++	if (ret) {
++		dev_err(&i2c->dev, "Failed to initialise panel bridge: %d\n", ret);
++		return ret;
++	}
++
++	ret = regmap_write(regmap, REG_BACKLIGHT_EN, 0x01);
++	if (ret) {
++		dev_err(&i2c->dev, "Failed to enable backlight: %d\n", ret);
++		return ret;
++	}
++
++	msleep(100);
++
++	gconfig.regmap = regmap;
++	ret = PTR_ERR_OR_ZERO(devm_gpio_regmap_register(&i2c->dev, &gconfig));
++	if (ret)
++		return dev_err_probe(&i2c->dev, ret, "Failed to create gpiochip\n");
++
++	return 0;
++}
++
++static void ed_i2c_shutdown(struct i2c_client *client)
++{
++	struct ed_regulator *regulator = i2c_get_clientdata(client);
++
++	regmap_write(regulator->regmap, REG_OUTPUT, 0);
++	regmap_write(regulator->regmap, REG_BACKLIGHT_EN, 0);
++}
++
++static const struct of_device_id ed_dt_ids[] = {
++	{ .compatible = "edatec,disp-regulator" },
++	{},
++};
++MODULE_DEVICE_TABLE(of, ed_dt_ids);
++
++static struct i2c_driver ed_regulator_driver = {
++	.driver = {
++		.name = "edatec_panel_regulator",
++		.of_match_table = of_match_ptr(ed_dt_ids),
++	},
++	.probe = ed_i2c_probe,
++	.shutdown = ed_i2c_shutdown,
++};
++module_i2c_driver(ed_regulator_driver);
++
++MODULE_AUTHOR("EDATEC <support@edatec.cn>");
++MODULE_DESCRIPTION("EDATEC TFT LCD panel regulator driver");
++MODULE_LICENSE("GPL");
 diff --git a/drivers/regulator/rpi-panel-attiny-regulator.c b/drivers/regulator/rpi-panel-attiny-regulator.c
 index 3020839b9ef1..aba9244d8411 100644
 --- a/drivers/regulator/rpi-panel-attiny-regulator.c
@@ -156876,10 +157960,10 @@ index 30b78aa75ee3..119b315ac384 100644
  static const struct pwm_ops rpi_panel_v2_pwm_ops = {
 diff --git a/drivers/regulator/waveshare-panel-regulator.c b/drivers/regulator/waveshare-panel-regulator.c
 new file mode 100644
-index 000000000000..884555db8185
+index 000000000000..534307ba7e7c
 --- /dev/null
 +++ b/drivers/regulator/waveshare-panel-regulator.c
-@@ -0,0 +1,328 @@
+@@ -0,0 +1,336 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * Copyright (C) 2024 Waveshare International Limited
@@ -157090,6 +158174,7 @@ index 000000000000..884555db8185
 +	struct waveshare_panel_lcd *state;
 +	struct regmap *regmap;
 +	unsigned int data;
++	bool pre_power_on;
 +	int ret;
 +
 +	state = devm_kzalloc(&i2c->dev, sizeof(*state), GFP_KERNEL);
@@ -157109,6 +158194,8 @@ index 000000000000..884555db8185
 +		goto error;
 +	}
 +
++	pre_power_on = device_property_read_bool(&i2c->dev, "pre-power-on");
++
 +	ret = waveshare_panel_i2c_read(i2c, REG_ID, &data);
 +	if (ret == 0)
 +		dev_info(&i2c->dev, "waveshare panel hw id = 0x%x\n", data);
@@ -157124,9 +158211,14 @@ index 000000000000..884555db8185
 +
 +	state->direction_state = 0;
 +	state->poweron_state = BIT(9) | BIT(8); // Enable VCC
++	if (pre_power_on)
++		state->poweron_state |= BIT(4) | BIT(1) | BIT(0);
 +	regmap_write(regmap, REG_TP, state->poweron_state >> 8);
 +	regmap_write(regmap, REG_LCD, state->poweron_state & 0xff);
-+	msleep(20);
++	if (pre_power_on)
++		msleep(200);
++	else
++		msleep(20);
 +
 +	state->regmap = regmap;
 +	state->gc.parent = &i2c->dev;
@@ -239686,10 +240778,10 @@ index 000000000000..a9a54d3322ec
 +
 +#endif
 diff --git a/kernel/cgroup/cgroup.c b/kernel/cgroup/cgroup.c
-index 6b2ee75c63eb..49eebf1f15f1 100644
+index 8789ba613ea1..18c8cb90151c 100644
 --- a/kernel/cgroup/cgroup.c
 +++ b/kernel/cgroup/cgroup.c
-@@ -7195,6 +7195,39 @@ static int __init cgroup_disable(char *str)
+@@ -7203,6 +7203,39 @@ static int __init cgroup_disable(char *str)
  }
  __setup("cgroup_disable=", cgroup_disable);
  
@@ -240145,7 +241237,7 @@ index 703c8fa05048..58d0769dbdaf 100644
  		emu_nid_to_phys[nid] = pb->nid;
  
 diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-index e92898ad51cd..7a416a12db63 100644
+index 7c52f85b2ea5..005ae189c4f9 100644
 --- a/mm/page_alloc.c
 +++ b/mm/page_alloc.c
 @@ -237,6 +237,27 @@ EXPORT_SYMBOL(node_states);
@@ -240207,10 +241299,10 @@ index 0fc9373e8251..eff7d08b21be 100644
  
  		if (last != folio) {
 diff --git a/net/bluetooth/hci_sync.c b/net/bluetooth/hci_sync.c
-index 919ec275dd23..a779803548a0 100644
+index 426f465be355..3ca774df75b7 100644
 --- a/net/bluetooth/hci_sync.c
 +++ b/net/bluetooth/hci_sync.c
-@@ -5017,6 +5017,8 @@ static const struct {
+@@ -5020,6 +5020,8 @@ static const struct {
   */
  static int hci_dev_setup_sync(struct hci_dev *hdev)
  {
@@ -240219,7 +241311,7 @@ index 919ec275dd23..a779803548a0 100644
  	int ret = 0;
  	bool invalid_bdaddr;
  	size_t i;
-@@ -5045,7 +5047,8 @@ static int hci_dev_setup_sync(struct hci_dev *hdev)
+@@ -5048,7 +5050,8 @@ static int hci_dev_setup_sync(struct hci_dev *hdev)
  			 hci_test_quirk(hdev, HCI_QUIRK_USE_BDADDR_PROPERTY);
  	if (!ret) {
  		if (hci_test_quirk(hdev, HCI_QUIRK_USE_BDADDR_PROPERTY) &&
@@ -266822,7 +267914,7 @@ index c8617a488b11..0363869aed63 100644
  		pcm3168a->supplies[i].supply = pcm3168a_supply_names[i];
  
 diff --git a/sound/soc/codecs/pcm512x.c b/sound/soc/codecs/pcm512x.c
-index a70e8ea166dc..d4c1d8d45af3 100644
+index fdef98ce52f1..348752722bd6 100644
 --- a/sound/soc/codecs/pcm512x.c
 +++ b/sound/soc/codecs/pcm512x.c
 @@ -540,7 +540,7 @@ static unsigned long pcm512x_ncp_target(struct pcm512x_priv *pcm512x,
@@ -268264,7 +269356,7 @@ index 270dad84d825..970ad247a507 100644
  	/*
  	 * For devices with more than one control interface, we assume the
 diff --git a/sound/usb/quirks.c b/sound/usb/quirks.c
-index 4cfa24c06fcd..c4ed6c91766a 100644
+index e8ae3464887b..64f1618a4027 100644
 --- a/sound/usb/quirks.c
 +++ b/sound/usb/quirks.c
 @@ -2421,6 +2421,8 @@ static const struct usb_audio_quirk_flags_table quirk_flags_table[] = {

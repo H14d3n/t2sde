@@ -25,9 +25,9 @@
 [F] CROSS
 
 [L] GPL
-[V] 2.25
+[V] 2.27
 
-[D] c35a83f640db55a6f570859135949314d67a3560124206e9a294d4ed lesspipe-2.25.tar.gz https://github.com/wofr06/lesspipe/archive/v2.25/
+[D] df6d218181ec00fe7cc5a91f8fe70df30ed6547f25ce7933c039ec96 lesspipe-2.27.tar.gz https://github.com/wofr06/lesspipe/archive/v2.27/
 
 var_append confopt ' ' --yes
 var_append makeinstopt ' ' PREFIX=$root/$prefix # no DESTDIR

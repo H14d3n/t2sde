@@ -3,6 +3,8 @@
 610 mul_fft.c
 556 randmt.c
 232 rrandomb.c
-201 cmp.c
+203 cmp.c
 192 random2.c
 143 tdiv_q_2exp.c
+11 tdiv_qr.c
+10 import.c

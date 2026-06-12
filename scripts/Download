@@ -22,31 +22,27 @@ umask 022
 eval "$(egrep '^(sdever)=' scripts/parse-config)"
 base=$(pwd -P)
 
-if [ "$1" = '--help' ]; then
-	{ echo
-	echo "Usage:"
+usage() {
+    if [ "$1" = 1 ]; then
+	echo "Usage: [ options ] [ .desc file ] [ -repository repo ] [ -all | -required ] [ packages ]"
 	echo
-	echo " scripts/Download [options] [ Package(s) ]"
-	echo " scripts/Download [options] [ Desc file(s) ]"
-	echo " scripts/Download [options] -repository Repositories"
-	echo " scripts/Download [options] { -all | -required }"
-	echo
-	echo " Where [options] is an alias for:"
+	echo "Where [options] is an alias for:"
 	echo "    [ -cfg <config> ] [ -nock ]  [ -alt-dir <AlternativeDirectory> ]"
 	echo "    [ -mirror <URL> | -check ]  [ -try-questionable ]  [ -notimeout ]"
 	echo "    [ -longtimeout ]  [ -curl-opt <curl-option>[:<curl-option>[:..]] ]"
 	echo "    [ -proxy <server>[:<port>] ] [ -proxy-auth <username>[:<password>] ]"
 	echo "    [ -copy ] [ -move ]"
 	echo
-	echo " On default, this script auto-detects the best T2 SDE mirror."
+	echo "By default, this script auto-detects the best T2 SDE mirror."
 	echo
-	echo " Mirrors can also be a local directories in the form of: 'file:///<dir>'"
+	echo "Mirrors can also be a local directories in the form of: 'file:///<dir>'"
 	echo
-	echo " scripts/Download -mk-cksum Filename(s)"
-	echo " scripts/Download [ -list | -list-unknown | -list-missing | -list-cksums ]"
-	echo; } >&2
-	exit 1
-fi
+	echo "-mk-cksum Filename(s)"
+	echo "[ -list | -list-unknown | -list-missing | -list-cksums ]"
+    fi >&2
+
+    exit $1
+}
 
 # -mk-cksum mode (display T2 type package checksum): it
 # displays the checksum T2 validates against.
@@ -81,7 +77,7 @@ fi
 #
 mkdir -p src/ download/; config=default
 this_is_the_2nd_run=0
-mirror='' checkonly=0 altdir=''
+mirror= checkonly=0 altdir=
 tryques=0 nocheck=0 options='-this_is_the_2nd_run '
 notimeout=0 curl_options='-A T2-downloader --disable-epsv --location -f'
 altcopy=link verbose=1 quietmirror=0
@@ -924,7 +920,8 @@ case "$1" in
 
 	-repository)	shift; repository "$@" ;;
 
-	-*|"")		exec $0 --help ;;
+	-*)		usage 1 ;;
+	"")		usage ;;
 
 	*/\*)		repository "${1%/*}" ;;
 	*)		packages "$@" ;;

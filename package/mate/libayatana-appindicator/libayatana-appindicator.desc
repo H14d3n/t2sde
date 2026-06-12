@@ -1,0 +1,32 @@
+[COPY] --- T2-COPYRIGHT-BEGIN ---
+[COPY] t2/package/*/libayatana-appindicator/libayatana-appindicator.desc
+[COPY] Copyright (C) 2025 - 2026 The T2 SDE Project
+[COPY] SPDX-License-Identifier: GPL-2.0
+[COPY] --- T2-COPYRIGHT-END ---
+
+[I] Ayatana Application Indicators Shared Library
+
+[T] The Ayatana Indicators project is the continuation of Application
+[T] Indicators and System Indicators, two technologies developed by Canonical
+[T] Ltd. for the Unity7 desktop. Note: This library is Gtk and DBusMenu-based
+[T] and considered obsolete. The libayatana-appindicator-glib should instead
+[T] be used for new projects.
+
+[U] https://github.com/AyatanaIndicators/libayatana-appindicator
+
+[A] Ayatana developers
+[M] René Rebe <rene@exactco.de>
+
+[C] extra/desktop/mate
+
+[L] GPL
+[V] 0.6.0
+[P] X -----5---9 179.410
+
+[D] 597be79188e8dacda92a938b4396dee594ed18272c8e4c82c7a45f1f libayatana-appindicator-0.6.0.tar.gz https://github.com/AyatanaIndicators/libayatana-appindicator/archive/refs/tags/0.6.0/
+
+var_append GCC_WRAPPER_APPEND ' ' -L$root$(pkgprefix libdir glib)
+
+pkginstalled mono || var_append cmakeopt ' ' -DENABLE_BINDINGS_MONO=OFF
+pkginstalled vala || var_append cmakeopt ' ' -DENABLE_BINDINGS_VALA=OFF
+var_append cmakeopt ' ' -DENABLE_GTKDOC=OFF

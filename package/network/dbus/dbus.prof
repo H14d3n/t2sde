@@ -1,0 +1,10 @@
+87 dbus-marshal-recursive.c
+31 dbus-marshal-header.c
+29 dbus-marshal-basic.c
+28 dbus-message.c
+21 dbus-list.c
+20 dbus-marshal-validate.c
+15 policy.c
+15 dbus-connection.c
+13 dbus-string.c
+10 dbus-hash.c

@@ -1,2 +1,6 @@
 378 apr_pools.c
 342 apr_hash.c
+46 variable.c
+42 hash.c
+12 misc.c
+11 implicit.c

@@ -1,0 +1,10 @@
+87 list.c
+62 quotearg.c
+25 extract.c
+19 basename-lgpl.c
+13 names.c
+13 buffer.c
+12 xheader.c
+10 xmalloc.c
+10 transform.c
+10 paxnames.c

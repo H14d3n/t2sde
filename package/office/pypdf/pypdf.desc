@@ -20,7 +20,7 @@
 [F] CROSS
 
 [L] BSD
-[V] 6.12.2
+[V] 6.13.2
 [P] X -----5---9 400.00
 
-[D] 74fbbeb0349ae2f719e77f860e146e31224bc252db72809d81ea350e pypdf-6.12.2.tar.gz https://github.com/py-pdf/pypdf/archive/6.12.2/
+[D] 5775cf79e40dc30e6478832a1770b1374590205d8a59fb2b6f1c39c1 pypdf-6.13.2.tar.gz https://github.com/py-pdf/pypdf/archive/6.13.2/

@@ -1,0 +1,12 @@
+1070 memchr.c
+585 mbrtowc.c
+461 strnlen1.c
+374 fnmatch_loop.c
+259 basename-lgpl.c
+131 fnmatch.c
+118 util.c
+86 pred.c
+26 basename.c
+20 fts.c
+11 stripslash.c
+10 cat.c

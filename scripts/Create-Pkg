@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 #--- T2-COPYRIGHT-BEGIN ---
 #t2/scripts/Create-Pkg
@@ -9,9 +9,7 @@
 
 usage() {
 	cat <<-EOT
-Usage:
-$0 [ package/repository/packagename ] url < url-2 ... >
-
+Usage: [ package/repository/packagename ] url < url-2 ... >
 EOT
 	exit 1
 }

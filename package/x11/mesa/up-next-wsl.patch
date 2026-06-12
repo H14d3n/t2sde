@@ -34,7 +34,7 @@ index d88323a91ed7..7cef39a2ef5b 100644
  
     VkMemoryRequirements reqs;
     wsi->GetBufferMemoryRequirements(chain->device, image->blit.buffer, &reqs);
--   assert(reqs.size <= info->linear_size);
+-   assert(reqs.size >= info->linear_size);
 +   buffer_mem_size = MAX2(info->linear_size, reqs.size);
  
     struct wsi_memory_allocate_info memory_wsi_info = {

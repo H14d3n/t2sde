@@ -1,0 +1,6 @@
+67 libegl.c
+24 glvnd_pthread.c
+23 libeglmapping.c
+19 GLdispatch.c
+14 winsys_dispatch.c
+11 libeglcurrent.c

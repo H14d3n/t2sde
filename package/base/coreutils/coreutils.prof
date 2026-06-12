@@ -4,3 +4,4 @@
 162 linebuffer.c
 129 cut.c
 109 uniq.c
+10 fts.c

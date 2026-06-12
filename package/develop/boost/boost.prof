@@ -1,0 +1,15 @@
+504 gcc.cc
+316 inflate.c
+156 dfa.c
+134 kwset.c
+87 regcomp.c
+85 spellcheck.cc
+54 linebuffer.c
+44 stackvma.c
+41 opts-common.cc
+33 uniq.c
+23 printf.c
+19 regex_internal.c
+19 memchr.c
+18 vasnprintf.c
+13 grep.c

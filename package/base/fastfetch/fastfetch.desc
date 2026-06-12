@@ -19,14 +19,26 @@
 [F] CROSS
 
 [E] del rpm
-[E] opt chafa dconf imagemagick opencl-headers pulseaudio python
-[E] opt libdrm libglvnd libx11 libxcb libxrandr libxrender mesa
-[E] opt vulkan-headers wayland xfconf xorgproto libxfce4util gtkmm
+[E] opt chafa
+[E] opt dconf
+[E] opt pulseaudio
 [E] opt dbus
+[E] opt gtkmm
+[E] opt imagemagick
+[E] opt libglvnd mesa libdrm
+[E] opt libva libvdpau
+[E] opt libx11 libxcb libxrandr libxrender xorgproto
+[E] opt opencl-headers
+[E] opt python
+[E] opt vulkan-headers
+[E] opt wayland
+[E] opt xfconf libxfce4util
+[E] opt lua
+[E] opt sqlite
 
 [L] MIT
-[V] 2.63.1
+[V] 2.64.2
 
-[D] 7930e7659378630a577506589cd98840df58f034bf5b8217605dfc82 fastfetch-2.63.1.tar.gz https://github.com/fastfetch-cli/fastfetch/archive/2.63.1/
+[D] 44e161fd90e08cc0a917e13ca7597caa8ffdb9f4efe2d36a85a13e48 fastfetch-2.64.2.tar.gz https://github.com/fastfetch-cli/fastfetch/archive/2.64.2/
 
 pkginstalled directx-headers && var_append GCC_WRAPPER_APPEND ' ' -I$root$includedir/wsl/stubs

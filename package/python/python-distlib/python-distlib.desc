@@ -22,7 +22,7 @@
 [E] add python-virtualenv python-stevedore python-platformdirs filelock
 
 [L] MIT
-[V] 0.4.0
+[V] 0.4.2
 [P] X -----5---9 300.000
 
-[D] 5b6fc88d27aa2e9cc1b7e4c7bb9bf47ab476ce4325981cd6d5a7a4ce python-distlib-0.4.0.tar.gz https://github.com/pypa/distlib/archive/0.4.0/
+[D] c642a3d5bc790bdd495849d69dbdf44a8d36ffaad1c14b464581b2c4 python-distlib-0.4.2.tar.gz https://github.com/pypa/distlib/archive/0.4.2/

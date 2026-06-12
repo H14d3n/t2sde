@@ -1,0 +1,17 @@
+8 kfileplacesview.cpp
+6 kfileplacesmodel.cpp
+5 slavebase.cpp
+5 connectionbackend.cpp
+4 scheduler.cpp
+4 kurlnavigator.cpp
+4 kfileplacesitem.cpp
+3 previewjob.cpp
+3 kfileitem.cpp
+3 filepreviewjob.cpp
+3 connection.cpp
+2 kcoredirlister.cpp
+1 transferjob.cpp
+1 moc_kurlnavigatortogglebutton_p.cpp
+1 moc_kdirnotify.cpp
+1 kurlnavigatorbutton.cpp
+1 job.cpp

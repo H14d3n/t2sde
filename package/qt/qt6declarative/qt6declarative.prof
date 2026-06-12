@@ -1,0 +1,16 @@
+22 qquickitem.cpp
+11 qsgbatchrenderer.cpp
+8 qqmlengine.cpp
+7 qquickdeliveryagent.cpp
+7 qqmlvmemetaobject.cpp
+7 qqml.cpp
+6 qv4qobjectwrapper.cpp
+4 qv4persistent.cpp
+4 qv4mm.cpp
+4 qsgthreadedrenderloop.cpp
+4 qqmlobjectcreator.cpp
+4 qqmljavascriptexpression.cpp
+3 qv4function.cpp
+3 qsgnode.cpp
+3 qquicktext.cpp
+3 qqmlbinding.cpp

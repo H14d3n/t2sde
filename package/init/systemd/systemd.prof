@@ -1,0 +1,16 @@
+36 journal-file.c
+9 sd-event.c
+7 mmap-cache.c
+7 alloc-util.c
+6 siphash24.c
+6 hashmap.c
+5 time-util.c
+5 prioq.c
+5 journald-stream.c
+4 journald-manager.c
+4 fileio.c
+3 string-util-fundamental.c
+3 journald-context.c
+2 utf8.c
+2 netlink-message.c
+2 lookup3.c
