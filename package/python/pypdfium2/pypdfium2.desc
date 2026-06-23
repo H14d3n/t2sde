@@ -1,0 +1,28 @@
+# --- T2-COPYRIGHT-BEGIN ---
+# t2/package/*/pypdfium2/pypdfium2.desc
+# Copyright (C) 2026 The T2 SDE Project
+# SPDX-License-Identifier: GPL-2.0
+# --- T2-COPYRIGHT-END ---
+
+[I] Python 3 bindings for PDFium
+
+[T] ABI-level Python 3 bindings to PDFium for rendering, inspection,
+[T] manipulation and creation of PDFs.
+
+[U] https://github.com/pypdfium2-team/pypdfium2
+
+[A] Pypdfium2 authors
+[M] Paul Manners <paul.manners@yahoo.com>
+
+[E] opt pillow
+[E] opt numpy
+[E] opt opencv-python
+[E] opt python-tabulate
+
+[C] extra/tool
+[F] CROSS
+
+[L] OpenSource
+[V] 5.10.1
+
+[D] ad1301e7bf0be51ff607e6c82374f281c12233300552cd492c92cb12 pypdfium2-5.10.1.tar.gz https://github.com/pypdfium2-team/pypdfium2/archive/5.10.1/

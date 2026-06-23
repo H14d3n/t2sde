@@ -18,9 +18,9 @@
 [F] CROSS OBJDIR
 
 [L] GPL
-[V] 6.6.91
+[V] 6.7.1
 
 [CV-GROUP] kde-plasma
-[D] 99b5c31cdcfcc864934fdbc6e8ec7b6ece9c511a3ab8d5ee93ab14d9 ksshaskpass-6.6.91.tar.xz https://download.kde.org/unstable/plasma/6.6.91/
+[D] 994b38a5fe0f57342888b5b95391c8a856800c09b280b659716416cb ksshaskpass-6.7.1.tar.xz https://download.kde.org/stable/plasma/6.7.1/
 
 . $base/package/*/*/kde-conf.in

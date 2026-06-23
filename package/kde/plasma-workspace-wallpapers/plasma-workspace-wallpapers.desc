@@ -19,9 +19,9 @@
 [E] add plasma-workspace
 
 [L] GPL
-[V] 6.6.91
+[V] 6.7.1
 
 [CV-GROUP] kde-plasma
-[D] 165401915e368e83cdaedb853e61efbcca02bb88a84ed1951a862329 plasma-workspace-wallpapers-6.6.91.tar.xz https://download.kde.org/unstable/plasma/6.6.91/
+[D] ebe0e08ee24360cbdbec46f15fe4b6593744e5f11e8c00d3f74a0813 plasma-workspace-wallpapers-6.7.1.tar.xz https://download.kde.org/stable/plasma/6.7.1/
 
 . $base/package/*/*/kde-conf.in

@@ -17,10 +17,10 @@
 [F] CROSS OBJDIR
 
 [L] GPL
-[V] 6.6.91
+[V] 6.7.1
 
 [CV-GROUP] kde-plasma
-[D] df75c7c0b64221707e7a1d715b0172ed9f774a7ddd2779b314013426 plasma-keyboard-v6.6.91.tar.bz2 https://invent.kde.org/plasma/plasma-keyboard/-/archive/v6.6.91/
+[D] 197f49d3790c687bbd721c1100931dfcd7fc7fb6068b472a6fda2850 plasma-keyboard-v6.7.1.tar.bz2 https://invent.kde.org/plasma/plasma-keyboard/-/archive/v6.7.1/
 
 . $base/package/*/*/kde-conf.in
 

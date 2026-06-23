@@ -17,9 +17,9 @@
 [F] CROSS OBJDIR
 
 [L] GPL
-[V] 6.6.91
+[V] 6.7.1
 
 [CV-GROUP] kde-plasma
-[D] 8c8dffa89e26149d4b4e15720b7619aebaaa8b8e3951aa054bd94771 kwayland-integration-6.6.91.tar.xz https://download.kde.org/unstable/plasma/6.6.91/
+[D] 56d33702128b2ac1cd3b2ad4e8c9dc6ed62ca35db0c6c402c88e31b3 kwayland-integration-6.7.1.tar.xz https://download.kde.org/stable/plasma/6.7.1/
 
 . $base/package/*/*/kde-conf.in

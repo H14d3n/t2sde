@@ -16,6 +16,6 @@
 [C] extra/desktop/mate
 
 [L] GPL
-[V] 24.5.1
+[V] 26.6.1
 
-[D] 045d3dbb39f1003217ad39e3930ca7dcf972073bb26ad500389fc682 ayatana-indicator-session-24.5.1.tar.gz https://github.com/AyatanaIndicators/ayatana-indicator-session/archive/refs/tags/24.5.1/
+[D] 9178b31da06ac139da02ff3a50ab1254011985dca31014f43711878c ayatana-indicator-session-26.6.1.tar.gz https://github.com/AyatanaIndicators/ayatana-indicator-session/archive/refs/tags/26.6.1/

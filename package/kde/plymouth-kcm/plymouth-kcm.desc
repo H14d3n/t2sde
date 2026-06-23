@@ -17,9 +17,9 @@
 [F] CROSS OBJDIR
 
 [L] GPL
-[V] 6.6.91
+[V] 6.7.1
 
 [CV-GROUP] kde-plasma
-[D] b8b9c56f47fb8012eeddd765cc4d271a7facdf2038445be858e56519 plymouth-kcm-6.6.91.tar.xz https://download.kde.org/unstable/plasma/6.6.91/
+[D] c5843ce35835a626ea391718fc207c4f4328291a1a6987a7cefa7ed8 plymouth-kcm-6.7.1.tar.xz https://download.kde.org/stable/plasma/6.7.1/
 
 . $base/package/*/*/kde-conf.in

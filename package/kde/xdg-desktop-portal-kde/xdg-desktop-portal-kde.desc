@@ -17,9 +17,9 @@
 [F] CROSS OBJDIR
 
 [L] GPL
-[V] 6.6.91
+[V] 6.7.1
 
 [CV-GROUP] kde-plasma
-[D] bc1d4728ea55bd4399b052b60938e8db7c95a57a4e80b3e36e1584d3 xdg-desktop-portal-kde-6.6.91.tar.xz https://download.kde.org/unstable/plasma/6.6.91/
+[D] feb174850a04d987c860d8680817e0776e322ef289180282af70f1b1 xdg-desktop-portal-kde-6.7.1.tar.xz https://download.kde.org/stable/plasma/6.7.1/
 
 . $base/package/*/*/kde-conf.in

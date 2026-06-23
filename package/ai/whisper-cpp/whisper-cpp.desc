@@ -18,10 +18,11 @@
 [F] OBJDIR
 
 [L] MIT
-[V] 1.8.6
+[V] 1.9.1
 
-[D] 0252d05ec0f85f6255437cab0c7e74564d1ce5b1386a919d570d0fab whisper-cpp-1.8.6.tar.gz https://github.com/ggerganov/whisper.cpp/archive/refs/tags/v1.8.6/
+[D] 277b22707bc5cde1494ee5c4148c9456e9813a120cad7d74608d1b9b whisper-cpp-1.9.1.tar.gz https://github.com/ggerganov/whisper.cpp/archive/refs/tags/v1.9.1/
 
 [ $prefix_auto = 1 ] && prefix=opt/whisper-cpp && set_confopt
+
 #hook_add postmake 5 "cp -rfv {bin,examples,../models,../grammars,../samples,../scripts} $root/$prefix/"
 #hook_add postmake 5 "cp -fv {src/libwhisper*,ggml/src/libggml*} $root$libdir/"

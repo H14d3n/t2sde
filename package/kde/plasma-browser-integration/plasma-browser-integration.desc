@@ -17,9 +17,9 @@
 [F] CROSS OBJDIR
 
 [L] GPL
-[V] 6.6.91
+[V] 6.7.1
 
 [CV-GROUP] kde-plasma
-[D] 91415240ab5f101afdb1ded3380b298f2d663eaa216846997ed77d65 plasma-browser-integration-6.6.91.tar.xz https://download.kde.org/unstable/plasma/6.6.91/
+[D] 12e3035c895bde8a2c56a2b2d3bb962f9985ae7fec5d896c102472d3 plasma-browser-integration-6.7.1.tar.xz https://download.kde.org/stable/plasma/6.7.1/
 
 . $base/package/*/*/kde-conf.in

@@ -22,6 +22,6 @@
 [C] extra/scientific
 
 [L] GPL
-[V] 26.05.0
+[V] 26.06.2
 
-[D] cc03df40d57652c509c140fd8077d3819369d77eb94c44adea4043cf wxMaxima-26.05.0.tar.gz https://github.com/wxMaxima-developers/wxmaxima/archive/Version-26.05.0/
+[D] 2ce8e73ea0fe1ec202b65e1be7e729c1c6c8699bb3b0aa425adba0b9 wxMaxima-26.06.2.tar.gz https://github.com/wxMaxima-developers/wxmaxima/archive/Version-26.06.2/

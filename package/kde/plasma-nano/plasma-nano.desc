@@ -17,9 +17,9 @@
 [F] CROSS OBJDIR
 
 [L] GPL
-[V] 6.6.91
+[V] 6.7.1
 
 [CV-GROUP] kde-plasma
-[D] 4b49a8418789c41967804d048ed40b35a7d8c1ea17bec583a76f0302 plasma-nano-6.6.91.tar.xz https://download.kde.org/unstable/plasma/6.6.91/
+[D] f9ca1f976519288cd6ed083043a99c4439ea2f10297300a30497a64f plasma-nano-6.7.1.tar.xz https://download.kde.org/stable/plasma/6.7.1/
 
 . $base/package/*/*/kde-conf.in

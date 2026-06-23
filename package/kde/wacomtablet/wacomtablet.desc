@@ -20,9 +20,9 @@
 [E] opt kdoctools
 
 [L] GPL
-[V] 6.6.91
+[V] 6.7.1
 
 [CV-GROUP] kde-plasma
-[D] 6ab493a67154b8e54f35157ae380d5d58c905d346afdb42fcb3ef8c2 wacomtablet-6.6.91.tar.xz https://download.kde.org/unstable/plasma/6.6.91/
+[D] 8d9adcbdaaf12edc58b19a3560e554c20bc9ab3188c03e2b313fbc85 wacomtablet-6.7.1.tar.xz https://download.kde.org/stable/plasma/6.7.1/
 
 . $base/package/*/*/kde-conf.in

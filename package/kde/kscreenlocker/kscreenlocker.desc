@@ -19,10 +19,10 @@
 [F] CROSS OBJDIR
 
 [L] GPL
-[V] 6.6.91
+[V] 6.7.1
 [P] X -----5---9 200.020
 
 [CV-GROUP] kde-plasma
-[D] fea924e1fe48ff5a8f3b398cfca10b3f9661d02483af65e9cc390c2d kscreenlocker-6.6.91.tar.xz https://download.kde.org/unstable/plasma/6.6.91/
+[D] f190c9c263afa34feb829d34321541c3244220d68b2acca2574438b3 kscreenlocker-6.7.1.tar.xz https://download.kde.org/stable/plasma/6.7.1/
 
 . $base/package/*/*/kde-conf.in

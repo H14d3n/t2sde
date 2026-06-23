@@ -17,9 +17,9 @@
 [F] CROSS OBJDIR
 
 [L] GPL
-[V] 6.6.91
+[V] 6.7.1
 
 [CV-GROUP] kde-plasma
-[D] b06095e53ddd3467267d28ee5578b807dc10902c65858cd46537ff9d breeze-gtk-6.6.91.tar.xz https://download.kde.org/unstable/plasma/6.6.91/
+[D] 3099d0cd728f8e337e001982ea128f47e708e9759b51c70f914b2e2e breeze-gtk-6.7.1.tar.xz https://download.kde.org/stable/plasma/6.7.1/
 
 . $base/package/*/*/kde-conf.in

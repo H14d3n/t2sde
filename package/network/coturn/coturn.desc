@@ -16,7 +16,9 @@
 
 [C] extra/network
 
-[L] BSD
-[V] 4.12.0
+[E] opt systemd
 
-[D] be4fc27f2a0b072bb13d3c162adf66e633b66e46ef8168169a7784db coturn-4.12.0.tar.gz https://github.com/coturn/coturn/archive/4.12.0/
+[L] BSD
+[V] 4.14.0
+
+[D] e8afab087cba24c420f6114175df923b4365e121744f5dbc5664194e coturn-4.14.0.tar.gz https://github.com/coturn/coturn/archive/4.14.0/

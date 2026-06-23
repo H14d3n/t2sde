@@ -17,8 +17,8 @@
 [F] CROSS
 
 [L] GPL
-[V] 10.06.0
+[V] 10.07.1
 
-[D] 836880cfb4ca9457197664857186e37639335b463332d0c2cc360f16 ghostscript-10.06.0.tar.xz https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10060/
+[D] 08c526333bc91c39026a88d03af369f3bd0ee4665f08da9d398465ce ghostscript-10.07.1.tar.xz https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10070/
 
 srcdir=*/ijs

@@ -16,6 +16,6 @@
 [C] extra/network
 
 [L] GPL
-[V] 0.16.13
+[V] 0.16.15
 
-[D] 6335ef4ef05b1e81d2c607c694c03b78fc87c8525a2cee47fcc56f3a rtorrent-0.16.13.tar.gz https://github.com/rakshasa/rtorrent/releases/download/v0.16.13/
+[D] 065db7b2471af9e72c8ca852f1d47645677e49c3ff12ac1c5536ef5a rtorrent-0.16.15.tar.gz https://github.com/rakshasa/rtorrent/releases/download/v0.16.15/

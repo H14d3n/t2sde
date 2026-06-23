@@ -17,9 +17,9 @@
 [F] CROSS OBJDIR
 
 [L] GPL
-[V] 6.6.91
+[V] 6.7.1
 
 [CV-GROUP] kde-plasma
-[D] 69211eb57082fa4c29954c6a95eb9f74b6b054c92b8a8a49ebf61aaf plasma-firewall-6.6.91.tar.xz https://download.kde.org/unstable/plasma/6.6.91/
+[D] 2bf82eae09a2d65e255ad51b59a28513867c6ec5e4c6315528f1b15e plasma-firewall-6.7.1.tar.xz https://download.kde.org/stable/plasma/6.7.1/
 
 . $base/package/*/*/kde-conf.in

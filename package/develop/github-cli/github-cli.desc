@@ -19,8 +19,8 @@
 [F] CROSS
 
 [L] GPL
-[V] 2.93.0
+[V] 2.95.0
 
-[D] f1dd5c05f98d45864dd5e6aa2af43d071aaaa5d38abbc819e4f0132d githubcli-v2.93.0.tar.gz https://github.com/cli/cli/archive/v2.93.0/
+[D] 70292aa8288288d5f5a72f2f53de68975c262052e9ced1ee36aa37d3 githubcli-v2.95.0.tar.gz https://github.com/cli/cli/archive/v2.95.0/
 
 rungo=0

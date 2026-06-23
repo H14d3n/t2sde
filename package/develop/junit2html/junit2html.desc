@@ -16,8 +16,8 @@
 [C] extra/base
 [F] CROSS
 
-[V] 31.0.5
+[V] 31.1.4
 [L] MIT
 [P] X -----5---9 700.000
 
-[D] ab911889fb88c5cfeb4dd439aad966a191e6d95caea61b124849a9c5 junit2html-31.0.5.tar.gz !https://gitlab.com/inorton/junit2html/-/archive/v31.0.5/junit2html-v31.0.5.tar.gz
+[D] af4f87d2ffda242a5f69ff3d6e86ddecd4c498da6b30572026a15508 junit2html-31.1.4.tar.gz !https://gitlab.com/inorton/junit2html/-/archive/v31.1.4/junit2html-v31.1.4.tar.gz

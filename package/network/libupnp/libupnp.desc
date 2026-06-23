@@ -21,7 +21,7 @@
 [F] CROSS
 
 [L] GPL
-[V] 1.18.5
+[V] 2.0.2
 [P] X -----5---9 164.000
 
-[D] eb2ae7032629c2461bee26c9c07b51cda94f61400db06a46a16d6f21 libupnp-1.18.5.tar.bz2 https://prdownloads.sourceforge.net/sourceforge/pupnp/
+[D] b2f27cd3e99a61d95a1b46cc3d734817f68f733b5b0b85502cb3754d libupnp-2.0.2.tar.bz2 https://prdownloads.sourceforge.net/sourceforge/pupnp/

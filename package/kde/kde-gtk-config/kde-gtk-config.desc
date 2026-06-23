@@ -18,9 +18,9 @@
 [F] CROSS OBJDIR
 
 [L] GPL
-[V] 6.6.91
+[V] 6.7.1
 
 [CV-GROUP] kde-plasma
-[D] c02542ec5597e29407e3f8268c980f322261de4cdc8b08c086bfd7e8 kde-gtk-config-6.6.91.tar.xz https://download.kde.org/unstable/plasma/6.6.91/
+[D] cb170d0c5634278e5e42ce880ad6a8461646583695b5d9146a3e13cc kde-gtk-config-6.7.1.tar.xz https://download.kde.org/stable/plasma/6.7.1/
 
 . $base/package/*/*/kde-conf.in

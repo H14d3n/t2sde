@@ -17,9 +17,9 @@
 [F] CROSS OBJDIR
 
 [L] GPL
-[V] 6.6.91
+[V] 6.7.1
 
 [CV-GROUP] kde-plasma
-[D] f5ee503573ecdabc88d98e92df534820277a7278011d674316838ecf plasma-sdk-6.6.91.tar.xz https://download.kde.org/unstable/plasma/6.6.91/
+[D] 02c9b582714cee679f83fa14e3f2d61cb9f61d5a202a1f1b8f7c5526 plasma-sdk-6.7.1.tar.xz https://download.kde.org/stable/plasma/6.7.1/
 
 . $base/package/*/*/kde-conf.in

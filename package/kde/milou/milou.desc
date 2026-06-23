@@ -17,9 +17,9 @@
 [F] CROSS OBJDIR
 
 [L] GPL
-[V] 6.6.91
+[V] 6.7.1
 
 [CV-GROUP] kde-plasma
-[D] 796b9107ab1fbdac49d613a39d98c709005856a09e05c8c097aa21e9 milou-6.6.91.tar.xz https://download.kde.org/unstable/plasma/6.6.91/
+[D] 026fbc6cf182192381c01486cc69475ed53e61e9f125a74554f79168 milou-6.7.1.tar.xz https://download.kde.org/stable/plasma/6.7.1/
 
 . $base/package/*/*/kde-conf.in

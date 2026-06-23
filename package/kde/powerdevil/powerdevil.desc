@@ -21,9 +21,9 @@
 [E] opt kdoctools docbook-xml docbook-xsl
 
 [L] GPL
-[V] 6.6.91
+[V] 6.7.1
 
 [CV-GROUP] kde-plasma
-[D] 11f18a7149beec939c5a4fc7003960f0d0fa01f056fd1810bd1e9992 powerdevil-6.6.91.tar.xz https://download.kde.org/unstable/plasma/6.6.91/
+[D] cbfe0db2ac710f4ea9a4b931e49c04cd039c76add1f0fce3b988965f powerdevil-6.7.1.tar.xz https://download.kde.org/stable/plasma/6.7.1/
 
 . $base/package/*/*/kde-conf.in

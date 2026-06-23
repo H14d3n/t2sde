@@ -17,10 +17,10 @@
 [F] CROSS
 
 [L] MIT
-[V] 1.5.0
+[V] 1.5.1.1
 [P] X -----5---9 200.000
 
-[D] 6401e3fe8fd536c49c6ffad2f737d1e09f60507ebc1af6e6c32b31e8 QXlsx-1.5.0.tar.gz https://github.com/QtExcel/QXlsx/archive/v1.5.0/
+[D] 61ac5826295d8b46fe9c0eda9e0c1505a27c804c2e7910968fd8efce QXlsx-1.5.1.1.tar.gz https://github.com/QtExcel/QXlsx/archive/v1.5.1.1/
 
 srcdir=*/QXlsx
 
