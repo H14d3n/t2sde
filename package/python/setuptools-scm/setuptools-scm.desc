@@ -18,8 +18,8 @@
 [C] extra/development
 
 [L] MIT
-[V] 10.0.5
+[V] 10.2.0
 [P] X ?----5---9 109.040
 
 [CV-URL] https://pypi.org/project/setuptools-scm/#history
-[D] c932c8420de67c38fbd68530848d57ba8e1a6390c8974248c07613a5 setuptools_scm-10.0.5.tar.gz https://pypi.io/packages/source/s/setuptools_scm/
+[D] a8ad3dfd935e88275fb9adad70fb2553b20adb186a9a8e2a662384c9 setuptools_scm-10.2.0.tar.gz https://pypi.io/packages/source/s/setuptools_scm/

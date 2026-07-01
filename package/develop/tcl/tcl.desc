@@ -20,17 +20,20 @@
 [F] CROSS NO-LTO
 
 [L] OpenSource
-[V] 9.0.3
+[V] 9.0.4
 [P] X 0----5---9 119.000
 
 [CV-FLAGS] tcltk
-[D] ef2821922c64d69fb393cb3ea2aff6630b2f82af22375d85d7c20f14 tcl9.0.3-src.tar.gz https://prdownloads.sourceforge.net/sourceforge/tcl/
+[D] 15bdee82cc45b8d6564b81ebef6738ec340c9071b8ea2166d6179ea4 tcl9.0.4-src.tar.gz https://prdownloads.sourceforge.net/sourceforge/tcl/
 
 srcdir=*/unix
 
 atstage cross &&
 	hook_add preconf 5 "echo 'ac_cv_func_strtod=yes
 	                    tcl_cv_strtod_buggy=1' >> config.cache"
+
+# fix: error while loadshared libraries: libtcl9.0.so: cannot open shared object file: No such file or directory
+export LD_LIBRARY_PATH=$builddir/tcl$ver/unix
 
 ptcl() {
     mm=`echo $ver | cut -d . -f 1-2`

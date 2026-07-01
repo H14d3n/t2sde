@@ -17,11 +17,12 @@
 [F] CROSS NO-LTO
 
 [L] MIT
-[V] 29.17.0
+[V] 29.19.1
 
-[D] fc6404ac71059c76135d088423078efb448cbbcbdf38e0eeadf49272 oh-my-posh-29.17.0.tar.gz https://github.com/JanDeDobbeleer/oh-my-posh/archive/refs/tags/v29.17.0/
+[D] bf6ddc098c6f5936469ede934c7e009f9396b064b51b00135fe53ad6 oh-my-posh-29.19.1.tar.gz https://github.com/JanDeDobbeleer/oh-my-posh/archive/refs/tags/v29.19.1/
 
 . $base/package/*/*/go-conf.in
+
 export CGO_ENABLED=1
 var_append goconfopt ' ' "-o $pkg"
 var_remove GCC_WRAPPER_REMOVE ' ' '-gdwarf*'

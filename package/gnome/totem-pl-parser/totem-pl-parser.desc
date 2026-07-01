@@ -4,7 +4,7 @@
 [COPY] SPDX-License-Identifier: GPL-2.0
 [COPY] --- T2-COPYRIGHT-END ---
 
-[I] Simple GObject-based library to parse a host of playlist formats, as well as save those
+[I] Simple GObject-based library to parse and save a host of playlist formats
 
 [T] totem-pl-parser is a simple GObject-based library to parse a host of
 [T] playlist formats, as well as save those.
@@ -25,4 +25,5 @@
 [D] 7af08aca7554ed8fb710d8f8690143900fce9c34864e534a39ebbd35 totem-pl-parser-3.26.7.tar.xz https://download.gnome.org/sources/totem-pl-parser/3.26/
 
 . $base/package/*/*/gnome-conf.in
+
 var_append GCC_WRAPPER_REMOVE ' ' -Werror=maybe-uninitialized

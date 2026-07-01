@@ -15,15 +15,15 @@
 
 [C] base/tool
 [F] CROSS NO-LTO LATOMIC.mips LATOMIC.sparc LATOMIC.x86
-[R] - alpha arc avr32 blackfin cris hppa hppa64 ia64 m68k microblaze nios2 openrisc superh
+[R] - alpha arc avr32 blackfin cris hppa hppa64 m68k microblaze nios2 openrisc superh
 
 [L] APL MIT
-[V] 1.96.0
+[V] 1.96.1
 [P] X -12------9 127.350
 
 [CV-GROUP] rust
 [CV-URL] https://forge.rust-lang.org/infra/other-installation-methods.html
-[D] 67f8bb5cca372111bfae55b372fee0cbded1f61cede1773f1cca52a8 rustc-1.96.0-src.tar.xz https://static.rust-lang.org/dist/
+[D] ac1f236d7a1ecf08e7412e9cae2f4d883dc863bf143bae19ec32ba28 rustc-1.96.1-src.tar.xz https://static.rust-lang.org/dist/
 
 # TODO: maybe a config option
 [ $stagelevel -gt 1 ] && [ $prefix_auto = 1 ] && prefix=opt/rust && set_confopt
@@ -76,6 +76,15 @@ rustc_preconf() {
 		compiler/rustc_target/src/spec/targets/${orig_target//-/_}.rs > \
 		compiler/rustc_target/src/spec/targets/${rust_target//-/_}.rs
 
+	if [ "$arch" = ia64 ]; then
+		# apply target tweak again after ia64 target is added via patch
+		sed -i "/\"$orig_target\"/ {p; s/unknown/t2/g}" \
+			compiler/rustc_target/src/spec/mod.rs
+		# disable GenerateCopyright which trips over patched deps
+		sed -i 's@let file_list = builder.ensure(super::run::GenerateCopyright);@let file_list: Vec<std::path::PathBuf> = Vec::new();@' \
+			src/bootstrap/src/core/build_steps/dist.rs
+	fi
+
 	cargo_clear_cksum vendor/*/.cargo-checksum.json
 }
 hook_add preconf 5 rustc_preconf
@@ -92,6 +101,7 @@ case $arch in
 	powerpc*) var_insert targets ';' 'PowerPC' ;;
 	riscv*) var_insert targets ';' 'RISCV' ;;
 	x86*|*) var_insert targets ';' 'X86' ;;
+	ia64) var_insert targets ';' 'IA64' ;;
 esac
 
 rustc_config() {
@@ -145,7 +155,16 @@ fi
 var_append confopt ' ' --release-channel=stable
 var_append confopt ' ' "--disable-codegen-tests" # needs llvm's FileCheck
 var_append confopt ' ' --disable-docs
-var_append confopt ' ' --enable-vendor
+if [ "$arch" = ia64 ]; then
+	# ia64 patch needs to download patched dependencies from GitHub
+	var_append confopt ' ' --disable-vendor
+	# bootstrap forces vendor with SUDO_USER, unset it
+	unset SUDO_USER
+	# remap-debuginfo is broken when combining vendored and downloaded deps
+	hook_add premake 6 'sed -i "/^\[rust\]/a remap-debuginfo = false" bootstrap.toml'
+else
+	var_append confopt ' ' --enable-vendor
+fi
 var_append confopt ' ' "--disable-clang --disable-lld --disable-llvm-bitcode-linker"
 
 # "cargo", "rls", "clippy", "rustfmt", "analysis", src, ...

@@ -16,7 +16,7 @@
 [C] extra/base
 [F] CROSS
 
-[V] 321
+[V] 323
 [L] GPL3
 
-[D] a00409178ce614ce93993178c8a75e8a770f533cd648d4eb570ba90c diffoscope-321.tar.gz https://salsa.debian.org/reproducible-builds/diffoscope/-/archive/321/
+[D] 891b2284964057fdd157fd14a74a21c385b0ac286617e9bd58a2c0df diffoscope-323.tar.gz https://salsa.debian.org/reproducible-builds/diffoscope/-/archive/323/

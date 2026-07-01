@@ -4,7 +4,7 @@
 [COPY] SPDX-License-Identifier: GPL-2.0
 [COPY] --- T2-COPYRIGHT-END ---
 
-[I] Artwork, styles and assets for the Breeze visual style for the Plasma Desktop
+[I] Artwork, styles and assets for the Breeze visual style
 
 [T] Breeze is the default style for Plasma. This package contains some parts of
 [T] Breeze such as the cursors, wallpapers, and the application style.
@@ -20,11 +20,12 @@
 [E] add kwin
 
 [L] GPL
-[V] 6.7.1
+[V] 6.7.2
 [P] X -----5---9 200.010
 
 [CV-GROUP] kde-plasma
-[D] 49d5b0ad01fdacb9cfff99eef82c2ff4fafa266fff2159bb9ab90724 breeze-6.7.1.tar.xz https://download.kde.org/stable/plasma/6.7.1/
+[D] 7b1ab9442a76774f74ffaa8d11e55a7cc57806e746d2db9233ca3674 breeze-6.7.2.tar.xz https://download.kde.org/stable/plasma/6.7.2/
 
 . $base/package/*/*/kde-conf.in
+
 var_append cmakeopt ' ' -DBUILD_QT5=OFF

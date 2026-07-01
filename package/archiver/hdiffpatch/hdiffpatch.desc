@@ -20,9 +20,9 @@
 [F] CROSS
 
 [L] MIT
-[V] 4.12.2
+[V] 5.0.1
 
-[D] f9830ac1ae4312fc38b8e1ebc34fca613e222a37e923286dc8b54c2e HDiffPatch-4.12.2.tar.gz https://github.com/sisong/HDiffPatch/archive/v4.12.2/
+[D] 6e7e166d77d6ace330d7829acac768185978e5e919a24434cfbf7f2a HDiffPatch-5.0.1.tar.gz https://github.com/sisong/HDiffPatch/archive/v5.0.1/
 
 var_append makeopt ' ' 'LDEF=0 LZMA=0 ZSTD=0 MD5=0 XXH=0'
 var_append makeinstopt ' ' 'LDEF=0 LZMA=0 ZSTD=0 MD5=0 XXH=0 INSTALL_BIN=$root$bindir'

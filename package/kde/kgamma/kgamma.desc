@@ -4,7 +4,7 @@
 [COPY] SPDX-License-Identifier: GPL-2.0
 [COPY] --- T2-COPYRIGHT-END ---
 
-[I] Kgamma is a KDE base package
+[I] Adjust your monitor's gamma settings
 
 [T] kgamma is part of the KDE base packages. Adjust your monitor's gamma settings.
 
@@ -19,9 +19,9 @@
 [E] opt kdoctools docbook-xml docbook-xsl
 
 [L] GPL
-[V] 6.7.1
+[V] 6.7.2
 
 [CV-GROUP] kde-plasma
-[D] c96d13b250b944c4397ef7620226140150d1948be98abd9d8f0355fb kgamma-6.7.1.tar.xz https://download.kde.org/stable/plasma/6.7.1/
+[D] 96d8ed74e8c32294166fac14b8e0c31844929b98fc88fd1712f32b35 kgamma-6.7.2.tar.xz https://download.kde.org/stable/plasma/6.7.2/
 
 . $base/package/*/*/kde-conf.in

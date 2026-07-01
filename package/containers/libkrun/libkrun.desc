@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: GPL-2.0
 # --- T2-COPYRIGHT-END ---
 
-[I] A dynamic library providing Virtualization-based process isolation capabilities
+[I] A library providing Virtualization-based process isolation capabilities
 
 [T] libkrun is a dynamic library that allows programs to easily acquire the
 [T] ability to run processes in a partially isolated environment using KVM
@@ -24,9 +24,9 @@
 [F] CROSS
 
 [L] APL
-[V] 1.19.0
+[V] 1.19.3
 
-[D] 740a96013833dfeef7c15190b9ee75f86dd890f693372b0e631a01a7 libkrun-1.19.0.tar.gz https://github.com/containers/libkrun/archive/v1.19.0/
+[D] badb2438bcd1329b5fd699f20a0e0123275114fa70e2a6b049331f97 libkrun-1.19.3.tar.gz https://github.com/containers/libkrun/archive/v1.19.3/
 
 runcargo=0
 var_append makeinstopt ' ' LIBDIR_Linux=${libdir##*/}

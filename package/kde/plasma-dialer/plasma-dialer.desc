@@ -17,8 +17,9 @@
 [F] CROSS
 
 [L] GPL
-[V] 6.7.0
+[V] 6.7.2
 
-[D] 6f004258ada12f979739186df9b84f64d868383bd0b78f51224106c6 plasma-dialer-6.7.0.tar.xz https://download.kde.org/stable/plasma/6.7.0/
+[CV-GROUP] kde-plasma
+[D] 2fb8878691159b8fffdbc55a58fb21f27736ad1dc25ec4be8c20d583 plasma-dialer-6.7.2.tar.xz https://download.kde.org/stable/plasma/6.7.2/
 
 . $base/package/*/*/kde-conf.in

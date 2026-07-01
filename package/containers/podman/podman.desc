@@ -21,12 +21,14 @@
 [E] add catatonit conmon netavark
 
 [L] APL
-[V] 5.8.3
+[V] 6.0.0
 
-[D] d8a488ea645599873787a41f517e868bb608df2c507da96226b84e3f podman-5.8.3.tar.gz https://github.com/containers/podman/archive/v5.8.3/
+[D] cff58231cb4a3240cc018cf5e901fdc0e1aabb24f5198928609119ba podman-6.0.0.tar.gz https://github.com/containers/podman/archive/v6.0.0/
+
+. $base/package/*/*/go-conf.in
 
 rungpepinstall=0 rungo=0
-. $base/package/*/*/go-conf.in
+
 export CGO_ENABLED=1
 var_append GCC_WRAPPER_APPEND ' ' '*cgo*?-O0'
 hook_add postmake 5 'mkdir -p $root/etc/containers/'

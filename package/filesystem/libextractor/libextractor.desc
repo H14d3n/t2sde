@@ -25,7 +25,7 @@
 [E] opt flac
 
 [L] GPL
-[V] 1.14
+[V] 1.16
 [P] X -----5---9 300.000
 
-[D] 0d0e5af9d4ecbc8aff1545cb089af92a3c776810a2ab96563f45f664 libextractor-1.14.tar.gz https://ftpmirror.gnu.org/gnu/libextractor/
+[D] 47b8967971881fc54e53aeb592351bccab3f6d82d450e6d5410b0820 libextractor-1.16.tar.gz https://ftpmirror.gnu.org/gnu/libextractor/

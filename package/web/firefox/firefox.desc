@@ -20,10 +20,10 @@
 [R] - alpha hppa hppa64 ia64 m68k riscv
 
 [L] MPL
-[V] 152.0.1
+[V] 152.0.4
 [P] X -----5---9 202.000
 
-[D] 1f08473f72d76e5cf7c553fc178ac94fe1ea0277f47229eeed6dc375 firefox-152.0.1.source.tar.xz https://ftp.mozilla.org/pub/firefox/releases/152.0.1/source/
+[D] 5898be2f3c4b0481d80f4853f7463d735b2bac8489b2239af1e7e884 firefox-152.0.4.source.tar.xz https://ftp.mozilla.org/pub/firefox/releases/152.0.4/source/
 
 . $base/package/*/*/mozilla-conf.in
 
@@ -38,7 +38,9 @@ hook_add postmake 5 "./mach install"
 
 firefox_config() {
 	cat <<-EOT >> .mozconfig
+
 . \$topsrcdir/browser/config/mozconfig
+
 export MOZ_PHOENIX=1
 mk_add_options MOZ_PHOENIX=1
 mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/objs
