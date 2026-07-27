@@ -19,8 +19,8 @@
 [C] extra/development
 
 [L] OpenSource
-[V] 4.0.15
+[V] 4.0.17
 
-[D] 879e9e03eb5f47f1754c3d8c1920d689153cacfcfad33e12e8da5356 rubygems-4.0.15.tgz http://production.cf.rubygems.org/rubygems/
+[D] ff2659bc653e578f161759c6dcd686ac278e9acc0c083ae0a48f03b7 rubygems-4.0.17.tgz http://production.cf.rubygems.org/rubygems/
 
 custmain="ruby setup.rb"

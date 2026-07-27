@@ -20,6 +20,6 @@
 [C] extra/security
 
 [L] APL
-[V] 4.1.1
+[V] 4.1.3
 
-[D] cdea89817cf4ed0bdc02760ee9fd9e0a25dd4699b6594e77ad8c42d7 rspamd-4.1.1.tar.gz https://github.com/rspamd/rspamd/archive/4.1.1/
+[D] d668b1cb06e3ac52434c3761a8aaa0086645d43261bb324844764950 rspamd-4.1.3.tar.gz https://github.com/rspamd/rspamd/archive/4.1.3/

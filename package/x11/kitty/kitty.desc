@@ -16,9 +16,9 @@
 [C] extra/shell
 
 [L] GPL3
-[V] 0.47.4
+[V] 0.48.1
 
-[D] 8be031174b3664a2698509e09eb7e9b3da716c4209d9a871612e8379 kitty-v0.47.4.tar.gz https://github.com/kovidgoyal/kitty/archive/v0.47.4/
+[D] 922e51b470eeee22439d54b2e6e5546a6b1967f857fcbd7231410632 kitty-v0.48.1.tar.gz https://github.com/kovidgoyal/kitty/archive/v0.48.1/
 
 rungpepinstall=0 rungo=0 runmake=0
 

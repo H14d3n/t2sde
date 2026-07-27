@@ -18,11 +18,11 @@
 [F] CROSS
 
 [L] OpenSource
-[V] 1.4.355
+[V] 1.4.357
 [P] X -----5---9 127.400
 
 [CV-FLAGS] NO-PREFIX
 [CV-GROUP] vulkan
-[D] bd560742546eb43292e05915a6f2e6438df5330ee801db8abaf6c942 Vulkan-Headers-1.4.355.tar.gz https://github.com/KhronosGroup/Vulkan-Headers/archive/v1.4.355/
+[D] 4fee10bf7f7df9a166b0df5ee763a703a041ca97cffc5ae8fec7492c Vulkan-Headers-1.4.357.tar.gz https://github.com/KhronosGroup/Vulkan-Headers/archive/v1.4.357/
 
 var_append cmakeopt ' ' -GNinja

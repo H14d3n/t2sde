@@ -20,12 +20,14 @@
 [M] René Rebe <rene@exactco.de>
 
 [C] extra/multimedia
-[F] CROSS NO-LTO
+[F] CROSS
+
+[E] opt gtk+12 glib12
 
 [L] LGPL
-[V] 3.100
+[V] 4.0
 [P] X -----5---9 126.200
 
-[D] 2489a7ea0453ef21463c7519a6736aef4ea4a64be14c824ba78633f5 lame-3.100.tar.gz https://prdownloads.sourceforge.net/sourceforge/lame/
+[D] 73085be1b7854b49a5d01a73c05411c1c1534ca5a50701fc6b4b745c lame-4.0.tar.gz https://prdownloads.sourceforge.net/sourceforge/lame/
 
 pkginstalled nasm && var_append confopt ' ' --enable-nasm

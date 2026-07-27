@@ -17,13 +17,13 @@
 
 [C] extra/office
 [F] CROSS NO-LIBTOOL-FIX CUSTOM-LTO LATOMIC.sparc LATOMIC.sparc64
-[R] - alpha hppa hppa64 ia64 m68k riscv
+[R] - alpha hppa hppa64 m68k riscv
 
 [L] MPL
-[V] 152.0.4
+[V] 153.0
 [P] X -----5---9 202.000
 
-[D] 5898be2f3c4b0481d80f4853f7463d735b2bac8489b2239af1e7e884 firefox-152.0.4.source.tar.xz https://ftp.mozilla.org/pub/firefox/releases/152.0.4/source/
+[D] 0f97a5fcc6df5ca12b784816604a2c386d99313b68eb2eb44cfbfe13 firefox-153.0.source.tar.xz https://ftp.mozilla.org/pub/firefox/releases/153.0/source/
 
 . $base/package/*/*/mozilla-conf.in
 
@@ -70,6 +70,9 @@ ac_add_options --disable-jemalloc
 ac_add_options --enable-jxl
 EOT
 
+#pkginstalled nspr && echo "ac_add_options --with-system-nspr" >> .mozconfig
+#pkginstalled nss && echo "ac_add_options --with-system-nss" >> .mozconfig
+
 pkginstalled dbus || echo "ac_add_options --disable-dbus" >> .mozconfig
 pkginstalled libjpeg-turbo && echo "ac_add_options --with-system-jpeg" >> .mozconfig
 pkginstalled icu4c && echo "ac_add_options --with-system-icu" >> .mozconfig
@@ -105,12 +108,31 @@ pkginstalled libevent && echo "ac_add_options --with-system-libevent" >> .mozcon
 		var_remove_regex GCC_WRAPPER_INSERT ' ' '-mfpu=.*'
 		[[ $arch_machine = armv[678]* ]] || echo "ac_add_options --disable-jit" >> .mozconfig
 		;;
-	arm64|loongarch64|riscv64|x86-64)
+	arm64|loongarch64|x86-64)
 		# no jit yet for x32 ABI variants
 		if [ "$SDECFG_X8664_X32" = 1 -o "$SDECFG_MIPS64_N32" = 1 ]; then
 			echo "ac_add_options --disable-jit" >> .mozconfig
 		fi
 		;;
+	riscv64)
+		# hotfix rva23 vector support
+		$CC -E -dM -x c /dev/null | grep -iq __riscv_vector &&
+			var_append patchfiles ' ' $confdir/hotfix-libyuv-riscv64-rvv.diff
+		;;
+
+	ia64)
+		# ia64 -fPIC defaults to constant GP per DSO, due to which
+		# GPREL22 is too small to hold all globals for libxul.so;
+		# disable GPREL22 relocations
+		var_append GCC_WRAPPER_APPEND ' ' '*clang*?:-mno-sdata'
+		# FIXME: somehow, text relocations leak into libxul.so
+		var_append GCC_WRAPPER_REMOVE ' ' -Wl,-z,text
+		var_append GCC_WRAPPER_APPEND ' ' -Wl,-z,notext
+		# ia64 does not have JIT
+		echo "ac_add_options --disable-jit" >> .mozconfig
+		;;
+	powerpc64)
+		: ;;
 	*)
 		echo "ac_add_options --disable-jit" >> .mozconfig ;;
 	esac
@@ -124,6 +146,7 @@ GCC_WRAPPER_INSERT="${GCC_WRAPPER_INSERT/-mfpu=/--target=wasm32-wasip1?:-mfpu=}"
 CLANG_WRAPPER_INSERT="${CLANG_WRAPPER_INSERT/-mcpu=/--target=wasm32-wasip1?:-mcpu=}"
 GCC_WRAPPER_INSERT="${GCC_WRAPPER_INSERT/-c?:-pie/--target=wasm32-wasip1?:-c?:-pie}"
 
+[ "$arch" = ia64 ] && hook_add prepatch 5 "cargo vendor third_party/rust"
 hook_add prepatch 5 "cargo_clear_cksum third_party/rust/*/.cargo-checksum.json"
 hook_add postpatch 5 "rust_update_arch_target third_party/rust/*/no_atomic*.rs"
 

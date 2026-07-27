@@ -23,7 +23,7 @@
 [E] opt libsdl3
 
 [L] LGPL
-[V] 2.5.5
+[V] 2.5.7
 [P] X -----5---9 400.000
 
-[D] c4e00f44eeff6b3575774a8fa87b798c381c01d84c99dd3b47d679be fluidsynth-v2.5.5.tar.gz https://github.com/fluidsynth/fluidsynth/archive/v2.5.5/
+[D] 7e7c553863bfafbaf0e78be10ffb5b0a4dfec2c8c45b633f6bca0aea fluidsynth-v2.5.7.tar.gz https://github.com/fluidsynth/fluidsynth/archive/v2.5.7/

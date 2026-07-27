@@ -25,7 +25,7 @@
 [E] add tqdm
 
 [L] APL
-[V] 5.12.1
+[V] 5.14.1
 [P] X -----5---9 160.005
 
-[D] d310ac90847ba29426a12b0cab2fdd8d2ba37a063bf89028589dd917 transformers-v5.12.1.tar.gz https://github.com/huggingface/transformers/archive/v5.12.1/
+[D] fe8168db7bf5a8cc45d697e2036f76275f3633b53fc085efd626655e transformers-v5.14.1.tar.gz https://github.com/huggingface/transformers/archive/v5.14.1/

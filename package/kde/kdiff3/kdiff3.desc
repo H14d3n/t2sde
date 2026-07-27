@@ -24,8 +24,8 @@
 [E] opt kdoctools docbook-xml docbook-xsl
 
 [L] GPL
-[V] 1.12.4
+[V] 1.12.6
 
-[D] 244853b4c656e0fe86854caffadd0ff249d5f718eaef451cc5be2b73 kdiff3-1.12.4.tar.xz https://download.kde.org/stable/kdiff3/
+[D] 01f18f6fea83e80a0b6216a030c9162f61c9869b0446fc755e72bd18 kdiff3-1.12.6.tar.xz https://download.kde.org/stable/kdiff3/
 
 . $base/package/*/*/kde-conf.in

@@ -18,6 +18,6 @@
 [F] CROSS
 
 [L] GPL
-[V] 1.32.5
+[V] 1.32.8
 
-[D] d4c1946aa6c885ff9aa0815cb65540606f44b964745b8a661dd531e2 gallery-dl-1.32.5.tar.gz https://github.com/mikf/gallery-dl/archive/v1.32.5/
+[D] edb8994fc8f8b3ee9df018330ca299942d617fdf9662f845bdfdef3e gallery-dl-1.32.8.tar.gz https://github.com/mikf/gallery-dl/archive/v1.32.8/

@@ -18,11 +18,11 @@
 [F] CROSS OBJDIR
 
 [L] GPL
-[V] 6.27.0
+[V] 6.28.1
 [P] X -----5---9 162.800
 
 [CV-GROUP] kde-frameworks
-[D] ef0634442de69d2d1530f819bf5581f9dcc985bbff89c445851ef567 syntax-highlighting-6.27.0.tar.xz https://download.kde.org/stable/frameworks/6.27/
+[D] 34049ea7cc34be72fd8a6520197702808c1529c14e6a68166c17d870 syntax-highlighting-6.28.1.tar.xz https://download.kde.org/stable/frameworks/6.28/
 
 . $base/package/*/*/kde-conf.in
 

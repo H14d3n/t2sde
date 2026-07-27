@@ -1,0 +1,38 @@
+# --- T2-COPYRIGHT-BEGIN ---
+# t2/package/*/xf86-video-sis/hotfix-x32-no-asm.patch
+# Copyright (C) 2026 The T2 SDE Project
+# SPDX-License-Identifier: GPL-2.0 or patched project license
+# --- T2-COPYRIGHT-END ---
+
+Just use the modern optimized system memcpy. Does not build for x32 anyway.
+Avoids startup benchmark.
+
+--- xf86-video-sis/src/sis_memcpy.c.orig	2000-01-01 01:00:00.000000000 +0100
++++ xf86-video-sis/src/sis_memcpy.c	2026-07-13 13:57:20.738554928 +0200
+@@ -363,7 +363,7 @@
+ /* would do with our asm code.  					*/
+ /************************************************************************/
+ 
+-#ifndef __GNUC__
++#if 1
+ 
+ unsigned int SiSGetCPUFlags(ScrnInfoPtr pScrn)
+ {
+@@ -486,7 +486,7 @@
+     return(eax);
+ }
+ 
+-#elif defined(__AMD64__) || defined(__amd64__) || defined(__x86_64__) /***************** AMD64 */
++#elif (defined(__AMD64__) || defined(__amd64__) || defined(__x86_64__)) && !defined(__ILP32__)  /***************** AMD64 */
+ 
+ #define SiS_checkosforsse	/* Does this cpu support sse and do we need to check os? */
+ #define SiS_canBenchmark	/* Can we perform a benchmark? */
+@@ -1014,7 +1014,7 @@
+     return flags;
+ }
+ 
+-#elif defined(__AMD64__) || defined(__amd64__) || defined(__x86_64__) /* AMD64 specific ***** */
++#elif (defined(__AMD64__) || defined(__amd64__) || defined(__x86_64__)) && !defined(__ILP32__) /* AMD64 specific ***** */
+ 
+ PREFETCH_FUNC(SiS_sse,SSE64,SSE,,FENCE,small_memcpy_amd64)
+ 

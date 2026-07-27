@@ -17,10 +17,10 @@
 [F] CROSS OBJDIR
 
 [L] APL
-[V] 9.0.33
+[V] 9.0.35
 [P] X -----5---9 200.000
 
-[D] 9dadb8295fad0e655758f84c0e3801229699c1f846ab7f9becc0aafd libphonenumber-9.0.33.tar.gz https://github.com/google/libphonenumber/archive/v9.0.33/
+[D] 391f75b05dc62c7d34ff54f3b36983b1cd1820d343fb28db117a9d75 libphonenumber-9.0.35.tar.gz https://github.com/google/libphonenumber/archive/v9.0.35/
 
 srcdir=*/cpp
 

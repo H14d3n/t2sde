@@ -1,0 +1,36 @@
+# --- T2-COPYRIGHT-BEGIN ---
+# t2/package/*/codegraph/codegraph.desc
+# Copyright (C) 2026 The T2 SDE Project
+# SPDX-License-Identifier: GPL-2.0
+# --- T2-COPYRIGHT-END ---
+
+[I] Pre-indexed code knowledge graph
+
+[T] Pre-indexed code knowledge graph, auto syncs on code changes, for Claude
+[T] Code, Codex, Gemini, Cursor, OpenCode, AntiGravity, Kiro, and Hermes Agent.
+[T] Fewer tokens, fewer tool calls, 100% local.
+
+[U] https://github.com/colbymchenry/codegraph
+
+[A] colbymchenry
+[M] The T2 Project <t2@t2-project.org>
+
+[C] extra/tool
+[F] CROSS
+
+[L] MIT
+[V] 1.5.0
+
+[D] 7c051d8ced493a574a72490e7a74c87b48071cbfd0e449ebe839a870 codegraph-1.5.0.tar.gz https://github.com/colbymchenry/codegraph/archive/v1.5.0/
+
+runmake=0
+
+codegraph_main() {
+	npm ci
+	npm run build
+
+	mkdir -p $libdir/node_modules/codegraph
+	cp -ar dist node_modules package.json $libdir/node_modules/codegraph/
+	ln -sf $libdir/node_modules/codegraph/dist/bin/codegraph.js $bindir/codegraph
+}
+hook_add postmake 5 codegraph_main

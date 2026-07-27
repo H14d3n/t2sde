@@ -1,0 +1,22 @@
+[COPY] --- T2-COPYRIGHT-BEGIN ---
+[COPY] t2/package/*/qbittorrent/qbittorrent.desc
+[COPY] Copyright (C) 2025 - 2026 The T2 SDE Project
+[COPY] SPDX-License-Identifier: GPL-2.0
+[COPY] --- T2-COPYRIGHT-END ---
+
+[I] Open-source software alternative to µTorrent
+
+[T] The qBittorrent project aims to provide an open-source software alternative
+[T] to µTorrent.
+
+[U] https://www.qbittorrent.org
+
+[A] sledgehammer999@qbittorrent.org
+[M] René Rebe <rene@exactco.de>
+
+[C] extra/network
+
+[L] GPL
+[V] 5.2.3
+
+[D] 8b4f40396dc5d7f874abb5b5e873879d9ce1a3051f6db9dcb08a63c7 qbittorrent-5.2.3.tar.xz https://download.sourceforge.net/qbittorrent/

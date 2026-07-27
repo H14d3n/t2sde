@@ -1,0 +1,24 @@
+[COPY] --- T2-COPYRIGHT-BEGIN ---
+[COPY] t2/package/*/girara/girara.desc
+[COPY] Copyright (C) 2026 The T2 SDE Project
+[COPY] SPDX-License-Identifier: GPL-2.0
+[COPY] --- T2-COPYRIGHT-END ---
+
+[I] User interface library
+
+[T] Girara is a library that implements a user interface that focuses on
+[T] simplicity and minimalism.
+
+[U] https://pwmt.org/projects/girara/
+
+[A] Pwmt
+[M] andrei32
+
+[C] extra/office
+[F] CROSS
+
+[L] ZLIB
+[V] 2026.07.18
+[P] X -----5---9 400.000
+
+[D] 7e5090d030da649e8ca3d44dddc8fafe73649de4209525c65f8db62a girara-2026.07.18.tar.xz https://pwmt.org/projects/girara/download/

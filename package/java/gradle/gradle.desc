@@ -24,10 +24,10 @@
 [C] extra/development
 
 [L] APL
-[V] 9.7.0-M1
+[V] 9.7.0-M3
 [P] X -----5---9 400.050
 
-[D] 83332ec3ed01da5f1ef2042baef16daec3f4961907c5f75db40f4e91 gradle-v9.7.0-M1.tar.gz https://github.com/gradle/gradle/archive/v9.7.0-M1/
+[D] af20ba3a30cf11aa448da3663c2089b1dd645f6928cbbefaf9605c09 gradle-v9.7.0-M3.tar.gz https://github.com/gradle/gradle/archive/v9.7.0-M3/
 
 . $base/package/*/*/java-common-conf.in
 

@@ -28,9 +28,9 @@
 [F] CROSS
 
 [L] MIT
-[V] 1.6.0
+[V] 1.7.1
 
-[D] cbbe950b326986df27f367c4ddc8e4a67e14f55442189f394161d962 helmfile-1.6.0.tar.gz https://github.com/helmfile/helmfile/archive/v1.6.0/
+[D] 0bf8e46b1c57713ff6bd38461e62fc6b03b63700e021dfa88d2e7c56 helmfile-1.7.1.tar.gz https://github.com/helmfile/helmfile/archive/v1.7.1/
 
 . $base/package/*/*/go-conf.in
 

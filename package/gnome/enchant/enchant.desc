@@ -24,10 +24,10 @@
 [E] opt aspell
 
 [L] LGPL
-[V] 2.8.17
+[V] 2.8.19
 [P] X -----5---9 153.100
 
-[D] f44776cf698166c892841f636a8ccc02750e7a04fd9d342b7c84b6fe enchant-2.8.17.tar.gz https://github.com/rrthomas/enchant/releases/download/v2.8.17/
+[D] f022e1609e1ba7068b31e799b4c541b935ad9c97ac85e00bb197b301 enchant-2.8.19.tar.gz https://github.com/rrthomas/enchant/releases/download/v2.8.19/
 
 . $base/package/*/*/gnome-conf.in
 

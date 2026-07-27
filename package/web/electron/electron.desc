@@ -20,9 +20,9 @@
 [E] add lld nodejs
 
 [L] BSD
-[V] 43.0.0
+[V] 43.2.0
 
-[D] 83548c0d85dca326386d0b0a3b34eea10bb7c0f488dec5a5804c40ca electron-43.0.0.tar.gz https://github.com/electron/electron/archive/refs/tags/v43.0.0/
+[D] 4f3dbca356b7bb11e8e58f60b1e5011c457231c08995ef4776dab34f electron-43.2.0.tar.gz https://github.com/electron/electron/archive/refs/tags/v43.2.0/
 
 runmake=0
 prefix=opt/electron

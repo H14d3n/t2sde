@@ -29,7 +29,7 @@
 [E] opt systemd
 
 [L] GPL
-[V] 2.4.1
+[V] 2.4.3
 
 [CV-URL] https://www.keepalived.org/download.html
-[D] dba02c5b8a25fb36292b9f9412f2f43f17bceb24c28f1aebb59a0a8d keepalived-2.4.1.tar.gz https://www.keepalived.org/software/
+[D] 0fca33e50b0fa5fc1987cb7d2c1d96db6d55a937e6b0190e87a57fb7 keepalived-2.4.3.tar.gz https://www.keepalived.org/software/

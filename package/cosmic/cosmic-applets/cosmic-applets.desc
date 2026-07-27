@@ -17,9 +17,9 @@
 [F] CROSS NO-LTO
 
 [L] GPL3
-[V] 1.2.0
+[V] 1.4.0
 
 [CV-GROUP] cosmic-desktop
-[D] c7d927b05b0c052b57d127630e5aa51e63f74ff3bb9491996541e6f4 cosmic-applets-epoch-1.2.0.tar.gz https://github.com/pop-os/cosmic-applets/archive/epoch-1.2.0/
+[D] debeaf52b680d7f7bb3b5cbdb0ba6eb7ffb0217af1f983ea0746b5fa cosmic-applets-epoch-1.4.0.tar.gz https://github.com/pop-os/cosmic-applets/archive/epoch-1.4.0/
 
 . $base/package/cosmic/*/cosmic-conf.in

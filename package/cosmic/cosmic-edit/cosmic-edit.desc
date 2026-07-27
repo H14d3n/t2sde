@@ -17,9 +17,9 @@
 [F] CROSS NO-LTO
 
 [L] GPL3
-[V] 1.2.0
+[V] 1.4.0
 
 [CV-GROUP] cosmic-desktop
-[D] e1e4d94b906e16decc21a9fc06e09740ebb1cd855181b6f0670cc6d9 cosmic-edit-epoch-1.2.0.tar.gz https://github.com/pop-os/cosmic-edit/archive/epoch-1.2.0/
+[D] 68c5123c82fe963b2398dbc18dca4e46e5e2359ff5f69a727b2265a0 cosmic-edit-epoch-1.4.0.tar.gz https://github.com/pop-os/cosmic-edit/archive/epoch-1.4.0/
 
 . $base/package/cosmic/*/cosmic-conf.in

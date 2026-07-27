@@ -19,9 +19,9 @@
 [F] CROSS
 
 [L] GPL3
-[V] 1.2.0
+[V] 1.4.0
 
 [CV-GROUP] cosmic-desktop
-[D] 5356af7f69a5c9362188bb482ac1f9237ec0b4b623e9c0b67d9a8b41 cosmic-workspaces-epoch-1.2.0.tar.gz https://github.com/pop-os/cosmic-workspaces-epoch/archive/epoch-1.2.0/
+[D] 0db89075ad6a15ba6f689e0bf59287393da7bd2fe70ef086ccb32c35 cosmic-workspaces-epoch-1.4.0.tar.gz https://github.com/pop-os/cosmic-workspaces-epoch/archive/epoch-1.4.0/
 
 . $base/package/cosmic/*/cosmic-conf.in

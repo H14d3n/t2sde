@@ -17,9 +17,9 @@
 [F] CROSS OBJDIR NO-LTO
 
 [L] OpenSource
-[V] 1.619.1
+[V] 1.619.4
 [P] X ?----5---9 127.400
 
-[D] 48e1889688d828a2b465a904c0d8e1951e6f9d71597e8be748a3cfc2 DirectX-Headers-v1.619.1.tar.gz https://github.com/microsoft/DirectX-Headers/archive/v1.619.1/
+[D] 8c47f1149b6a75148c1f6012798c19c790453962b21cb593a2a490f0 DirectX-Headers-v1.619.4.tar.gz https://github.com/microsoft/DirectX-Headers/archive/v1.619.4/
 
 var_append cmakeopt ' ' "-DDXHEADERS_BUILD_TEST=OFF -DDXHEADERS_BUILD_GOOGLE_TEST=OFF"

@@ -17,9 +17,9 @@
 [C] extra/emulator
 
 [L] MPL
-[V] 0.38.7
+[V] 0.39.0
 
-[D] 8d589f27b9c02c37b9dad2ac9edb24002bbea8ad13523b9a328c26d4 terraform-ls-v0.38.7.tar.gz https://github.com/hashicorp/terraform-ls/archive/v0.38.7/
+[D] 79d3a56452973fb894b6198f4acc07f7991062009ba670b49b52873e terraform-ls-v0.39.0.tar.gz https://github.com/hashicorp/terraform-ls/archive/v0.39.0/
 
 export CGO_ENABLED=0
 goconfopt=" "

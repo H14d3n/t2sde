@@ -22,7 +22,7 @@
 [F] CROSS
 
 [L] GPL
-[V] 7.0.1
+[V] 7.1.1
 [P] X -----5---9 121.900
 
-[D] 8fdd705b18f7007f4c0bb0ad1a764cfdd581be90cd7514f6be494874 libdvdread-7.0.1.tar.bz2 https://code.videolan.org/videolan/libdvdread/-/archive/7.0.1/
+[D] b8b9e1003fa2a415b5e667c8e743ad3c63b755142df92a7bc3bb5837 libdvdread-7.1.1.tar.bz2 https://code.videolan.org/videolan/libdvdread/-/archive/7.1.1/
